@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="18, Fortune, and Power — photographs" />
+  <title>18, Fortune, and Power — 3Cats</title>
+  <style>
+    :root { color-scheme: light; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #fafaf8;
+      color: #161616;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      padding: clamp(2rem, 6vw, 4.5rem) clamp(1rem, 4vw, 2rem) 5rem;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; }
+    .back {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #161616;
+      text-decoration: none;
+      opacity: 0.45;
+      margin-bottom: clamp(2rem, 6vw, 3.5rem);
+      transition: opacity 0.2s ease;
+    }
+    .back:hover, .back:focus-visible { opacity: 1; outline: none; }
+    h1 {
+      font-size: clamp(1.7rem, 4.8vw, 2.6rem);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    .gallery { margin-top: clamp(1.75rem, 4vw, 2.5rem); }
+
+    .frame {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 320px;
+      background: #f1f0eb;
+      border-radius: 3px;
+      overflow: hidden;
+      touch-action: pan-y;
+    }
+    .frame img {
+      display: block;
+      max-width: 100%;
+      max-height: 72vh;
+      object-fit: contain;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .frame img.loaded { opacity: 1; }
+
+    .status {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      color: rgba(22, 22, 22, 0.4);
+      pointer-events: none;
+    }
+    .status[hidden] { display: none; }
+
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      line-height: 1;
+      color: #161616;
+      background: rgba(250, 250, 248, 0.82);
+      border: 1px solid rgba(22, 22, 22, 0.14);
+      border-radius: 50%;
+      cursor: pointer;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      transition: background 0.2s ease, opacity 0.2s ease;
+    }
+    .nav:hover, .nav:focus-visible { background: #fff; outline: none; }
+    .nav:disabled { opacity: 0; pointer-events: none; }
+    .nav.prev { left: 12px; }
+    .nav.next { right: 12px; }
+    .nav[hidden] { display: none; }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 0.9rem;
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(22, 22, 22, 0.45);
+    }
+    .meta span[hidden] { display: none; }
+
+    @media (max-width: 560px) {
+      .nav { width: 38px; height: 38px; font-size: 1.25rem; }
+      .nav.prev { left: 8px; }
+      .nav.next { right: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="index.html">&larr; 3Cats</a>
+    <h1>18, Fortune, and Power</h1>
+
+    <section class="gallery" aria-label="Photograph gallery">
+      <div class="frame" id="frame">
+        <img id="photo" alt="" />
+        <div class="status" id="status">Loading&hellip;</div>
+        <button class="nav prev" id="prev" type="button" aria-label="Previous photo" hidden>&lsaquo;</button>
+        <button class="nav next" id="next" type="button" aria-label="Next photo" hidden>&rsaquo;</button>
+      </div>
+      <div class="meta">
+        <span id="caption" hidden></span>
+        <span id="counter" hidden></span>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var OWNER = "alexhkagent";
+      var REPO = "alexhkagent.github.io";
+      var FOLDER = "Photo";
+      var API = "https://api.github.com/repos/" + OWNER + "/" + REPO + "/contents/" + FOLDER;
+      var IMAGE_RE = /\.(jpe?g|png|webp|gif|avif)$/i;
+
+      var img = document.getElementById("photo");
+      var status = document.getElementById("status");
+      var prevBtn = document.getElementById("prev");
+      var nextBtn = document.getElementById("next");
+      var captionEl = document.getElementById("caption");
+      var counterEl = document.getElementById("counter");
+      var frame = document.getElementById("frame");
+
+      var photos = [];
+      var index = 0;
+
+      function pretty(name) {
+        return name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ").trim();
+      }
+
+      function setStatus(text) {
+        if (text) {
+          status.textContent = text;
+          status.hidden = false;
+        } else {
+          status.hidden = true;
+        }
+      }
+
+      function updateChrome() {
+        var many = photos.length > 1;
+        prevBtn.hidden = !many;
+        nextBtn.hidden = !many;
+        counterEl.hidden = photos.length === 0;
+        counterEl.textContent = (index + 1) + " / " + photos.length;
+        captionEl.hidden = photos.length === 0;
+      }
+
+      function render(i) {
+        if (!photos.length) return;
+        index = (i + photos.length) % photos.length;
+        var photo = photos[index];
+
+        img.classList.remove("loaded");
+        var probe = new Image();
+        probe.onload = function () {
+          img.src = photo.src;
+          img.alt = pretty(photo.name);
+          img.classList.add("loaded");
+          setStatus("");
+        };
+        probe.onerror = function () {
+          setStatus("This image could not be loaded.");
+        };
+        probe.src = photo.src;
+
+        captionEl.textContent = pretty(photo.name);
+        updateChrome();
+
+        if (photos.length > 1) {
+          var ahead = photos[(index + 1) % photos.length];
+          var pre = new Image();
+          pre.src = ahead.src;
+        }
+      }
+
+      function fromApi(data) {
+        return data
+          .filter(function (f) {
+            return f.type === "file" && IMAGE_RE.test(f.name) && f.download_url;
+          })
+          .sort(function (a, b) {
+            return a.name.localeCompare(b.name, undefined, { numeric: true });
+          })
+          .map(function (f) {
+            return { src: f.download_url, name: f.name };
+          });
+      }
+
+      function loadManifest() {
+        return fetch(FOLDER + "/photos.json", { cache: "no-store" })
+          .then(function (r) { return r.ok ? r.json() : []; })
+          .then(function (list) {
+            if (!Array.isArray(list)) return [];
+            return list
+              .filter(function (n) { return typeof n === "string" && IMAGE_RE.test(n); })
+              .map(function (n) { return { src: FOLDER + "/" + encodeURIComponent(n), name: n }; });
+          })
+          .catch(function () { return []; });
+      }
+
+      function boot() {
+        fetch(API, { headers: { Accept: "application/vnd.github+json" }, cache: "no-store" })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (data) {
+            if (Array.isArray(data)) {
+              var found = fromApi(data);
+              if (found.length) return found;
+            }
+            return loadManifest();
+          })
+          .catch(loadManifest)
+          .then(function (list) {
+            photos = list || [];
+            if (!photos.length) {
+              setStatus("No photographs yet.");
+              return;
+            }
+            render(0);
+          });
+      }
+
+      prevBtn.addEventListener("click", function () { render(index - 1); });
+      nextBtn.addEventListener("click", function () { render(index + 1); });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") render(index - 1);
+        if (e.key === "ArrowRight") render(index + 1);
+      });
+
+      var touchX = null;
+      frame.addEventListener("touchstart", function (e) {
+        touchX = e.changedTouches[0].clientX;
+      }, { passive: true });
+      frame.addEventListener("touchend", function (e) {
+        if (touchX === null) return;
+        var dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 45) render(index + (dx < 0 ? 1 : -1));
+        touchX = null;
+      }, { passive: true });
+
+      boot();
+    })();
+  </script>
+</body>
+</html>
