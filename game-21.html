@@ -66,6 +66,16 @@ button:focus-visible,a:focus-visible,summary:focus-visible { outline:3px solid #
 .hand-label {font-size:11px;color:#ffe1a0;text-align:center;margin-bottom:8px;}
 #player-hand {align-items:flex-start;} #player-hand .hand {min-height:0;}
 @media(max-width:420px){.ai-seats{gap:7px;}.ai-seat{padding:8px 3px;}.ai-seat .hand{--card-w:42px;gap:3px;}.ai-seat .card{padding:4px;}}
+
+.message { min-height:64px; padding:12px 18px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; border-radius:14px; border:1px solid transparent; }
+.outcome-title {font-family:Georgia,serif;font-size:clamp(30px,5vw,54px);font-weight:700;line-height:1.1;letter-spacing:.05em;}
+.outcome-detail {font-size:13px;line-height:1.5;color:#e7e4d3;}
+.message.win {background:radial-gradient(ellipse at center,#78602b80,#443a1922);border-color:#f4cf70;box-shadow:0 0 30px #e6bf4930;color:#ffe294;padding:20px;}
+.message.lose {background:#671d302e;border-color:#dd8a8366;color:#ffc3b6;}
+.message.push {background:#284d5880;border-color:#91bac77a;color:#d1edf0;}
+.hand-bank {display:inline-flex;align-items:center;gap:9px;border:1px solid #d4b47199;border-radius:30px;padding:7px 13px;background:#002b24;color:#e6d2a5;letter-spacing:.08em;}
+.hand-bank strong {font-size:20px;letter-spacing:0;color:#ffe29a;font-variant-numeric:tabular-nums;}
+.side-label {flex-wrap:wrap;justify-content:center;}
   </style>
 </head>
 <body>
@@ -88,12 +98,12 @@ button:focus-visible,a:focus-visible,summary:focus-visible { outline:3px solid #
     </section>
 
     <div class="divider"></div>
-    <p class="message" id="message" aria-live="polite">Place your bet, then deal.</p>
+    <div class="message" id="message" role="status" aria-live="polite" aria-atomic="true">Place your bet, then deal.</div>
     <div class="divider"></div>
 
     <div id="ai-seats" class="ai-seats"></div>
     <section class="side" aria-label="Your hand">
-      <div class="side-label">You <span class="total" id="player-total">&mdash;</span></div>
+      <div class="side-label">You <span class="total" id="player-total">&mdash;</span><span class="hand-bank">Your chips <strong id="hand-bankroll">1,000</strong></span></div>
       <div class="hand" id="player-hand"></div>
     </section>
 
@@ -128,6 +138,6 @@ button:focus-visible,a:focus-visible,summary:focus-visible { outline:3px solid #
 
   <footer class="footer">18 · Fortune · Power &nbsp; / &nbsp; A little luck. A little strategy. &nbsp; / &nbsp; Virtual chips only</footer>
   <script src="casino/game.js?v=1"></script>
-  <script src="casino/ui.js?v=1"></script>
+  <script src="casino/ui.js?v=2"></script>
 </body>
 </html>

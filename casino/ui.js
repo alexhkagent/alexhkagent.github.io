@@ -13,7 +13,7 @@
   }
   function render() {
     const playing=game.phase==='player', hidden=['player','bots'].includes(game.phase);
-    $('bankroll').textContent=game.bank; $('bet-val').textContent=game.bet;
+    $('bankroll').textContent=game.bank; $('hand-bankroll').textContent=game.bank.toLocaleString('en-US'); $('bet-val').textContent=game.bet;
     cards($('dealer-hand'),game.dealer,hidden?1:-1);
     $('dealer-total').textContent=game.dealer.length?(hidden?Blackjack.value([game.dealer[0]])+' +':Blackjack.value(game.dealer)):'—';
     $('player-hand').replaceChildren();
@@ -31,7 +31,18 @@
       const state=document.createElement('p'),h=b.hands[0];state.textContent=h?`Bet ${h.bet} · Total ${Blackjack.value(h.cards)} · ${h.result||b.action}`:'Sitting out';
       box.append(title,info,row,state);$('ai-seats').append(box);
     });
-    $('message').textContent=game.message;
+    const announcement=$('message');
+    announcement.className='message'; announcement.replaceChildren();
+    if(game.phase==='settled') {
+      const net=game.hands.reduce((sum,h)=>sum+(h.result==='Blackjack'?h.bet*1.5:h.result==='Win'?h.bet:h.result==='Push'?0:-h.bet),0);
+      const kind=net>0?'win':net<0?'lose':'push';
+      announcement.classList.add(kind);
+      const title=document.createElement('strong');title.className='outcome-title';
+      title.textContent=net>0?(game.hands.some(h=>h.result==='Blackjack')?'BLACKJACK! YOU WIN':'YOU WIN!'):net<0?'DEALER WINS':'EVEN ROUND';
+      const detail=document.createElement('span');detail.className='outcome-detail';
+      detail.textContent=(net>0?'+'+net:net<0?String(net):'0')+' chips · '+game.message;
+      announcement.append(title,detail);
+    } else announcement.textContent=game.message;
     $('btn-deal').textContent=game.bank<10?'New session':game.phase==='settled'?'Next Round':'Deal';
     $('btn-deal').disabled=busy||!['ready','settled'].includes(game.phase);
     $('btn-hit').disabled=$('btn-stand').disabled=busy||!playing;
