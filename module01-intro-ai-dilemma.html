@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FB5807P · Module 01 · 引言：AI困局" />
+  <title>Module 01 · 引言：AI困局 — FB5807P</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #fafaf8;
+      --fg: #161616;
+      --fg-muted: rgba(22, 22, 22, 0.52);
+      --fg-soft: rgba(22, 22, 22, 0.8);
+      --fg-subtle: rgba(22, 22, 22, 0.42);
+      --border: rgba(22, 22, 22, 0.1);
+      --border-strong: rgba(22, 22, 22, 0.18);
+      --accent: #161616;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      line-height: 1.7;
+    }
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1rem, 3vw, 2rem);
+      background: rgba(250, 250, 248, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+    .topbar .course-link {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .topbar .course-link:hover { color: var(--fg); }
+    .topbar .progress {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      font-variant-numeric: tabular-nums;
+    }
+    .topbar .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg);
+      text-decoration: none;
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      transition: all 0.2s ease;
+    }
+    .topbar .back-btn:hover {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
+    .topbar .back-btn .arrow { font-size: 0.8em; }
+    .book {
+      position: absolute;
+      top: 52px; left: 0; right: 0; bottom: 56px;
+      overflow: hidden;
+    }
+    .pages {
+      height: 100%;
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+      will-change: transform;
+    }
+    .page {
+      flex: 0 0 100%;
+      height: 100%;
+      overflow-y: auto;
+      padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 6vw, 5rem);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(22,22,22,0.2) transparent;
+    }
+    .page::-webkit-scrollbar { width: 6px; }
+    .page::-webkit-scrollbar-thumb { background: rgba(22,22,22,0.2); border-radius: 3px; }
+    .page-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+    }
+    .page.active .page-inner {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h1 {
+      font-size: clamp(1.6rem, 4.8vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: clamp(1.2rem, 3.2vw, 1.8rem);
+      font-weight: 400;
+      line-height: 1.3;
+      letter-spacing: -0.005em;
+      margin-top: clamp(2rem, 6vw, 3.5rem);
+      margin-bottom: 1rem;
+      padding-top: clamp(1rem, 3vw, 1.5rem);
+      border-top: 1px solid var(--border);
+    }
+    h3 {
+      font-size: 0.76rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .subtitle {
+      margin-top: 0.5rem;
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--fg-muted);
+    }
+    .module-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border-strong);
+    }
+    .page-number {
+      position: absolute;
+      bottom: clamp(0.5rem, 2vw, 1.2rem);
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+    }
+    p { font-size: clamp(0.95rem, 2.2vw, 1.02rem); color: var(--fg-soft); margin-bottom: 1rem; }
+    p.lead { font-size: clamp(1rem, 2.4vw, 1.1rem); color: var(--fg); line-height: 1.8; text-align: justify; }
+    ul, ol { padding-left: 1.25rem; margin-bottom: 1rem; }
+    li { font-size: clamp(0.92rem, 2.1vw, 1rem); color: var(--fg-soft); margin-bottom: 0.4rem; }
+    blockquote {
+      border-left: 2px solid var(--border-strong);
+      padding: 0.75rem 1.25rem;
+      margin: 1.25rem 0;
+      font-style: italic;
+      color: var(--fg-muted);
+      font-size: clamp(0.9rem, 2vw, 0.98rem);
+      background: rgba(255,255,255,0.3);
+    }
+    blockquote strong, blockquote em { font-style: normal; color: var(--fg); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0;
+      font-size: clamp(0.85rem, 1.9vw, 0.92rem);
+    }
+    th, td {
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      font-weight: 500;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      background: rgba(22,22,22,0.02);
+    }
+    tr:nth-child(even) td { background: rgba(22,22,22,0.015); }
+    .highlight {
+      background: rgba(22,22,22,0.04);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem;
+      margin: 1.25rem 0;
+    }
+    .highlight p:last-child, .highlight ul:last-child { margin-bottom: 0; }
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border-strong);
+      margin: 2rem auto;
+    }
+    .nav-controls {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      background: rgba(250, 250, 248, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      z-index: 99;
+    }
+    .nav-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border-strong);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fg);
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
+    .nav-btn:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+    }
+    .nav-btn svg { width: 14px; height: 14px; stroke-width: 2; }
+    .page-dots {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+    .page-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border-strong);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .page-dot.active {
+      background: var(--fg);
+      width: 22px;
+      border-radius: 3px;
+    }
+    .click-zone {
+      position: fixed;
+      top: 52px;
+      bottom: 56px;
+      width: 15%;
+      cursor: pointer;
+      z-index: 50;
+    }
+    .click-zone.prev { left: 0; }
+    .click-zone.next { right: 0; }
+    .click-zone:hover { background: rgba(22,22,22,0.02); }
+    .cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+    }
+    .cover .module-label { display: inline-block; }
+    .cover h1 { font-weight: 200; letter-spacing: -0.02em; }
+    .cover .divider { margin: 2rem auto; }
+    @media (max-width: 640px) {
+      .page { padding: 1.5rem 1.25rem; }
+      .click-zone { width: 25%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="course-link" href="course.html">← FB5807P</a>
+  <span class="progress" id="progress">1 / 7</span>
+  <a class="back-btn" href="course.html"><span class="arrow">←</span> Back to Course</a>
+</div>
+
+<div class="book">
+  <div class="pages" id="pages">
+
+    <div class="page active" data-index="0">
+      <div class="page-inner cover">
+        <span class="module-label">Module 01</span>
+        <h1>引言：AI困局</h1>
+        <p class="subtitle">The AI Dilemma — Hype vs. Reality</p>
+        <div class="divider"></div>
+        <p>三年前，MaaS 席卷全球。今天，我们需要直面一个更复杂的问题：<br/>技术爆发了，但商业准备好了吗？人类准备好了吗？</p>
+        <span class="page-number">01</span>
+      </div>
+    </div>
+
+    <div class="page" data-index="1">
+      <div class="page-inner">
+        <span class="module-label">01 · MaaS 回顾</span>
+        <h1>Model as a Service</h1>
+        <p class="subtitle">三年过去，What Happened?</p>
+        <h2>从概念到现实</h2>
+        <p>2022–2023 年，MaaS 成为 AI 商业化的核心叙事。核心理念很简单：像使用云服务器一样，按需调用大模型能力，无需自建基础设施。</p>
+        <h2>市场规模与格局</h2>
+        <p>根据 Menlo Ventures 2025 年中报告，企业级 LLM 支出在 <strong>6 个月内翻倍</strong>，从 $35 亿增至 $84 亿。</p>
+        <div class="highlight">
+          <p><strong>全球格局：</strong></p>
+          <ul>
+            <li>Anthropic 以 <strong>32%</strong> 市场份额超越 OpenAI 成为企业首选</li>
+            <li>OpenAI 从 2023 年的 50% 降至 <strong>25%</strong></li>
+            <li>Google Gemini 占据 <strong>20%</strong></li>
+            <li><strong>87%</strong> 的企业工作负载运行在闭源模型上</li>
+          </ul>
+        </div>
+        <p>中国市场同样爆发：IDC 数据显示，2025 年上半年中国 MaaS 市场规模达 <strong>129 亿元人民币</strong>，同比增长 <strong>42%</strong>。</p>
+        <h2>Token 调用量的爆发</h2>
+        <p>字节跳动火山引擎的豆包大模型日均调用量超过 <strong>100 万亿 tokens</strong>，跻身全球前三。阿里云目标：五年内云与 AI 商业化年收入突破 <strong>1000 亿美元</strong>。</p>
+        <h2>冷静期的启示</h2>
+        <ul>
+          <li>为什么 Anthropic 能超越 OpenAI？</li>
+          <li>MaaS 的壁垒在哪里？</li>
+          <li>未来会是赢家通吃，还是多模型共存？</li>
+        </ul>
+        <span class="page-number">02</span>
+      </div>
+    </div>
+
+    <div class="page" data-index="2">
+      <div class="page-inner">
+        <span class="module-label">02 · 大语言模型</span>
+        <h1>从工具到智能体</h1>
+        <p class="subtitle">AI 的演化焦点与智能涌现</p>
+        <h2>AI 研究的演化</h2>
+        <table>
+          <tr><th>阶段</th><th>核心范式</th><th>代表技术</th></tr>
+          <tr><td>早期 AI</td><td>基于规则的专家系统</td><td>MYCIN、DENDRAL</td></tr>
+          <tr><td>机器学习</td><td>自动规划与自动编程</td><td>决策树、SVM</td></tr>
+          <tr><td>深度学习</td><td>深度神经网络</td><td>CNN、RNN/LSTM</td></tr>
+          <tr><td>大模型时代</td><td>大规模预训练 + Prompting</td><td>LLM、多模态基础模型</td></tr>
+        </table>
+        <h2>智能涌现 · Emergence</h2>
+        <blockquote>
+          <strong>Emergence is when quantitative changes in a system result in qualitative changes in behavior.</strong><br/>
+          涌现是指一个系统的量的变化导致行为的质的变化。
+        </blockquote>
+        <p>Wei et al. (2022) 的经典定义：<em>一种在小型模型中不存在，但在大型模型中出现、且无法通过 scaling law 外推预测的能力</em>。</p>
+        <p>关键观察：<strong>当参数数量达到 1000 亿规模时，某些任务上的准确率出现突然提升</strong>。</p>
+        <h2>涌现机制的最新研究</h2>
+        <ul>
+          <li><strong>ICLR 2025</strong>：困难问题呈 U-shaped scaling，简单问题呈 inverted-U scaling</li>
+          <li><strong>Nature Machine Intelligence 2025</strong>：清华 + OpenBMB 提出"能力密度"概念</li>
+        </ul>
+        <h2>GPT 3.5 的自白</h2>
+        <blockquote>
+          『大模型本身并没有智能，它只是一个庞大的参数空间……它通过学习数据中的模式和规律来实现预测和分类等任务。』
+        </blockquote>
+        <span class="page-number">03</span>
+      </div>
+    </div>
+
+    <div class="page" data-index="3">
+      <div class="page-inner">
+        <span class="module-label">03 · 行业落地</span>
+        <h1>AI 带飞？</h1>
+        <p class="subtitle">大模型落地的真实图景</p>
+        <h2>一个实用的四问框架</h2>
+        <div class="highlight">
+          <ul>
+            <li><strong>什么场景？</strong></li>
+            <li><strong>什么产品？</strong></li>
+            <li><strong>如何落地？</strong></li>
+            <li><strong>效果如何？</strong></li>
+          </ul>
+        </div>
+        <h2>常见陷阱</h2>
+        <ul>
+          <li><strong>PoC → Production 鸿沟</strong>：Demo 惊艳，生产环境问题百出</li>
+          <li><strong>数据治理欠债</strong>：模型效果瓶颈最终是训练数据不够好</li>
+          <li><strong>ROI 模糊</strong>：短期成本上升，长期价值难以量化</li>
+          <li><strong>组织阻力</strong>：技术团队兴奋，业务团队观望，管理层焦虑</li>
+        </ul>
+        <div class="divider"></div>
+        <p class="lead">这是一门关于<strong>管理</strong>的课程，不是关于技术的课程。核心问题不是"AI 能做什么"，而是 <strong>"管理者应该如何面对 AI"</strong>。</p>
+        <span class="page-number">04</span>
+      </div>
+    </div>
+
+    <div class="page" data-index="4">
+      <div class="page-inner">
+        <span class="module-label">04 · 人机协作</span>
+        <h1>算法信任的动态研究</h1>
+        <p class="subtitle">从 MBA 入学预测场景说起</p>
+        <h2>研究场景</h2>
+        <p>每年超过 10,000 份 MBA 申请，不到 400 份进入面试。AI 提供预测建议，人类最终拍板。</p>
+        <h2>研究发现</h2>
+        <table>
+          <tr><th>发现</th><th>具体表现</th></tr>
+          <tr><td>基础信任相同</td><td>一开始愿意参考 AI 建议的程度差异不大</td></tr>
+          <tr><td>训练效应</td><td>有反馈时，人越来越相信自己的判断</td></tr>
+          <tr><td>自信膨胀</td><td>AI 让人对自己更自信，尤其无反馈时</td></tr>
+          <tr><td>错误敏感</td><td>对算法错误格外敏感，会被放大</td></tr>
+          <tr><td>效果溢出</td><td>对某领域的信任溢出到其他领域</td></tr>
+          <tr><td>合作效果</td><td>人机合理组合可能超越任何单一一方</td></tr>
+        </table>
+        <h2>核心启示</h2>
+        <p>信任不是静态属性，而是 <strong>动态建构的过程</strong>。管理者需要设计信任建立的机制，而不是假设"算法更优就会被采纳"。</p>
+        <span class="page-number">05</span>
+      </div>
+    </div>
+
+    <div class="page" data-index="5">
+      <div class="page-inner">
+        <span class="module-label">05 · 算法厌恶</span>
+        <h1>为什么人们抵触算法？</h1>
+        <p class="subtitle">Dietvorst, Simmons & Massey (2015)</p>
+        <h2>经典研究</h2>
+        <blockquote>
+          <strong>核心发现</strong>：即使算法表现更优，人们也不会理性地选择算法。看过算法执行的被试，对算法的信心更低，更倾向于选择一个更差的人类预测者。
+        </blockquote>
+        <h2>为什么会厌恶？</h2>
+        <div class="highlight">
+          <ul>
+            <li><strong>认知层面</strong>：对算法的误解、对准确性的担忧</li>
+            <li><strong>透明性</strong>：黑箱让人不安</li>
+            <li><strong>情感层面</strong>：算法剥夺成就感、自我效能感</li>
+            <li><strong>责任归属</strong>：道德与法律困境谁来负责？</li>
+          </ul>
+        </div>
+        <h2>破解之道</h2>
+        <blockquote>
+          <strong>让人们能够（哪怕略微）修改算法的输出，就能显著提升使用意愿。</strong>
+        </blockquote>
+        <p>人们真正想要的不是更准确的算法，而是 <strong>对决策 outcome 的控制感</strong>。</p>
+        <h2>数字人：内容 > 形式</h2>
+        <p>Seymour et al. (2025, ISR) 核心发现：<strong>交互内容的质量比外观拟真度更能塑造用户体验</strong>。</p>
+        <span class="page-number">06</span>
+      </div>
+    </div>
+
+    <div class="page" data-index="6">
+      <div class="page-inner">
+        <span class="module-label">本章小结</span>
+        <h1>穿越迷雾</h1>
+        <p class="subtitle">五个核心管理洞察</p>
+        <div class="highlight">
+          <h3>01 · 技术能力 ≠ 商业采纳</h3>
+          <p>技术成熟度曲线在管理层面有一个滞后。</p>
+        </div>
+        <div class="highlight">
+          <h3>02 · 智能涌现带来新范式</h3>
+          <p>未来的竞争是 <strong>"会用 AI 的人 vs 不会用的人"</strong>。</p>
+        </div>
+        <div class="highlight">
+          <h3>03 · 信任是动态建构的</h3>
+          <p>算法信任 <strong>建立慢、破坏快</strong>。</p>
+        </div>
+        <div class="highlight">
+          <h3>04 · 算法厌恶不是非理性</h3>
+          <p>设计出让人愿意信任和愿意使用的人机协作机制。</p>
+        </div>
+        <div class="highlight">
+          <h3>05 · 内容 > 形式</h3>
+          <p>先排查内容质量和交互设计，不要盲目追求更逼真的数字人。</p>
+        </div>
+        <div class="divider"></div>
+        <p>这些洞察将贯穿后续模块，帮助我们理解数字化转型中的关键管理问题。</p>
+        <span class="page-number">07</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="click-zone prev" id="prevZone"></div>
+<div class="click-zone next" id="nextZone"></div>
+
+<div class="nav-controls">
+  <button class="nav-btn" id="prevBtn" aria-label="Previous">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="page-dots" id="dots"></div>
+  <button class="nav-btn" id="nextBtn" aria-label="Next">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+</div>
+
+<script>
+  (function() {
+    const pages = document.querySelectorAll('.page');
+    const pagesContainer = document.getElementById('pages');
+    const progressEl = document.getElementById('progress');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevZone = document.getElementById('prevZone');
+    const nextZone = document.getElementById('nextZone');
+    const dotsContainer = document.getElementById('dots');
+    let currentPage = 0;
+    const totalPages = pages.length;
+    pages.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'page-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    });
+    const dots = document.querySelectorAll('.page-dot');
+    function updateUI() {
+      pagesContainer.style.transform = 'translateX(-' + (currentPage * 100) + '%)';
+      pages.forEach((p, i) => { p.classList.toggle('active', i === currentPage); });
+      dots.forEach((d, i) => { d.classList.toggle('active', i === currentPage); });
+      progressEl.textContent = (currentPage + 1) + ' / ' + totalPages;
+      prevBtn.disabled = currentPage === 0;
+      nextBtn.disabled = currentPage === totalPages - 1;
+    }
+    function goTo(index) { if (index < 0 || index >= totalPages) return; currentPage = index; updateUI(); }
+    prevBtn.addEventListener('click', () => goTo(currentPage - 1));
+    nextBtn.addEventListener('click', () => goTo(currentPage + 1));
+    prevZone.addEventListener('click', () => goTo(currentPage - 1));
+    nextZone.addEventListener('click', () => goTo(currentPage + 1));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') goTo(currentPage + 1);
+      else if (e.key === 'ArrowLeft') goTo(currentPage - 1);
+      else if (e.key === 'Home') goTo(0);
+      else if (e.key === 'End') goTo(totalPages - 1);
+    });
+    let touchStartX = 0;
+    document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+    document.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) { diff > 0 ? goTo(currentPage + 1) : goTo(currentPage - 1); }
+    });
+    updateUI();
+  })();
+</script>
+</body>
+</html>
