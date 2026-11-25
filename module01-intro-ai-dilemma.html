@@ -290,6 +290,61 @@
       .page { padding: 1.5rem 1.25rem; }
       .click-zone { width: 25%; }
     }
+
+    /* ---------- Narration player ---------- */
+    .narration {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0 0 1.5rem;
+      padding: 0.55rem 0.9rem;
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.4);
+      max-width: 340px;
+    }
+    .cover .narration { margin: 1.75rem auto 0; }
+    .narration .n-play {
+      flex: 0 0 30px;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 1px solid var(--fg);
+      background: var(--fg);
+      color: var(--bg);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.2s ease;
+    }
+    .narration .n-play:hover { opacity: 0.8; }
+    .narration .n-play svg { width: 12px; height: 12px; }
+    .narration .n-track {
+      flex: 1;
+      height: 3px;
+      background: var(--border-strong);
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+    }
+    .narration .n-fill {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 0%;
+      background: var(--fg);
+      border-radius: 2px;
+    }
+    .narration .n-time {
+      font-size: 0.66rem;
+      letter-spacing: 0.06em;
+      color: var(--fg-subtle);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .narration .n-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -516,6 +571,79 @@
     const dotsContainer = document.getElementById('dots');
     let currentPage = 0;
     const totalPages = pages.length;
+
+    // ---------- Narration players ----------
+    const narrationFiles = [
+      'page1-cover', 'page2-maas', 'page3-llm', 'page4-adoption',
+      'page5-trust', 'page6-aversion', 'page7-summary'
+    ];
+    const players = [];
+    const fmtTime = s => {
+      if (!isFinite(s)) return '0:00';
+      const m = Math.floor(s / 60), sec = Math.floor(s % 60);
+      return m + ':' + String(sec).padStart(2, '0');
+    };
+
+    pages.forEach((page, i) => {
+      const audio = new Audio('audio/module01/' + narrationFiles[i] + '.wav');
+      audio.preload = 'none';
+
+      const wrap = document.createElement('div');
+      wrap.className = 'narration';
+      wrap.innerHTML =
+        '<button class="n-play" aria-label="Play narration">' +
+          '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
+        '</button>' +
+        '<span class="n-label">Narration</span>' +
+        '<div class="n-track"><div class="n-fill"></div></div>' +
+        '<span class="n-time">0:00</span>';
+
+      const playBtn = wrap.querySelector('.n-play');
+      const track = wrap.querySelector('.n-track');
+      const fill = wrap.querySelector('.n-fill');
+      const time = wrap.querySelector('.n-time');
+      const iconPlay = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+      const iconPause = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+
+      playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+          players.forEach(p => { if (p.audio !== audio) { p.audio.pause(); } });
+          audio.play();
+        } else {
+          audio.pause();
+        }
+      });
+      audio.addEventListener('play', () => { playBtn.innerHTML = iconPause; });
+      audio.addEventListener('pause', () => { playBtn.innerHTML = iconPlay; });
+      audio.addEventListener('ended', () => { playBtn.innerHTML = iconPlay; });
+      audio.addEventListener('timeupdate', () => {
+        if (audio.duration) {
+          fill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+          time.textContent = fmtTime(audio.currentTime) + ' / ' + fmtTime(audio.duration);
+        }
+      });
+      audio.addEventListener('loadedmetadata', () => {
+        time.textContent = '0:00 / ' + fmtTime(audio.duration);
+      });
+      track.addEventListener('click', e => {
+        const rect = track.getBoundingClientRect();
+        if (audio.duration) {
+          audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+        }
+      });
+
+      // Insert player: after module-label for content pages, before divider for cover
+      const inner = page.querySelector('.page-inner');
+      const label = inner.querySelector('.module-label');
+      if (page.querySelector('.cover')) {
+        const divider = inner.querySelector('.divider');
+        inner.insertBefore(wrap, divider);
+      } else if (label) {
+        label.insertAdjacentElement('afterend', wrap);
+      }
+      players.push({ audio, btn: playBtn, iconPlay });
+    });
+
     pages.forEach((_, i) => {
       const dot = document.createElement('div');
       dot.className = 'page-dot' + (i === 0 ? ' active' : '');
@@ -525,6 +653,8 @@
     const dots = document.querySelectorAll('.page-dot');
     function updateUI() {
       pagesContainer.style.transform = 'translateX(-' + (currentPage * 100) + '%)';
+      // Pause narrations on non-active pages
+      players.forEach((p, i) => { if (i !== currentPage) p.audio.pause(); });
       pages.forEach((p, i) => { p.classList.toggle('active', i === currentPage); });
       dots.forEach((d, i) => { d.classList.toggle('active', i === currentPage); });
       progressEl.textContent = (currentPage + 1) + ' / ' + totalPages;
