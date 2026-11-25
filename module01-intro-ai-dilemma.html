@@ -27,8 +27,6 @@
       text-rendering: optimizeLegibility;
       line-height: 1.7;
     }
-
-    /* ---------- Top bar ---------- */
     .topbar {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -79,15 +77,11 @@
       border-color: var(--fg);
     }
     .topbar .back-btn .arrow { font-size: 0.8em; }
-
-    /* ---------- Book container ---------- */
     .book {
       position: absolute;
       top: 52px; left: 0; right: 0; bottom: 56px;
       overflow: hidden;
     }
-
-    /* ---------- Page stack ---------- */
     .pages {
       height: 100%;
       display: flex;
@@ -104,7 +98,6 @@
     }
     .page::-webkit-scrollbar { width: 6px; }
     .page::-webkit-scrollbar-thumb { background: rgba(22,22,22,0.2); border-radius: 3px; }
-
     .page-inner {
       max-width: 720px;
       margin: 0 auto;
@@ -116,8 +109,6 @@
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* ---------- Content typography ---------- */
     h1 {
       font-size: clamp(1.6rem, 4.8vw, 2.8rem);
       font-weight: 300;
@@ -171,13 +162,10 @@
       text-transform: uppercase;
       color: var(--fg-subtle);
     }
-
     p { font-size: clamp(0.95rem, 2.2vw, 1.02rem); color: var(--fg-soft); margin-bottom: 1rem; }
     p.lead { font-size: clamp(1rem, 2.4vw, 1.1rem); color: var(--fg); line-height: 1.8; text-align: justify; }
-
     ul, ol { padding-left: 1.25rem; margin-bottom: 1rem; }
     li { font-size: clamp(0.92rem, 2.1vw, 1rem); color: var(--fg-soft); margin-bottom: 0.4rem; }
-
     blockquote {
       border-left: 2px solid var(--border-strong);
       padding: 0.75rem 1.25rem;
@@ -188,7 +176,6 @@
       background: rgba(255,255,255,0.3);
     }
     blockquote strong, blockquote em { font-style: normal; color: var(--fg); }
-
     table {
       width: 100%;
       border-collapse: collapse;
@@ -209,7 +196,6 @@
       background: rgba(22,22,22,0.02);
     }
     tr:nth-child(even) td { background: rgba(22,22,22,0.015); }
-
     .highlight {
       background: rgba(22,22,22,0.04);
       border: 1px solid var(--border);
@@ -218,15 +204,12 @@
       margin: 1.25rem 0;
     }
     .highlight p:last-child, .highlight ul:last-child { margin-bottom: 0; }
-
     .divider {
       width: 40px;
       height: 1px;
       background: var(--border-strong);
       margin: 2rem auto;
     }
-
-    /* ---------- Nav controls ---------- */
     .nav-controls {
       position: fixed;
       bottom: 0; left: 0; right: 0;
@@ -264,7 +247,6 @@
       cursor: not-allowed;
     }
     .nav-btn svg { width: 14px; height: 14px; stroke-width: 2; }
-
     .page-dots {
       display: flex;
       gap: 0.4rem;
@@ -283,8 +265,6 @@
       width: 22px;
       border-radius: 3px;
     }
-
-    /* ---------- Side click zones ---------- */
     .click-zone {
       position: fixed;
       top: 52px;
@@ -296,8 +276,6 @@
     .click-zone.prev { left: 0; }
     .click-zone.next { right: 0; }
     .click-zone:hover { background: rgba(22,22,22,0.02); }
-
-    /* ---------- Cover page ---------- */
     .cover {
       display: flex;
       flex-direction: column;
@@ -308,8 +286,6 @@
     .cover .module-label { display: inline-block; }
     .cover h1 { font-weight: 200; letter-spacing: -0.02em; }
     .cover .divider { margin: 2rem auto; }
-
-    /* ---------- Responsive ---------- */
     @media (max-width: 640px) {
       .page { padding: 1.5rem 1.25rem; }
       .click-zone { width: 25%; }
@@ -318,18 +294,15 @@
 </head>
 <body>
 
-<!-- Top Bar -->
 <div class="topbar">
   <a class="course-link" href="course.html">← FB5807P</a>
-  <span class="progress" id="progress">1 / 6</span>
+  <span class="progress" id="progress">1 / 7</span>
   <a class="back-btn" href="course.html"><span class="arrow">←</span> Back to Course</a>
 </div>
 
-<!-- Book -->
 <div class="book">
   <div class="pages" id="pages">
 
-    <!-- Page 1: Cover -->
     <div class="page active" data-index="0">
       <div class="page-inner cover">
         <span class="module-label">Module 01</span>
@@ -341,19 +314,15 @@
       </div>
     </div>
 
-    <!-- Page 2: MaaS -->
     <div class="page" data-index="1">
       <div class="page-inner">
         <span class="module-label">01 · MaaS 回顾</span>
         <h1>Model as a Service</h1>
         <p class="subtitle">三年过去，What Happened?</p>
-
         <h2>从概念到现实</h2>
         <p>2022–2023 年，MaaS 成为 AI 商业化的核心叙事。核心理念很简单：像使用云服务器一样，按需调用大模型能力，无需自建基础设施。</p>
-
         <h2>市场规模与格局</h2>
         <p>根据 Menlo Ventures 2025 年中报告，企业级 LLM 支出在 <strong>6 个月内翻倍</strong>，从 $35 亿增至 $84 亿。</p>
-
         <div class="highlight">
           <p><strong>全球格局：</strong></p>
           <ul>
@@ -363,83 +332,66 @@
             <li><strong>87%</strong> 的企业工作负载运行在闭源模型上</li>
           </ul>
         </div>
-
-        <p>中国市场同样爆发：IDC 数据显示，2025 年上半年中国 MaaS 市场规模达 <strong>129 亿元人民币</strong>，同比增长 <strong>42%</strong>。阿里 Omdia 报告指出，MaaS 已从简单的 API 调用（1.0）演进到覆盖全生命周期的综合能力（2.0）。</p>
-
+        <p>中国市场同样爆发：IDC 数据显示，2025 年上半年中国 MaaS 市场规模达 <strong>129 亿元人民币</strong>，同比增长 <strong>42%</strong>。</p>
         <h2>Token 调用量的爆发</h2>
         <p>字节跳动火山引擎的豆包大模型日均调用量超过 <strong>100 万亿 tokens</strong>，跻身全球前三。阿里云目标：五年内云与 AI 商业化年收入突破 <strong>1000 亿美元</strong>。</p>
-
         <h2>冷静期的启示</h2>
         <ul>
-          <li>为什么 Anthropic 能超越 OpenAI？安全特性？可靠性？合规？</li>
-          <li>MaaS 的壁垒在哪里？模型？API 稳定性？还是行业 Know-how？</li>
+          <li>为什么 Anthropic 能超越 OpenAI？</li>
+          <li>MaaS 的壁垒在哪里？</li>
           <li>未来会是赢家通吃，还是多模型共存？</li>
         </ul>
-
         <span class="page-number">02</span>
       </div>
     </div>
 
-    <!-- Page 3: LLM & Emergence -->
     <div class="page" data-index="2">
       <div class="page-inner">
         <span class="module-label">02 · 大语言模型</span>
         <h1>从工具到智能体</h1>
         <p class="subtitle">AI 的演化焦点与智能涌现</p>
-
         <h2>AI 研究的演化</h2>
         <table>
           <tr><th>阶段</th><th>核心范式</th><th>代表技术</th></tr>
           <tr><td>早期 AI</td><td>基于规则的专家系统</td><td>MYCIN、DENDRAL</td></tr>
-          <tr><td>机器学习</td><td>自动规划与自动编程</td><td>决策树、SVM、贝叶斯网络</td></tr>
+          <tr><td>机器学习</td><td>自动规划与自动编程</td><td>决策树、SVM</td></tr>
           <tr><td>深度学习</td><td>深度神经网络</td><td>CNN、RNN/LSTM</td></tr>
           <tr><td>大模型时代</td><td>大规模预训练 + Prompting</td><td>LLM、多模态基础模型</td></tr>
         </table>
-
-        <h2>用数据说话</h2>
-        <p>基于 10,000 条大众点评数据 + 人工标注，传统情感分析模型可达 <strong>90%+ 准确率</strong>。而这一能力在今天的大模型面前，几乎是"零成本"——只需一句 Prompt。</p>
-
         <h2>智能涌现 · Emergence</h2>
         <blockquote>
           <strong>Emergence is when quantitative changes in a system result in qualitative changes in behavior.</strong><br/>
           涌现是指一个系统的量的变化导致行为的质的变化。
         </blockquote>
         <p>Wei et al. (2022) 的经典定义：<em>一种在小型模型中不存在，但在大型模型中出现、且无法通过 scaling law 外推预测的能力</em>。</p>
-        <p>关键观察：<strong>当参数数量达到 1000 亿规模时，某些任务上的准确率出现突然提升</strong>——这不是线性渐变，而是阶跃式跃迁。</p>
-
+        <p>关键观察：<strong>当参数数量达到 1000 亿规模时，某些任务上的准确率出现突然提升</strong>。</p>
         <h2>涌现机制的最新研究</h2>
         <ul>
-          <li><strong>ICLR 2025</strong>：困难问题呈 U-shaped scaling，简单问题呈 inverted-U scaling；两种模式初期相互抵消，导致性能停滞</li>
-          <li><strong>Nature Machine Intelligence 2025</strong>：清华 + OpenBMB 提出"能力密度（Capability Density）"概念，大模型正进入"效率"而非仅"规模"的时代</li>
+          <li><strong>ICLR 2025</strong>：困难问题呈 U-shaped scaling，简单问题呈 inverted-U scaling</li>
+          <li><strong>Nature Machine Intelligence 2025</strong>：清华 + OpenBMB 提出"能力密度"概念</li>
         </ul>
-
         <h2>GPT 3.5 的自白</h2>
         <blockquote>
           『大模型本身并没有智能，它只是一个庞大的参数空间……它通过学习数据中的模式和规律来实现预测和分类等任务。』
         </blockquote>
-        <p>这段话来自 GPT 3.5 自身，却道出了一个根本矛盾：<strong>我们对"智能"的定义正在被重新书写。</strong></p>
-
         <span class="page-number">03</span>
       </div>
     </div>
 
-    <!-- Page 4: Industry Adoption -->
     <div class="page" data-index="3">
       <div class="page-inner">
         <span class="module-label">03 · 行业落地</span>
         <h1>AI 带飞？</h1>
         <p class="subtitle">大模型落地的真实图景</p>
-
         <h2>一个实用的四问框架</h2>
         <div class="highlight">
           <ul>
-            <li><strong>什么场景？</strong> —— 客服？营销？研发？知识管理？</li>
-            <li><strong>什么产品？</strong> —— 自研模型？MaaS API？集成 SaaS？</li>
-            <li><strong>如何落地？</strong> —— 技术架构？数据安全？系统集成？组织变革？</li>
-            <li><strong>效果如何？</strong> —— 成本降低？效率提升？收入增长？如何归因？</li>
+            <li><strong>什么场景？</strong></li>
+            <li><strong>什么产品？</strong></li>
+            <li><strong>如何落地？</strong></li>
+            <li><strong>效果如何？</strong></li>
           </ul>
         </div>
-
         <h2>常见陷阱</h2>
         <ul>
           <li><strong>PoC → Production 鸿沟</strong>：Demo 惊艳，生产环境问题百出</li>
@@ -447,27 +399,19 @@
           <li><strong>ROI 模糊</strong>：短期成本上升，长期价值难以量化</li>
           <li><strong>组织阻力</strong>：技术团队兴奋，业务团队观望，管理层焦虑</li>
         </ul>
-
         <div class="divider"></div>
-
-        <p class="lead">这是一门关于<strong>管理</strong>的课程，不是关于技术的课程。我们关注的核心问题不是"AI 能做什么"，而是<strong>"管理者应该如何面对 AI"</strong>——在技术飞速发展的背景下，如何做出正确的战略决策、组织设计和资源配置。</p>
-
+        <p class="lead">这是一门关于<strong>管理</strong>的课程，不是关于技术的课程。核心问题不是"AI 能做什么"，而是 <strong>"管理者应该如何面对 AI"</strong>。</p>
         <span class="page-number">04</span>
       </div>
     </div>
 
-    <!-- Page 5: Human-AI Trust -->
     <div class="page" data-index="4">
       <div class="page-inner">
         <span class="module-label">04 · 人机协作</span>
         <h1>算法信任的动态研究</h1>
         <p class="subtitle">从 MBA 入学预测场景说起</p>
-
         <h2>研究场景</h2>
-        <p><strong>背景</strong>：每年超过 10,000 份 MBA 申请，不到 400 份进入面试；面试通过后还需通过统一考试才能入学。</p>
-        <p><strong>任务</strong>：根据报名者的申请信息，判断其是否能够通过入学考试。</p>
-        <p><strong>本质</strong>：AI 提供预测建议，人类最终拍板。问题是——人类会如何对待 AI 的建议？</p>
-
+        <p>每年超过 10,000 份 MBA 申请，不到 400 份进入面试。AI 提供预测建议，人类最终拍板。</p>
         <h2>研究发现</h2>
         <table>
           <tr><th>发现</th><th>具体表现</th></tr>
@@ -476,90 +420,70 @@
           <tr><td>自信膨胀</td><td>AI 让人对自己更自信，尤其无反馈时</td></tr>
           <tr><td>错误敏感</td><td>对算法错误格外敏感，会被放大</td></tr>
           <tr><td>效果溢出</td><td>对某领域的信任溢出到其他领域</td></tr>
-          <tr><td>减少披露</td><td>了解算法效果后倾向减少后续依赖</td></tr>
           <tr><td>合作效果</td><td>人机合理组合可能超越任何单一一方</td></tr>
         </table>
-
         <h2>核心启示</h2>
-        <p>信任不是静态属性，而是 <strong>动态建构的过程</strong>。一次算法出错带来的信任损失，可能需要多次正确才能修复。管理者需要设计信任建立的机制，而不是假设"算法更优就会被采纳"。</p>
-
+        <p>信任不是静态属性，而是 <strong>动态建构的过程</strong>。管理者需要设计信任建立的机制，而不是假设"算法更优就会被采纳"。</p>
         <span class="page-number">05</span>
       </div>
     </div>
 
-    <!-- Page 6: Algorithm Aversion + Digital Humans -->
     <div class="page" data-index="5">
       <div class="page-inner">
         <span class="module-label">05 · 算法厌恶</span>
         <h1>为什么人们抵触算法？</h1>
         <p class="subtitle">Dietvorst, Simmons & Massey (2015)</p>
-
         <h2>经典研究</h2>
-        <p>沃顿商学院的五项实验奠定了"算法厌恶"的理论基础：</p>
         <blockquote>
-          <strong>核心发现</strong>：即使算法表现更优，人们也不会理性地选择算法。看过算法执行的被试，对算法的信心更低，更倾向于选择一个更差的人类预测者——甚至在亲眼看到算法超越人类的被试中依然存在。
+          <strong>核心发现</strong>：即使算法表现更优，人们也不会理性地选择算法。看过算法执行的被试，对算法的信心更低，更倾向于选择一个更差的人类预测者。
         </blockquote>
-
         <h2>为什么会厌恶？</h2>
         <div class="highlight">
           <ul>
             <li><strong>认知层面</strong>：对算法的误解、对准确性的担忧</li>
-            <li><strong>透明性</strong>：黑箱让人不安，不透明 → 不信任</li>
-            <li><strong>情感层面</strong>：算法剥夺成就感、自我价值、自我效能感</li>
-            <li><strong>责任归属</strong>：算法决策出错，道德与法律困境谁来负责？</li>
+            <li><strong>透明性</strong>：黑箱让人不安</li>
+            <li><strong>情感层面</strong>：算法剥夺成就感、自我效能感</li>
+            <li><strong>责任归属</strong>：道德与法律困境谁来负责？</li>
           </ul>
         </div>
-
         <h2>破解之道</h2>
-        <p>Dietvorst et al. (2018, <em>Management Science</em>) 发现：</p>
         <blockquote>
           <strong>让人们能够（哪怕略微）修改算法的输出，就能显著提升使用意愿。</strong>
         </blockquote>
-        <p>人们真正想要的不是更准确的算法，而是 <strong>对决策 outcome 的控制感</strong>。其他策略：渐进式引入、透明化设计、人机协作模式、归因训练。</p>
-
+        <p>人们真正想要的不是更准确的算法，而是 <strong>对决策 outcome 的控制感</strong>。</p>
         <h2>数字人：内容 > 形式</h2>
-        <p>Seymour et al. (2025, <em>Information Systems Research</em>) 对比了人类客户经理、文本聊天机器人、数字人代理（DHA）、数字人小狗（DHP）四种交互方式。核心发现：<strong>交互内容的质量（内容、语气、回应速度）比外观拟真度更能塑造用户体验</strong>。</p>
-
+        <p>Seymour et al. (2025, ISR) 核心发现：<strong>交互内容的质量比外观拟真度更能塑造用户体验</strong>。</p>
         <span class="page-number">06</span>
       </div>
     </div>
 
-    <!-- Page 7: Summary -->
     <div class="page" data-index="6">
       <div class="page-inner">
         <span class="module-label">本章小结</span>
         <h1>穿越迷雾</h1>
         <p class="subtitle">五个核心管理洞察</p>
-
         <div class="highlight">
           <h3>01 · 技术能力 ≠ 商业采纳</h3>
-          <p>MaaS 市场爆发，但企业真正用好的比例仍然有限。<strong>技术成熟度曲线在管理层面有一个滞后</strong>。</p>
+          <p>技术成熟度曲线在管理层面有一个滞后。</p>
         </div>
-
         <div class="highlight">
           <h3>02 · 智能涌现带来新范式</h3>
-          <p>我们对"智能"的理解正在被大模型重新书写。未来的竞争不再是"人 vs 机器"，而是 <strong>"会用 AI 的人 vs 不会用的人"</strong>。</p>
+          <p>未来的竞争是 <strong>"会用 AI 的人 vs 不会用的人"</strong>。</p>
         </div>
-
         <div class="highlight">
           <h3>03 · 信任是动态建构的</h3>
-          <p>算法信任 <strong>建立慢、破坏快</strong>。一次出错的损失可能需要多次正确才能修复。信任管理是组织层面的系统性工程。</p>
+          <p>算法信任 <strong>建立慢、破坏快</strong>。</p>
         </div>
-
         <div class="highlight">
           <h3>04 · 算法厌恶不是非理性</h3>
-          <p>背后有认知、情感、责任多重因素。破解之道不是"说服"人们使用 AI，而是 <strong>设计出让人愿意信任和愿意使用的人机协作机制</strong>。</p>
+          <p>设计出让人愿意信任和愿意使用的人机协作机制。</p>
         </div>
-
         <div class="highlight">
           <h3>05 · 内容 > 形式</h3>
-          <p>在 AI 交互中，沟通质量永远比外观拟真重要。如果效果不达预期，先排查 <strong>内容质量和交互设计</strong>，不要盲目追求更逼真的数字人。</p>
+          <p>先排查内容质量和交互设计，不要盲目追求更逼真的数字人。</p>
         </div>
-
         <div class="divider"></div>
-
         <p>这些洞察将贯穿后续模块，帮助我们理解数字化转型中的关键管理问题。</p>
-
         <span class="page-number">07</span>
       </div>
     </div>
@@ -567,17 +491,15 @@
   </div>
 </div>
 
-<!-- Side click zones -->
 <div class="click-zone prev" id="prevZone"></div>
 <div class="click-zone next" id="nextZone"></div>
 
-<!-- Nav Controls -->
 <div class="nav-controls">
-  <button class="nav-btn" id="prevBtn" aria-label="Previous page">
+  <button class="nav-btn" id="prevBtn" aria-label="Previous">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg>
   </button>
   <div class="page-dots" id="dots"></div>
-  <button class="nav-btn" id="nextBtn" aria-label="Next page">
+  <button class="nav-btn" id="nextBtn" aria-label="Next">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"/></svg>
   </button>
 </div>
@@ -592,11 +514,8 @@
     const prevZone = document.getElementById('prevZone');
     const nextZone = document.getElementById('nextZone');
     const dotsContainer = document.getElementById('dots');
-
     let currentPage = 0;
     const totalPages = pages.length;
-
-    // Create dots
     pages.forEach((_, i) => {
       const dot = document.createElement('div');
       dot.className = 'page-dot' + (i === 0 ? ' active' : '');
@@ -604,57 +523,31 @@
       dotsContainer.appendChild(dot);
     });
     const dots = document.querySelectorAll('.page-dot');
-
     function updateUI() {
-      pagesContainer.style.transform = `translateX(-${currentPage * 100}%)`;
-
-      pages.forEach((p, i) => {
-        p.classList.toggle('active', i === currentPage);
-      });
-
-      dots.forEach((d, i) => {
-        d.classList.toggle('active', i === currentPage);
-      });
-
-      progressEl.textContent = `${currentPage + 1} / ${totalPages}`;
+      pagesContainer.style.transform = 'translateX(-' + (currentPage * 100) + '%)';
+      pages.forEach((p, i) => { p.classList.toggle('active', i === currentPage); });
+      dots.forEach((d, i) => { d.classList.toggle('active', i === currentPage); });
+      progressEl.textContent = (currentPage + 1) + ' / ' + totalPages;
       prevBtn.disabled = currentPage === 0;
       nextBtn.disabled = currentPage === totalPages - 1;
     }
-
-    function goTo(index) {
-      if (index < 0 || index >= totalPages) return;
-      currentPage = index;
-      updateUI();
-    }
-
-    function next() { goTo(currentPage + 1); }
-    function prev() { goTo(currentPage - 1); }
-
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', next);
-    prevZone.addEventListener('click', prev);
-    nextZone.addEventListener('click', next);
-
-    // Keyboard navigation
+    function goTo(index) { if (index < 0 || index >= totalPages) return; currentPage = index; updateUI(); }
+    prevBtn.addEventListener('click', () => goTo(currentPage - 1));
+    nextBtn.addEventListener('click', () => goTo(currentPage + 1));
+    prevZone.addEventListener('click', () => goTo(currentPage - 1));
+    nextZone.addEventListener('click', () => goTo(currentPage + 1));
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === ' ') { next(); }
-      else if (e.key === 'ArrowLeft') { prev(); }
-      else if (e.key === 'Home') { goTo(0); }
-      else if (e.key === 'End') { goTo(totalPages - 1); }
+      if (e.key === 'ArrowRight' || e.key === ' ') goTo(currentPage + 1);
+      else if (e.key === 'ArrowLeft') goTo(currentPage - 1);
+      else if (e.key === 'Home') goTo(0);
+      else if (e.key === 'End') goTo(totalPages - 1);
     });
-
-    // Touch swipe
     let touchStartX = 0;
-    let touchEndX = 0;
     document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
     document.addEventListener('touchend', e => {
-      touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) next(); else prev();
-      }
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) { diff > 0 ? goTo(currentPage + 1) : goTo(currentPage - 1); }
     });
-
     updateUI();
   })();
 </script>
