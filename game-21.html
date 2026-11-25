@@ -30,14 +30,9 @@
       flex-direction: column;
     }
 
-    /* ---------- Top bar ---------- */
     .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      height: 56px;
-      display: flex;
-      align-items: center;
+      position: sticky; top: 0; z-index: 20;
+      height: 56px; display: flex; align-items: center;
       padding: 0 1.25rem;
       border-bottom: 1px solid var(--line-soft);
       background: rgba(250, 250, 248, 0.82);
@@ -45,86 +40,59 @@
       backdrop-filter: blur(14px);
     }
     .topbar a {
-      color: var(--fg);
-      text-decoration: none;
-      font-size: 0.76rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      opacity: 0.5;
-      transition: opacity 0.2s ease;
+      color: var(--fg); text-decoration: none;
+      font-size: 0.76rem; letter-spacing: 0.12em; text-transform: uppercase;
+      opacity: 0.5; transition: opacity 0.2s ease;
     }
     .topbar a:hover, .topbar a:focus-visible { opacity: 1; outline: none; }
     .topbar .balance {
       margin-left: auto;
       font-family: "SF Mono", Menlo, Consolas, monospace;
-      font-size: 0.78rem;
-      font-variant-numeric: tabular-nums;
-      letter-spacing: 0.04em;
-      color: var(--muted);
+      font-size: 0.78rem; font-variant-numeric: tabular-nums;
+      letter-spacing: 0.04em; color: var(--muted);
     }
     .topbar .balance strong { color: var(--fg); font-weight: 500; }
 
-    /* ---------- Table ---------- */
     .table {
-      flex: 1;
-      width: 100%;
-      max-width: 860px;
+      flex: 1; width: 100%; max-width: 860px;
       margin: 0 auto;
       padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 4vw, 2rem) 2rem;
-      display: flex;
-      flex-direction: column;
+      display: flex; flex-direction: column;
       gap: clamp(1rem, 3vw, 1.75rem);
     }
 
     .head { text-align: center; }
     .head h1 {
       font-size: clamp(2rem, 6vw, 2.9rem);
-      font-weight: 300;
-      letter-spacing: 0.02em;
-      line-height: 1;
+      font-weight: 300; letter-spacing: 0.02em; line-height: 1;
     }
     .head p {
       margin-top: 0.55rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
       color: var(--muted);
     }
 
-    .side {
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-    }
+    .side { display: flex; flex-direction: column; gap: 0.7rem; }
     .side-label {
-      display: flex;
-      align-items: baseline;
-      gap: 0.6rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      display: flex; align-items: baseline; gap: 0.6rem;
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--muted);
     }
     .side-label .total {
       font-family: "SF Mono", Menlo, Consolas, monospace;
-      font-size: 0.86rem;
-      font-variant-numeric: tabular-nums;
-      color: var(--fg);
-      letter-spacing: 0.02em;
+      font-size: 0.86rem; font-variant-numeric: tabular-nums;
+      color: var(--fg); letter-spacing: 0.02em;
       transition: color 0.2s ease;
     }
     .side-label .total.bust { color: var(--lose); }
     .side-label .total.good { color: var(--win); }
 
     .hand {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
+      display: flex; flex-wrap: wrap; gap: 0.55rem;
       min-height: calc(var(--card-w) * 1.4);
       align-items: center;
     }
 
-    /* ---------- Cards ---------- */
     .card {
       width: var(--card-w);
       height: calc(var(--card-w) * 1.4);
@@ -132,9 +100,7 @@
       border: 1px solid rgba(22, 22, 22, 0.14);
       border-radius: 7px;
       box-shadow: 0 1px 2px rgba(22, 22, 22, 0.05), 0 6px 14px rgba(22, 22, 22, 0.06);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      display: flex; flex-direction: column; justify-content: space-between;
       padding: 0.42em 0.5em;
       font-family: "SF Mono", Menlo, Consolas, monospace;
       position: relative;
@@ -149,8 +115,7 @@
     }
     .card.back::after {
       content: "";
-      position: absolute;
-      inset: 5px;
+      position: absolute; inset: 5px;
       border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: 4px;
     }
@@ -159,42 +124,27 @@
       to   { opacity: 1; transform: translateY(0) rotate(0); }
     }
 
-    /* ---------- Divider / message ---------- */
-    .divider {
-      position: relative;
-      height: 1px;
-      background: var(--line-soft);
-      margin: 0.25rem 0;
-    }
+    .divider { height: 1px; background: var(--line-soft); margin: 0.25rem 0; }
     .message {
-      text-align: center;
-      min-height: 1.6em;
-      font-size: 0.92rem;
-      letter-spacing: 0.01em;
+      text-align: center; min-height: 1.6em;
+      font-size: 0.92rem; letter-spacing: 0.01em;
       color: var(--muted);
       transition: color 0.25s ease;
     }
     .message.win { color: var(--win); }
     .message.lose { color: var(--lose); }
 
-    /* ---------- Controls ---------- */
     .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      justify-content: center;
-      align-items: center;
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      justify-content: center; align-items: center;
       padding-top: 0.5rem;
     }
     button {
-      font: inherit;
-      font-size: 0.82rem;
-      letter-spacing: 0.06em;
+      font: inherit; font-size: 0.82rem; letter-spacing: 0.06em;
       padding: 0.68rem 1.35rem;
       border-radius: 999px;
       border: 1px solid var(--line);
-      background: #fff;
-      color: var(--fg);
+      background: #fff; color: var(--fg);
       cursor: pointer;
       transition: background 0.18s ease, border-color 0.18s ease, opacity 0.18s ease, transform 0.12s ease;
     }
@@ -202,54 +152,37 @@
     button:active:not(:disabled) { transform: translateY(1px); }
     button:focus-visible { outline: 2px solid rgba(22, 22, 22, 0.35); outline-offset: 2px; }
     button:disabled { opacity: 0.32; cursor: default; }
-    button.primary {
-      background: var(--fg);
-      border-color: var(--fg);
-      color: var(--bg);
-    }
+    button.primary { background: var(--fg); border-color: var(--fg); color: var(--bg); }
     button.primary:hover:not(:disabled) { background: #000; border-color: #000; }
 
     .bet-box {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
+      display: flex; align-items: center; gap: 0.35rem;
       padding: 0.28rem 0.4rem;
-      border: 1px solid var(--line);
-      border-radius: 999px;
+      border: 1px solid var(--line); border-radius: 999px;
       background: #fff;
     }
     .bet-box .bet-val {
-      min-width: 4.6em;
-      text-align: center;
+      min-width: 4.6em; text-align: center;
       font-family: "SF Mono", Menlo, Consolas, monospace;
-      font-size: 0.8rem;
-      font-variant-numeric: tabular-nums;
+      font-size: 0.8rem; font-variant-numeric: tabular-nums;
     }
     .bet-box button {
-      width: 30px;
-      height: 30px;
-      padding: 0;
-      border-radius: 50%;
-      font-size: 0.95rem;
-      line-height: 1;
+      width: 30px; height: 30px; padding: 0;
+      border-radius: 50%; font-size: 0.95rem; line-height: 1;
       border-color: transparent;
       background: rgba(22, 22, 22, 0.045);
     }
 
     .hint {
       text-align: center;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
       color: rgba(22, 22, 22, 0.3);
       padding-top: 0.25rem;
     }
     .hint kbd {
       font-family: "SF Mono", Menlo, Consolas, monospace;
-      font-size: 0.68rem;
-      padding: 1px 5px;
-      border: 1px solid var(--line);
-      border-radius: 3px;
+      font-size: 0.68rem; padding: 1px 5px;
+      border: 1px solid var(--line); border-radius: 3px;
       letter-spacing: 0.04em;
     }
 
@@ -271,23 +204,21 @@
     </div>
 
     <section class="side" aria-label="Dealer hand">
-      <div class="side-label">Dealer <span class="total" id="dealer-total">—</span></div>
+      <div class="side-label">Dealer <span class="total" id="dealer-total">&mdash;</span></div>
       <div class="hand" id="dealer-hand"></div>
     </section>
 
     <div class="divider"></div>
-
     <p class="message" id="message" aria-live="polite">Place your bet, then deal.</p>
-
     <div class="divider"></div>
 
     <section class="side" aria-label="Your hand">
-      <div class="side-label">You <span class="total" id="player-total">—</span></div>
+      <div class="side-label">You <span class="total" id="player-total">&mdash;</span></div>
       <div class="hand" id="player-hand"></div>
     </section>
 
     <div class="controls">
-      <div class="bet-box" id="bet-box">
+      <div class="bet-box">
         <button type="button" id="bet-down" aria-label="Decrease bet">&minus;</button>
         <span class="bet-val" id="bet-val">25</span>
         <button type="button" id="bet-up" aria-label="Increase bet">+</button>
@@ -308,15 +239,18 @@
       var SUITS = [["\u2660", false], ["\u2665", true], ["\u2666", true], ["\u2663", false]];
       var RANKS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
       var DECKS = 6;
+      var START_BANKROLL = 1000;
 
-      var bankroll = 1000;
+      var bankroll = START_BANKROLL;
       var bet = 25;
-      var shoe = [];
+      var shoe = buildShoe();
       var round = null;
       var busy = false;
 
-      var $ = function (id) { return document.getElementById(id); };
-      var sleep = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+      function $(id) { return document.getElementById(id); }
+      function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+      /* ---------- Deck ---------- */
 
       function buildShoe() {
         var cards = [];
@@ -346,15 +280,22 @@
       }
 
       function handValue(hand) {
+        if (!hand || !hand.length) return 0;
         var total = 0;
         var aces = 0;
         for (var i = 0; i < hand.length; i++) {
+          if (!hand[i]) continue;
           total += cardValue(hand[i]);
           if (hand[i].rank === "A") aces++;
         }
         while (total > 21 && aces > 0) { total -= 10; aces--; }
         return total;
       }
+
+      /* ---------- Rendering ----------
+         Rebuild each hand from state on every render so card faces can never
+         drift out of sync with the model. Only cards beyond the previously
+         shown count animate, so existing cards stay put visually.          */
 
       function makeCard(card, faceDown) {
         var el = document.createElement("div");
@@ -372,22 +313,13 @@
         return el;
       }
 
-      function syncHand(container, hand, faceDownIndex) {
-        while (container.children.length > hand.length) {
-          container.removeChild(container.lastChild);
-        }
+      function paintHand(container, hand, faceDownIndex, alreadyShown) {
+        container.innerHTML = "";
         for (var i = 0; i < hand.length; i++) {
-          var wantDown = (i === faceDownIndex);
-          var existing = container.children[i];
-          if (!existing) {
-            var card = makeCard(hand[i], wantDown);
-            card.style.animationDelay = (i * 70) + "ms";
-            container.appendChild(card);
-          } else if (existing.classList.contains("back") !== wantDown) {
-            var fresh = makeCard(hand[i], wantDown);
-            fresh.style.animation = "none";
-            container.replaceChild(fresh, existing);
-          }
+          var el = makeCard(hand[i], i === faceDownIndex);
+          if (i < alreadyShown) { el.style.animation = "none"; }
+          else { el.style.animationDelay = ((i - alreadyShown) * 80) + "ms"; }
+          container.appendChild(el);
         }
       }
 
@@ -397,28 +329,42 @@
         m.className = "message" + (kind ? " " + kind : "");
       }
 
-      function renderTotals() {
+      function render() {
+        var playerEl = $("player-hand");
+        var dealerEl = $("dealer-hand");
         var pt = $("player-total");
         var dt = $("dealer-total");
+
         if (!round) {
+          playerEl.innerHTML = "";
+          dealerEl.innerHTML = "";
           pt.textContent = "\u2014";
           dt.textContent = "\u2014";
           pt.className = "total";
           dt.className = "total";
+          syncUI();
           return;
         }
+
+        paintHand(playerEl, round.player, -1, round.shown.player);
+        paintHand(dealerEl, round.dealer, round.dealerHidden ? 1 : -1, round.shown.dealer);
+        round.shown.player = round.player.length;
+        round.shown.dealer = round.dealer.length;
+
         var p = handValue(round.player);
         pt.textContent = String(p);
         pt.className = "total" + (p > 21 ? " bust" : (p === 21 ? " good" : ""));
 
         if (round.dealerHidden) {
-          dt.textContent = String(handValue([round.dealer[0]])) + " +";
+          dt.textContent = (round.dealer.length ? handValue([round.dealer[0]]) : 0) + " +";
           dt.className = "total";
         } else {
           var d = handValue(round.dealer);
           dt.textContent = String(d);
           dt.className = "total" + (d > 21 ? " bust" : "");
         }
+
+        syncUI();
       }
 
       function syncUI() {
@@ -426,37 +372,31 @@
         $("bet-val").textContent = String(bet);
 
         var inRound = !!round && round.phase === "player";
-        $("btn-deal").disabled = busy || inRound || bankroll < 5;
+        var settled = !!round && round.phase === "settled";
+        var broke = bankroll < 5;
+
+        $("btn-deal").textContent = broke ? "Restart" : (settled ? "Next Round" : "Deal");
+        $("btn-deal").disabled = busy || inRound;
         $("btn-hit").disabled = busy || !inRound;
         $("btn-stand").disabled = busy || !inRound;
-        $("btn-double").disabled = busy || !inRound || round.player.length !== 2 || bankroll < round.bet;
+        $("btn-double").disabled = busy || !inRound || !round || round.player.length !== 2 || bankroll < round.bet;
         $("bet-down").disabled = busy || inRound || bet <= 5;
-        $("bet-up").disabled = busy || inRound || bet + 25 > bankroll;
-      }
-
-      function render() {
-        var playerHand = $("player-hand");
-        var dealerHand = $("dealer-hand");
-        if (!round) {
-          playerHand.innerHTML = "";
-          dealerHand.innerHTML = "";
-        } else {
-          syncHand(playerHand, round.player, -1);
-          syncHand(dealerHand, round.dealer, round.dealerHidden ? 1 : -1);
-        }
-        renderTotals();
-        syncUI();
+        $("bet-up").disabled = busy || inRound || bet >= bankroll;
       }
 
       function adjustBet(delta) {
         if (busy || (round && round.phase === "player")) return;
-        bet = Math.max(5, Math.min(bankroll, bet + delta));
+        bet = Math.min(bankroll, Math.max(5, bet + delta));
         syncUI();
       }
+
+      /* ---------- Game flow ---------- */
 
       async function deal() {
         if (busy) return;
         if (round && round.phase === "player") return;
+        if (bankroll < 5) { resetBankroll(); return; }
+        if (bet > bankroll) { bet = bankroll; }
         if (bankroll < bet) { setMessage("Not enough chips for that bet.", "lose"); return; }
 
         busy = true;
@@ -467,19 +407,21 @@
           bet: bet,
           phase: "player",
           dealerHidden: true,
-          doubled: false
+          shown: { player: 0, dealer: 0 }
         };
         setMessage("");
         render();
-        syncUI();
 
-        round.player.push(drawCard());
-        round.dealer.push(drawCard());
+        await sleep(80);
         round.player.push(drawCard());
         round.dealer.push(drawCard());
         render();
-        syncUI();
-        await sleep(520);
+
+        await sleep(220);
+        round.player.push(drawCard());
+        round.dealer.push(drawCard());
+        render();
+        await sleep(360);
 
         var p = handValue(round.player);
         var d = handValue(round.dealer);
@@ -513,7 +455,8 @@
         syncUI();
         round.player.push(drawCard());
         render();
-        await sleep(320);
+        await sleep(360);
+
         var total = handValue(round.player);
         if (total > 21) {
           round.dealerHidden = false;
@@ -522,7 +465,7 @@
           finishRound("lose", "Bust with " + total + ".");
         } else if (total === 21) {
           setMessage("21 \u2014 standing.");
-          await sleep(300);
+          await sleep(320);
           await dealerTurn();
         } else {
           busy = false;
@@ -542,17 +485,16 @@
         busy = true;
         bankroll -= round.bet;
         round.bet *= 2;
-        round.doubled = true;
         syncUI();
         round.player.push(drawCard());
         render();
         await sleep(420);
-        var total = handValue(round.player);
-        if (total > 21) {
+
+        if (handValue(round.player) > 21) {
           round.dealerHidden = false;
           render();
           await sleep(420);
-          finishRound("lose", "Double bust with " + total + ".");
+          finishRound("lose", "Double bust with " + handValue(round.player) + ".");
           return;
         }
         await dealerTurn();
@@ -563,13 +505,12 @@
         round.dealerHidden = false;
         setMessage("Dealer plays\u2026");
         render();
-        syncUI();
-        await sleep(500);
+        await sleep(520);
 
         while (handValue(round.dealer) < 17) {
           round.dealer.push(drawCard());
           render();
-          await sleep(580);
+          await sleep(600);
         }
 
         var d = handValue(round.dealer);
@@ -589,6 +530,7 @@
       function finishRound(kind, text) {
         round.phase = "settled";
         round.dealerHidden = false;
+
         var b = round.bet;
         var msgKind = "";
 
@@ -600,47 +542,43 @@
           msgKind = "win";
         } else if (kind === "push") {
           bankroll += b;
-          msgKind = "";
         }
 
         setMessage(text, msgKind);
-        render();
         busy = false;
-        syncUI();
+        render();
 
         if (bankroll < 5) {
-          setTimeout(function () {
-            if (bankroll < 5) {
-              setMessage("Out of chips. Press Deal to start over with 1000.", "");
-              $("btn-deal").disabled = false;
-            }
-          }, 300);
+          setMessage(text + " Out of chips \u2014 press Next Round to restart with " + START_BANKROLL + ".", msgKind);
         }
       }
 
       function resetBankroll() {
-        bankroll = 1000;
+        bankroll = START_BANKROLL;
         bet = 25;
         round = null;
         busy = false;
         shoe = buildShoe();
-        render();
         setMessage("Fresh shoe. Place your bet, then deal.");
+        render();
       }
 
       /* ---------- Events ---------- */
+
       $("btn-deal").addEventListener("click", function () {
         if (bankroll < 5) { resetBankroll(); return; }
         deal();
       });
-      $("btn-hit").addEventListener("click", hit);
-      $("btn-stand").addEventListener("click", stand);
-      $("btn-double").addEventListener("click", doubleDown);
+      $("btn-hit").addEventListener("click", function () { hit(); });
+      $("btn-stand").addEventListener("click", function () { stand(); });
+      $("btn-double").addEventListener("click", function () { doubleDown(); });
       $("bet-down").addEventListener("click", function () { adjustBet(-25); });
       $("bet-up").addEventListener("click", function () { adjustBet(25); });
 
       document.addEventListener("keydown", function (e) {
         if (e.metaKey || e.ctrlKey || e.altKey) return;
+        if (e.target && /^(INPUT|TEXTAREA|SELECT|BUTTON)$/.test(e.target.tagName)) return;
+
         var key = e.key.toLowerCase();
         if (key === "h") { hit(); }
         else if (key === "s") { stand(); }
