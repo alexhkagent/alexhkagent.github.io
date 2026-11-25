@@ -56,12 +56,13 @@
   <main>
     <div class="s-num">01 · Caricature Amplification</div>
     <h1>Caricature Amplification and Harnessing</h1>
-    <div class="meta"><span class="tag">AI Safety</span><span>NeurIPS · ICML · ICLR · ACL · EMNLP · AAAI · CHI</span><span class="pulse"></span>Last updated 2026-11-25</div>
+    <div class="meta"><span class="tag">AI Safety</span><span>NeurIPS · ICML · ICLR · ACL · EMNLP · AAAI · CHI · FT50/UTD24 · Nature · Science · PNAS</span><span class="pulse"></span>Last updated 2026-11-25</div>
 
     <section>
       <h2>Definition</h2>
       <p>Caricature amplification refers to the tendency of large language models, when prompted to simulate or describe a specific demographic, identity, or viewpoint, to systematically flatten that group into an exaggerated, two-dimensional "caricature." The phenomenon is documented in persona-steered generation, demographic simulation for social science surveys, role-play safety testing, and agentic self-expression. Two diagnostic criteria — <em>individuation</em> (within-group diversity is erased) and <em>exaggeration</em> (between-group stereotypes are amplified beyond empirical reality) — jointly define caricature in the CoMPosT diagnostic framework (Cheng et al., EMNLP 2023).</p>
       <p>Caricature is not a subtype of generic toxicity or hate speech: it produces text that reads fluent and socially plausible yet is systematically misleading at the group level. It is amplified by instruction tuning that rewards fluent persona-consistent output without penalizing flattening, and by RLHF that anchors "helpful" responses to a narrow representation of the target group.</p>
+      <p>In management and economics, the same failure surfaces as distorted synthetic respondents and as <em>symbolic compliance</em> in LLM-assisted evaluation — visible stereotypes are suppressed while the underlying evaluative logic is left intact.</p>
     </section>
 
     <section>
@@ -110,9 +111,141 @@
     </section>
 
     <section>
+      <h2>Management &amp; Economics Perspectives</h2>
+      <p>Recent FT50 and UTD24 work treats caricature less as toxic text than as a validity problem in synthetic respondents and a fairness problem in LLM-assisted evaluation. The literature is young, but the first multi-venue cluster appeared in 2024–2026.</p>
+      <div class="paper">
+        <div class="title"><a href="https://doi.org/10.1002/smj.70094" target="_blank" rel="noopener">Bias In, Symbolic Compliance Out? GPT's Reliance on Gender and Race in Strategic Evaluations</a></div>
+        <div class="venue">Strategic Management Journal · 2026 · Botelho &amp; Wang</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Across 26,000 GPT evaluations of startup pitches that differed only in founder name, underrepresented minorities were not systematically scored lower — but they were less likely to be ranked last without becoming more likely to win.</li>
+            <li>The pattern is "symbolic compliance": GPT corrected overt identity-based bias more readily than bias framed as neutral business critique, and corrections were small in magnitude.</li>
+            <li>Caricature can therefore survive as a ceiling on final selection rather than as an explicitly negative score — a form of amplification that aggregate score comparisons miss.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://doi.org/10.1002/smj.70112" target="_blank" rel="noopener">Simulating Strategic Interactions with AI Agents</a></div>
+        <div class="venue">Strategic Management Journal · 2026 · Tranchero, Brenninkmeijer, Murugan &amp; Nagaraj</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Introduces a framework for running strategy experiments with LLM agents as synthetic subjects, applied to the exploration–exploitation dilemma.</li>
+            <li>Simulations reproduce core human patterns and identify where those patterns weaken or reverse, positioning agents as "model organisms" for hypothesis generation.</li>
+            <li>Treats external validity as the central limitation: a persona is a modeling choice, not a population sample.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://doi.org/10.1287/mnsc.2024.06807" target="_blank" rel="noopener">Bank Run, Interrupted: Modeling Deposit Withdrawals with Generative AI</a></div>
+        <div class="venue">Management Science · 2026 · Kazinnik</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Builds a synthetic depositor population with assigned demographic attributes, exposes it to a panic post, and validates withdrawal intent against human benchmarks before testing message variants.</li>
+            <li>Shows the constructive case: persona simulation can avoid caricature inside a narrow, validated design space and then support counterfactual policy tests.</li>
+            <li>The boundary condition is explicit — validation against human data is what separates calibrated simulation from stereotype projection.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://doi.org/10.1287/mksc.2023.0306" target="_blank" rel="noopener">Frontiers: Can Large Language Models Capture Human Preferences?</a></div>
+        <div class="venue">Marketing Science · 2024 · Goli &amp; Singh</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>GPT-3.5 and GPT-4 are less patient than humans in intertemporal choice; GPT-3.5 follows a lexicographic rule for earlier rewards that human decision makers do not.</li>
+            <li>Measured discount rates shift with prompt language, with German and Mandarin producing greater patience — evidence that "preferences" are systematic artifacts rather than stable human traits.</li>
+            <li>Extends caricature beyond demographic description: models also flatten decision rules into simplified, non-human heuristics.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://doi.org/10.1287/mksc.2025.0262" target="_blank" rel="noopener">Database Report: Twin-2K-500 — Building Digital Twins of over 2,000 People</a></div>
+        <div class="venue">Marketing Science · 2025 · Toubia, Gui, Peng, Merlau, et al.</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Public dataset of 2,058 U.S. participants, 500+ questions across demographics, psychology, behavioral economics, and pricing, collected over four waves.</li>
+            <li>Initial analyses show that digital twins can predict behavior well at both individual and aggregate levels, providing a benchmark for grounding personas in real response distributions.</li>
+            <li>Offers the main methodological antidote to flattening: ground each persona in individual-level data rather than in group labels alone.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://doi.org/10.1177/00222429241276529" target="_blank" rel="noopener">AI–Human Hybrids for Marketing Research: Leveraging LLMs as Collaborators</a></div>
+        <div class="venue">Journal of Marketing · 2025 · Arora, Chakraborty &amp; Nishimura</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>LLMs can generate sample characteristics, simulate respondents, and conduct or moderate in-depth interviews; human–LLM hybrids outperform both LLM-only and human-only workflows.</li>
+            <li>Frames synthetic respondents as complements that require human oversight, not substitutes for sampling a real population.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>General Science Journals</h2>
+      <p>Nature, Science, and PNAS have become the main venues for population-scale evidence on how models reproduce and amplify stereotypes, and for the methodological debate over LLMs as human surrogates.</p>
+      <div class="paper">
+        <div class="title"><a href="https://www.nature.com/articles/s41586-025-09581-z" target="_blank" rel="noopener">Age and Gender Distortion in Online Media and Large Language Models</a></div>
+        <div class="venue">Nature · 2025 · Guilbeault, Delecourt &amp; Desikan</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Analysis of nearly 1.4 million images across Google, Wikipedia, IMDb, Flickr, and YouTube finds women represented as younger than men across occupations and social roles, most strongly in high-status roles.</li>
+            <li>Prompted to write 40,000 resumes for 54 occupations, ChatGPT estimated female candidates to be 1.6 years younger on average and rated older male candidates as higher quality.</li>
+            <li>Direct evidence that models do not merely inherit online distortions — they actively reproduce them in evaluative output.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://www.pnas.org/doi/10.1073/pnas.2501660122" target="_blank" rel="noopener">Take Caution in Using LLMs as Human Surrogates</a></div>
+        <div class="venue">PNAS · 2025 · Gao, Lee, Burtch &amp; Fazelpour</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Across eight LLMs and 1,000 sessions each in the 11–20 money request game, response distributions diverge significantly from human participants; newer and larger models are not necessarily more human-like.</li>
+            <li>Prompt language, framing ("rational" vs. "like a human"), in-context examples, and fine-tuning all shift outputs; supplying detailed demographics does not restore human-like diversity.</li>
+            <li>Concludes that LLM surrogates require validation against human data and should not be treated as population samples by default.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://www.pnas.org/doi/10.1073/pnas.2416228122" target="_blank" rel="noopener">Explicitly Unbiased Large Language Models Still Form Biased Associations</a></div>
+        <div class="venue">PNAS · 2025 · Bai, Wang, Sucholutsky &amp; Griffiths</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Behavior-based measures reveal pervasive stereotype associations in eight value-aligned models across race, gender, religion, and health — 21 stereotypes in total.</li>
+            <li>Biases persist in models that appear unbiased on standard evaluations and produce sizable effects on downstream discriminatory decisions.</li>
+            <li>Shows that alignment suppresses explicit expression more reliably than it removes the underlying association.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://www.science.org/doi/10.1126/sciadv.adu9368" target="_blank" rel="noopener">Emergent Social Conventions and Collective Bias in LLM Populations</a></div>
+        <div class="venue">Science Advances · 2025 · Ashery, Aiello &amp; Baronchelli</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Decentralized populations of LLM agents spontaneously converge on shared naming conventions without central coordination.</li>
+            <li>Strong collective biases can emerge even when no individual agent is biased, and a committed minority of adversarial agents can impose an alternative convention on the population.</li>
+            <li>Reframes amplification as a population-level dynamic: auditing single responses cannot capture what repeated agent interaction produces.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://www.nature.com/articles/s41586-025-09215-4" target="_blank" rel="noopener">A Foundation Model to Predict and Capture Human Cognition</a></div>
+        <div class="venue">Nature · 2025 · Binz et al. (Centaur)</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Centaur is trained on data from 160 psychological experiments and predicts human behavior in new experiments expressed in natural language.</li>
+            <li>Provides the strongest current counterpoint to persona prompting: grounding simulation in individual experimental data improves behavioral fidelity.</li>
+            <li>Not evidence that generic persona prompting is safe — its advantage comes from task-specific human data, and coverage remains bounded by the experiments it has seen.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
       <h2>Hot Directions (2025–2026)</h2>
       <ul class="bullets">
-        <li><strong>Demographic ground-truth benchmarks.</strong> Most caricature evaluations compare model output to "common sense" stereotypes rather than empirical social-science data (population surveys, census, sociological studies). Several 2025 NeurIPS / ICML papers are building ground-truth-aligned persona benchmarks.</li>
+        <li><strong>Demographic ground-truth benchmarks.</strong> Most caricature evaluations compare model output to "common sense" stereotypes rather than empirical social-science data (population surveys, census, sociological studies). Individual-level datasets such as Twin-2K-500 (Marketing Science 2025) now provide a public benchmark for this work.</li>
+        <li><strong>Population-level amplification.</strong> Science Advances (2025) shows that collective bias can emerge in LLM populations even when no individual agent is biased, shifting attention from single responses to interaction dynamics and committed minorities.</li>
+        <li><strong>Symbolic compliance in evaluation.</strong> Strategic Management Journal (2026) finds that aligned evaluators avoid visible discrimination without improving final selection — a reminder that lower stereotype scores need not mean fairer outcomes.</li>
         <li><strong>Persona-individuation training objectives.</strong> Contrastive and multi-task objectives that reward within-group diversity (e.g., prompting the same persona across 10 counterfactual contexts) while penalizing between-group exaggeration.</li>
         <li><strong>LLM-as-judge calibration.</strong> A critical methodological concern: LLM-as-judge for caricature often inherits the caricatures it is supposed to detect. 2025 ACL workshops are addressing judge-side bias.</li>
         <li><strong>Policy and deployment.</strong> Caricature amplification is now cited in EU AI Act risk assessments for social science and polling tools that use LLM personas.</li>
@@ -126,6 +259,9 @@
         <li><strong>Post-hoc diversity reranking.</strong> Generate N candidate persona responses, re-rank by a dedicated "individuation classifier" trained on ground-truth demographic data (NeurIPS 2024).</li>
         <li><strong>Persona-aligned RLHF.</strong> Replace generic "helpful" reward with persona-specific reward models that jointly penalize exaggeration while rewarding fluency (Findings of ACL 2024).</li>
         <li><strong>Data curation.</strong> Filter persona fine-tuning data against empirical survey distributions to break the amplification loop (Wang et al., 2024).</li>
+        <li><strong>Individual-level grounding.</strong> Replace group labels with real response histories where available; Twin-2K-500 shows that individual digital twins can predict behavior at both individual and aggregate levels (Toubia et al., 2025).</li>
+        <li><strong>Validation gate before simulation.</strong> Validate synthetic responses against a human benchmark and restrict claims to the tested design space, as in the bank-run study (Kazinnik, 2026); unvalidated personas should not be read as population estimates.</li>
+        <li><strong>Human–AI hybrid workflows.</strong> Use LLM-generated respondents to expand coverage, but keep humans responsible for sampling, interpretation, and final decisions — hybrids outperform either alone (Arora et al., 2025).</li>
       </ul>
     </section>
 
@@ -137,10 +273,22 @@
         <li>Liu, A., Diab, M., &amp; Fried, D. (2024). <em>Evaluating Large Language Model Biases in Persona-Steered Generation.</em> <a href="https://aclanthology.org/2024.findings-acl.586/" target="_blank">Findings of ACL 2024</a>.</li>
         <li>Wang, Z., Wu, Z., Zhang, J., Jain, N., Guan, X., &amp; Koshiyama, A. (2024). <em>Bias Amplification: Language Models as Increasingly Biased Media.</em> ACL SRW / IJCNLP-AACL 2024. <a href="https://arxiv.org/abs/2410.15234" target="_blank">arXiv:2410.15234</a>.</li>
         <li>Ganguli, D., et al. (2023). <em>Red Teaming Language Models with Language Models.</em> <a href="https://arxiv.org/abs/2202.03286" target="_blank">arXiv:2202.03286</a> — widely cited preprint, foundational for persona-safety evaluation.</li>
+        <li>Botelho, T. L., &amp; Wang, Q. (2026). <em>Bias In, Symbolic Compliance Out? GPT's Reliance on Gender and Race in Strategic Evaluations.</em> <a href="https://doi.org/10.1002/smj.70094" target="_blank">Strategic Management Journal</a>.</li>
+        <li>Tranchero, M., Brenninkmeijer, C.-F., Murugan, A., &amp; Nagaraj, A. (2026). <em>Simulating Strategic Interactions with AI Agents.</em> <a href="https://doi.org/10.1002/smj.70112" target="_blank">Strategic Management Journal</a>.</li>
+        <li>Kazinnik, S. (2026). <em>Bank Run, Interrupted: Modeling Deposit Withdrawals with Generative AI.</em> <a href="https://doi.org/10.1287/mnsc.2024.06807" target="_blank">Management Science</a>.</li>
+        <li>Goli, A., &amp; Singh, A. (2024). <em>Frontiers: Can Large Language Models Capture Human Preferences?</em> <a href="https://doi.org/10.1287/mksc.2023.0306" target="_blank">Marketing Science</a> 43(4), 709–722.</li>
+        <li>Toubia, O., Gui, G. Z., Peng, T., Merlau, D. J., et al. (2025). <em>Database Report: Twin-2K-500 — A Data Set for Building Digital Twins of over 2,000 People.</em> <a href="https://doi.org/10.1287/mksc.2025.0262" target="_blank">Marketing Science</a>.</li>
+        <li>Arora, N., Chakraborty, I., &amp; Nishimura, Y. (2025). <em>AI–Human Hybrids for Marketing Research: Leveraging Large Language Models as Collaborators.</em> <a href="https://doi.org/10.1177/00222429241276529" target="_blank">Journal of Marketing</a> 89(2), 43–70.</li>
+        <li>Guilbeault, D., Delecourt, S., &amp; Desikan, B. S. (2025). <em>Age and Gender Distortion in Online Media and Large Language Models.</em> <a href="https://www.nature.com/articles/s41586-025-09581-z" target="_blank">Nature</a>.</li>
+        <li>Gao, Y., Lee, D., Burtch, G., &amp; Fazelpour, S. (2025). <em>Take Caution in Using LLMs as Human Surrogates.</em> <a href="https://www.pnas.org/doi/10.1073/pnas.2501660122" target="_blank">PNAS</a> 122(24), e2501660122.</li>
+        <li>Bai, X., Wang, A., Sucholutsky, I., &amp; Griffiths, T. L. (2025). <em>Explicitly Unbiased Large Language Models Still Form Biased Associations.</em> <a href="https://www.pnas.org/doi/10.1073/pnas.2416228122" target="_blank">PNAS</a>.</li>
+        <li>Ashery, A. F., Aiello, L. M., &amp; Baronchelli, A. (2025). <em>Emergent Social Conventions and Collective Bias in LLM Populations.</em> <a href="https://www.science.org/doi/10.1126/sciadv.adu9368" target="_blank">Science Advances</a> 11(20), eadu9368.</li>
+        <li>Binz, M., et al. (2025). <em>A Foundation Model to Predict and Capture Human Cognition.</em> <a href="https://www.nature.com/articles/s41586-025-09215-4" target="_blank">Nature</a> 644, 1002–1009.</li>
+        <li>Horton, J. J. (2023). <em>Large Language Models as Simulated Economic Agents: What Can We Learn from Homo Silicus?</em> <a href="https://www.nber.org/papers/w31122" target="_blank">NBER Working Paper 31122</a> — foundational, widely cited working paper.</li>
       </ol>
     </section>
   </main>
 
-  <footer>Scope: NeurIPS · ICML · ICLR · ACL · EMNLP · AAAI · CHI (2022–2026). Last updated 2026-11-25.</footer>
+  <footer>Scope: NeurIPS · ICML · ICLR · ACL · EMNLP · AAAI · CHI (2022–2026); FT50 + UTD24 management and economics; Nature · Science · PNAS · Science Advances. Last updated 2026-11-25.</footer>
 </body>
 </html>
