@@ -146,6 +146,7 @@
       var FOLDER = "Photo";
       var API = "https://api.github.com/repos/" + OWNER + "/" + REPO + "/contents/" + FOLDER;
       var IMAGE_RE = /\.(jpe?g|png|webp|gif|avif)$/i;
+      var FALLBACK = ["18.jpg", "Fortune.jpg", "Power.jpg"];
 
       var img = document.getElementById("photo");
       var status = document.getElementById("status");
@@ -221,29 +222,20 @@
           });
       }
 
-      function loadManifest() {
-        return fetch(FOLDER + "/photos.json", { cache: "no-store" })
-          .then(function (r) { return r.ok ? r.json() : []; })
-          .then(function (list) {
-            if (!Array.isArray(list)) return [];
-            return list
-              .filter(function (n) { return typeof n === "string" && IMAGE_RE.test(n); })
-              .map(function (n) { return { src: FOLDER + "/" + encodeURIComponent(n), name: n }; });
-          })
-          .catch(function () { return []; });
-      }
-
       function boot() {
         fetch(API, { headers: { Accept: "application/vnd.github+json" }, cache: "no-store" })
-          .then(function (r) { return r.ok ? r.json() : null; })
-          .then(function (data) {
-            if (Array.isArray(data)) {
-              var found = fromApi(data);
-              if (found.length) return found;
-            }
-            return loadManifest();
+          .then(function (r) {
+            if (!r.ok) throw new Error("api");
+            return r.json();
           })
-          .catch(loadManifest)
+          .then(function (data) {
+            return Array.isArray(data) ? fromApi(data) : [];
+          })
+          .catch(function () {
+            return FALLBACK.map(function (n) {
+              return { src: FOLDER + "/" + encodeURIComponent(n), name: n };
+            });
+          })
           .then(function (list) {
             photos = list || [];
             if (!photos.length) {
