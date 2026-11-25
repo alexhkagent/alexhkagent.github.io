@@ -76,11 +76,15 @@ button:focus-visible,a:focus-visible,summary:focus-visible { outline:3px solid #
 .hand-bank {display:inline-flex;align-items:center;gap:9px;border:1px solid #d4b47199;border-radius:30px;padding:7px 13px;background:#002b24;color:#e6d2a5;letter-spacing:.08em;}
 .hand-bank strong {font-size:20px;letter-spacing:0;color:#ffe29a;font-variant-numeric:tabular-nums;}
 .side-label {flex-wrap:wrap;justify-content:center;}
+#language-toggle {margin-left:auto;margin-right:16px;padding:8px 12px;font-size:12px;}
+.topbar {gap:10px;}
+@media(max-width:450px){.topbar{padding:12px;flex-wrap:wrap;}#language-toggle{margin-right:0}.balance{font-size:9px;}}
   </style>
 </head>
 <body>
   <header class="topbar">
     <a href="index.html">♠ 3CATS · HOME</a>
+    <button type="button" id="language-toggle" aria-label="Switch to Chinese">中文</button>
     <span class="balance">Virtual chips <strong id="bankroll">1000</strong></span>
   </header>
 
@@ -138,6 +142,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible { outline:3px solid #
 
   <footer class="footer">18 · Fortune · Power &nbsp; / &nbsp; A little luck. A little strategy. &nbsp; / &nbsp; Virtual chips only</footer>
   <script src="casino/game.js?v=1"></script>
-  <script src="casino/ui.js?v=2"></script>
+  <script src="casino/i18n.js?v=1"></script>
+  <script src="casino/ui.js?v=3"></script>
 </body>
 </html>

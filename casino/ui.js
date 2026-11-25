@@ -1,12 +1,13 @@
 (() => {
   const game = new Blackjack(), $ = id => document.getElementById(id);
+  const {t}=CasinoI18n;
   let busy = false;
   const pause = () => new Promise(r=>setTimeout(r,450));
   function cards(parent, hand, hidden=-1) {
     parent.replaceChildren();
     hand.forEach((c,i)=>{
       const el=document.createElement('div'); el.className='card'+(['♥','♦'].includes(c.suit)?' red':'')+(i===hidden?' back':'');
-      el.setAttribute('role','img');el.setAttribute('aria-label',i===hidden?'Face-down card':c.rank+' '+c.suit);
+      el.setAttribute('role','img');el.setAttribute('aria-label',i===hidden?t('Face-down card'):c.rank+' '+c.suit);
       if(i!==hidden) {const rank=document.createElement('span'),suit=document.createElement('span');rank.className='rank';suit.className='suit';rank.textContent=c.rank;suit.textContent=c.suit;el.append(rank,suit);}
       parent.append(el);
     });
@@ -19,16 +20,16 @@
     $('player-hand').replaceChildren();
     game.hands.forEach((h,i)=>{
       const box=document.createElement('div');box.className='player-hand'+(playing&&game.active===i?' active':'');
-      const label=document.createElement('div');label.className='hand-label';label.textContent=`Hand ${i+1} · Bet ${h.bet} · ${Blackjack.value(h.cards)}${h.result?' · '+h.result:playing&&game.active===i?' · YOUR TURN':''}`;
+      const label=document.createElement('div');label.className='hand-label';label.textContent=`${CasinoI18n.language==='zh'?'第 '+(i+1)+' 手':'Hand '+(i+1)} · ${t('Bet')} ${h.bet} · ${Blackjack.value(h.cards)}${h.result?' · '+t(h.result):playing&&game.active===i?' · '+t('YOUR TURN'):''}`;
       const row=document.createElement('div');row.className='hand';cards(row,h.cards);box.append(label,row);$('player-hand').append(box);
     });
-    $('player-total').textContent=game.hands.length===1?Blackjack.value(game.hands[0].cards):game.hands.length?game.hands.length+' hands':'—';
+    $('player-total').textContent=game.hands.length===1?Blackjack.value(game.hands[0].cards):game.hands.length?game.hands.length+' '+t('hands'):'—';
     $('ai-seats').replaceChildren();
     game.bots.forEach(b=>{
-      const box=document.createElement('section');box.className='ai-seat';box.setAttribute('aria-label',b.name+' AI player');
-      const title=document.createElement('h2');title.textContent=b.name+' · AI';const info=document.createElement('p');info.textContent=b.style+' · Chips '+b.bank;
+      const box=document.createElement('section');box.className='ai-seat';box.setAttribute('aria-label',b.name+(CasinoI18n.language==='zh'?' AI 玩家':' AI player'));
+      const title=document.createElement('h2');title.textContent=b.name+' · AI';const info=document.createElement('p');info.textContent=t(b.style)+' · '+t('Chips')+' '+b.bank;
       const row=document.createElement('div');row.className='hand';cards(row,b.hands[0]?.cards||[]);
-      const state=document.createElement('p'),h=b.hands[0];state.textContent=h?`Bet ${h.bet} · Total ${Blackjack.value(h.cards)} · ${h.result||b.action}`:'Sitting out';
+      const state=document.createElement('p'),h=b.hands[0];state.textContent=h?`${t('Bet')} ${h.bet} · ${t('Total')} ${Blackjack.value(h.cards)} · ${t(h.result||b.action)}`:t(game.phase==='ready'?'Waiting':'Sitting out');
       box.append(title,info,row,state);$('ai-seats').append(box);
     });
     const announcement=$('message');
@@ -38,12 +39,12 @@
       const kind=net>0?'win':net<0?'lose':'push';
       announcement.classList.add(kind);
       const title=document.createElement('strong');title.className='outcome-title';
-      title.textContent=net>0?(game.hands.some(h=>h.result==='Blackjack')?'BLACKJACK! YOU WIN':'YOU WIN!'):net<0?'DEALER WINS':'EVEN ROUND';
+      title.textContent=t(net>0?(game.hands.some(h=>h.result==='Blackjack')?'BLACKJACK! YOU WIN':'YOU WIN!'):net<0?'DEALER WINS':'EVEN ROUND');
       const detail=document.createElement('span');detail.className='outcome-detail';
-      detail.textContent=(net>0?'+'+net:net<0?String(net):'0')+' chips · '+game.message;
+      detail.textContent=(net>0?'+'+net:net<0?String(net):'0')+' '+t('chips')+' · '+t(game.message);
       announcement.append(title,detail);
-    } else announcement.textContent=game.message;
-    $('btn-deal').textContent=game.bank<10?'New session':game.phase==='settled'?'Next Round':'Deal';
+    } else announcement.textContent=t(game.message);
+    $('btn-deal').textContent=t(game.bank<10?'New session':game.phase==='settled'?'Next Round':'Deal');
     $('btn-deal').disabled=busy||!['ready','settled'].includes(game.phase);
     $('btn-hit').disabled=$('btn-stand').disabled=busy||!playing;
     $('btn-double').disabled=busy||!game.canDouble();$('btn-split').disabled=busy||!game.canSplit();
@@ -76,5 +77,6 @@
     document.querySelectorAll('.cat-choice').forEach(c=>c.setAttribute('aria-pressed',String(c===button)));
   }));
   document.addEventListener('keydown',e=>{if(e.repeat||e.metaKey||e.ctrlKey||e.altKey||/^(INPUT|TEXTAREA|SELECT|BUTTON|SUMMARY)$/.test(e.target.tagName))return; const name={h:'hit',s:'stand',d:'double',p:'split',' ':'deal',Enter:'deal'}[e.key];if(name){e.preventDefault();action(name);}});
+  $('language-toggle').addEventListener('click',()=>{CasinoI18n.toggle();render();});
   render();
 })();
