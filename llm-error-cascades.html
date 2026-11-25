@@ -39,7 +39,7 @@
   <main>
     <div class="s-num">03 · Compounded Error Cascades</div>
     <h1>Compounded Error Cascades and Harnessing</h1>
-    <div class="meta"><span class="tag">Agentic</span><span>NeurIPS · ICML · ICLR · AAAI · WWW</span><span class="pulse"></span>Last updated 2026-11-25</div>
+    <div class="meta"><span class="tag">Agentic</span><span>NeurIPS · ICML · ICLR · AAAI · WWW · FT50/UTD24 · Nature · Science · PNAS</span><span class="pulse"></span>Last updated 2026-11-25</div>
 
     <section>
       <h2>Definition</h2>
@@ -102,12 +102,91 @@
     </section>
 
     <section>
+      <h2>Management &amp; Economics Perspectives</h2>
+      <p>Management and economics approach compounding errors from the organizational side: how errors cross the human–AI boundary, how agentic workflows hide them, and how herd dynamics make them self-reinforcing. Direct evidence on multi-step LLM pipelines is thinner than in AI venues, but the 2024–2026 work identifies the conditions under which errors enter and persist.</p>
+      <div class="paper">
+        <div class="title"><a href="https://doi.org/10.1287/orsc.2025.21838" target="_blank" rel="noopener">Navigating the Jagged Technological Frontier: Field Experimental Evidence on Knowledge Worker Productivity and Quality</a></div>
+        <div class="venue">Organization Science · 2026 · Dell'Acqua, McFowland, Mollick, Lifshitz-Assaf, Kellogg, et al.</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Field experiment with 758 consultants: inside the AI frontier, GPT-4 users completed 12.2% more tasks, 25.1% faster, at 40% higher quality; on a task outside the frontier, they were 19 percentage points less likely to reach the correct solution.</li>
+            <li>Introduces the "jagged technological frontier": tasks that look similarly difficult to humans can fall on either side, and users cannot reliably tell which side they are on.</li>
+            <li>Describes the human-AI cascade mechanism: fluent but wrong output outside the frontier is accepted upstream and only surfaces at final quality checks, after downstream work has been built on it.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://doi.org/10.1287/isre.2025.editorial.v36.n4" target="_blank" rel="noopener">Inventing with Machines: Generative AI and the Evolving Landscape of IS Research</a></div>
+        <div class="venue">Information Systems Research · 2025 · Gopal, Li, Riemer, Sarker, Singh, Susarla, et al. (editorial)</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Argues that agentic AI moves work from isolated model calls to multi-agent pipelines, where integrity hazards include goal drift, error cascades, opaque reasoning, coordination bias, and accountability gaps.</li>
+            <li>Proposes three-tier automation with human control points: humans set objectives and success criteria, design agent roles, arbitrate synthesis, and retain final decision rights.</li>
+            <li>Recommends disclosing the full agentic setup — goals, roles, coordination rules, and logs — so cascades can be reconstructed rather than inferred from final output.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://doi.org/10.1086/261849" target="_blank" rel="noopener">A Theory of Fads, Fashion, Custom, and Cultural Change as Informational Cascades</a></div>
+        <div class="venue">Journal of Political Economy · 1992 · Bikhchandani, Hirshleifer &amp; Welch (classic anchor)</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Shows that once enough predecessors act on the same signal, rational agents ignore their own private information and follow the herd — an informational cascade.</li>
+            <li>Explains why one early error can become self-reinforcing without any agent being irrational, the mechanism behind "echo chamber" consensus in multi-agent LLM loops.</li>
+            <li>LLM agents intensify the classic dynamic: they generate and exchange plausible rationales at near-zero cost, making the cascade faster and harder to audit.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>General Science Journals</h2>
+      <p>Nature and PNAS have published the clearest population- and system-level evidence that errors compound invisibly: across model generations, across autonomous research pipelines, and across team topologies.</p>
+      <div class="paper">
+        <div class="title"><a href="https://www.nature.com/articles/s41586-024-07566-y" target="_blank" rel="noopener">AI Models Collapse When Trained on Recursively Generated Data</a></div>
+        <div class="venue">Nature · 2024 · Shumailov, Shumaylov, Zhao, Papernot, Anderson &amp; Gal</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Training successive model generations on recursively generated data causes "model collapse": irreversible loss of distribution tails and, eventually, of the original distribution.</li>
+            <li>The failure is not a single bad output but a compounding process across generations — the data-supply-chain analogue of a multi-step cascade.</li>
+            <li>Implication: synthetic data must be bounded, labeled, and mixed with fresh human data; otherwise errors accumulate while each generation looks locally fluent.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://www.pnas.org/doi/10.1073/pnas.2610214123" target="_blank" rel="noopener">The More You Automate, the Less You See: Hidden Pitfalls of Autonomous AI Scientists</a></div>
+        <div class="venue">PNAS · 2026 · Luo, Kasirzadeh &amp; Shah</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Controlled experiments with two open-source AI scientist systems isolate four pitfalls: cherry-picked benchmarks, undocumented synthetic data or subsampling, metric misuse, and post hoc selection bias.</li>
+            <li>Failures propagate silently: auditing only the final manuscript performed near chance (53.7% accuracy, F1 0.42), while access to full logs and code raised detection to 81.5% accuracy (F1 0.81).</li>
+            <li>Argues for process auditing of end-to-end workflow artifacts rather than manuscript-only review.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://www.pnas.org/doi/10.1073/pnas.2612825123" target="_blank" rel="noopener">Language Model Teams as Distributed Systems</a></div>
+        <div class="venue">PNAS · 2026 · Mieczkowski, Collins, Sucholutsky, Vélez &amp; Griffiths</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Casts LLM teams as distributed systems; task structure and team architecture determine whether teams help or compound errors.</li>
+            <li>Empirically, LLM team scaling follows classical distributed-computing laws, and centralized and decentralized architectures show the asymmetric vulnerabilities predicted by distributed-systems theory.</li>
+            <li>Poorly coordinated teams can underperform a single agent while consuming more resources — a structural argument for topology-aware verification rather than trial-and-error scaling.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
       <h2>Hot Directions (2025–2026)</h2>
       <ul class="bullets">
         <li><strong>Verifier architectures.</strong> The dominant harnessing approach: small verifier models score each intermediate step; low-scoring steps trigger rollback to the nearest decision branch (NeurIPS 2024, AAAI 2025).</li>
         <li><strong>Confidence-aware pipelines.</strong> Extending LLMs to emit step-level uncertainty scores; downstream steps can request human intervention when upstream confidence drops below threshold.</li>
         <li><strong>Multi-agent orchestration primitives.</strong> New primitives for "veto", "quarantine", and "fork-and-retry" — replacing naive consensus voting with error-resistant voting schemes.</li>
         <li><strong>Theoretical scaling.</strong> When does cascade risk outpace capability gain as context window scales? ICLR 2025 workshops on agent safety are exploring this.</li>
+        <li><strong>Process-level auditing.</strong> PNAS (2026) finds that manuscript-only review detects AI-scientist methodological failures near chance, while full log and code access raises detection sharply — shifting evaluation from outputs to workflow artifacts.</li>
+        <li><strong>Topology-aware verification.</strong> PNAS (2026) shows that LLM teams obey distributed-systems scaling laws, with centralized and decentralized architectures carrying different failure modes; verification should be placed at architectural boundaries, not added uniformly.</li>
+        <li><strong>Synthetic-data provenance.</strong> Nature (2024) demonstrates model collapse under recursive training, reframing cascade risk as a data-lineage problem that spans model generations.</li>
       </ul>
     </section>
 
@@ -118,6 +197,10 @@
         <li><strong>Tree-of-Thought</strong> search: breadth over depth reduces cascade commitment; best used with explicit pruning budgets.</li>
         <li><strong>Independent verifier agents</strong>: separate LLM with no exposure to prior reasoning path — avoids shared-premise cascade; at least one AAAI 2025 paper shows this matches or outperforms a single-agent self-reflection loop.</li>
         <li><strong>Execution traces</strong>: tool-use steps logged with immutable state snapshots; post-hoc forensic analysis of cascades becoming standard in production deployments.</li>
+        <li><strong>Process audits over output checks</strong>: require time-stamped decision logs, intermediate outputs, and generated code; manuscript-only review detects AI-pipeline flaws at near-chance accuracy (PNAS, 2026).</li>
+        <li><strong>Topology-aware verification</strong>: place independent verifiers at the boundaries where centralized and decentralized team architectures are most vulnerable, rather than scaling agent count (PNAS, 2026).</li>
+        <li><strong>Synthetic-data budgets and lineage</strong>: cap recursive synthetic data, retain fresh human data, and track provenance to prevent model collapse across generations (Nature, 2024).</li>
+        <li><strong>Human checkpoints at the frontier</strong>: require review when a task may fall outside the validated capability frontier, since users cannot reliably detect that boundary themselves (Organization Science, 2026).</li>
       </ul>
     </section>
 
@@ -129,9 +212,15 @@
         <li>Liu, X., et al. (2024). <em>AgentBench: Evaluating Language Model Agency.</em> <a href="https://arxiv.org/abs/2309.07864" target="_blank">ICLR 2024</a>.</li>
         <li>Madaan, A., et al. (2023). <em>Faithful Self-Correction of Large Language Models.</em> <a href="https://arxiv.org/abs/2303.17651" target="_blank">NeurIPS 2023</a>.</li>
         <li>Yao, S., et al. (2023). <em>Tree of Thoughts: Deliberate Problem Solving with LLMs.</em> <a href="https://arxiv.org/abs/2302.04761" target="_blank">ICML 2023</a>.</li>
+        <li>Dell'Acqua, F., McFowland, E., III, Mollick, E., Lifshitz-Assaf, H., Kellogg, K. C., Rajendran, S., Krayer, L., Candelon, F., &amp; Lakhani, K. R. (2026). <em>Navigating the Jagged Technological Frontier: Field Experimental Evidence on Knowledge Worker Productivity and Quality.</em> <a href="https://doi.org/10.1287/orsc.2025.21838" target="_blank">Organization Science</a> 37(2), 403–423.</li>
+        <li>Gopal, R. D., Li, J., Riemer, K., Sarker, S., Singh, P. V., Susarla, A., et al. (2025). <em>Inventing with Machines: Generative AI and the Evolving Landscape of IS Research.</em> <a href="https://doi.org/10.1287/isre.2025.editorial.v36.n4" target="_blank">Information Systems Research</a> 36(4), editorial.</li>
+        <li>Bikhchandani, S., Hirshleifer, D., &amp; Welch, I. (1992). <em>A Theory of Fads, Fashion, Custom, and Cultural Change as Informational Cascades.</em> <a href="https://doi.org/10.1086/261849" target="_blank">Journal of Political Economy</a> 100(5), 992–1026.</li>
+        <li>Shumailov, I., Shumaylov, Z., Zhao, Y., Papernot, N., Anderson, R., &amp; Gal, Y. (2024). <em>AI Models Collapse When Trained on Recursively Generated Data.</em> <a href="https://www.nature.com/articles/s41586-024-07566-y" target="_blank">Nature</a> 631, 755–759.</li>
+        <li>Luo, Z., Kasirzadeh, A., &amp; Shah, N. B. (2026). <em>The More You Automate, the Less You See: Hidden Pitfalls of Autonomous AI Scientists.</em> <a href="https://www.pnas.org/doi/10.1073/pnas.2610214123" target="_blank">PNAS</a> 123(41), e2610214123.</li>
+        <li>Mieczkowski, E., Collins, K. M., Sucholutsky, I., Vélez, N., &amp; Griffiths, T. L. (2026). <em>Language Model Teams as Distributed Systems.</em> <a href="https://www.pnas.org/doi/10.1073/pnas.2612825123" target="_blank">PNAS</a> 123(47), e2612825123.</li>
       </ol>
     </section>
   </main>
-  <footer>Scope: NeurIPS · ICML · ICLR · AAAI · WWW (2022–2026). Last updated 2026-11-25.</footer>
+  <footer>Scope: NeurIPS · ICML · ICLR · AAAI · WWW (2022–2026); FT50 + UTD24 management and economics; Nature · Science · PNAS. Last updated 2026-11-25.</footer>
 </body>
 </html>
