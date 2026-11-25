@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Chapter 1: The Internet as a Visual System — why the screen is a stimulus environment, and why intuitive is mostly learned." />
+  <title>Chapter 01 · The Internet as a Visual System — What do you see?</title>
+  <link rel="stylesheet" href="assets/book.css" />
+  <script>
+    (function () {
+      try {
+        var p = new URLSearchParams(location.search).get('lang');
+        var s = p || localStorage.getItem('visbook:lang');
+        if (s === 'zh') {
+          document.documentElement.setAttribute('data-lang', 'zh');
+          document.documentElement.setAttribute('lang', 'zh');
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+</head>
+<body data-chapter="1"
+      data-title-en="Chapter 01 · The Internet as a Visual System — What do you see?"
+      data-title-zh="第一章 · 互联网作为一个视觉系统 —— 你看见了什么？">
+
+  <a class="skip" href="#main"><span class="en">Skip to content</span><span class="zh">跳到正文</span></a>
+
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>What do you see?</a>
+    <button class="btn-menu" id="menu-toggle" type="button" aria-expanded="false" aria-controls="sidebar">
+      <span class="en">Contents</span><span class="zh">目录</span>
+    </button>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-meta"><span class="en">Ch. 01 / 07</span><span class="zh">第 01 章 / 共 7 章</span></span>
+    <div class="lang-switch" role="group" aria-label="Language / 语言">
+      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+    </div>
+  </header>
+
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
+  <div class="shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="sidebar-scrim" id="sidebar-scrim"></div>
+
+    <main class="page" id="main">
+      <article>
+        <header class="chapter-head">
+          <p class="kicker"><span class="en">Chapter 01</span><span class="zh">第一章</span></p>
+          <h1><span class="en">The Internet as a Visual System</span><span class="zh">互联网作为一个视觉系统</span></h1>
+          <p class="lede">
+            <span class="en">Every webpage is an experiment on the human visual system, run millions of times a day without a consent form. This chapter frames the screen as a stimulus environment—and asks what kind of system is on the receiving end.</span>
+            <span class="zh">每一个网页，都是一场针对人类视觉系统的实验，每天在未经同意的情况下运行数百万次。本章把屏幕视为一种刺激环境，并追问：接收端究竟是一个怎样的系统？</span>
+          </p>
+          <p class="chapter-meta">
+            <span><span class="en">12 min read</span><span class="zh">约 12 分钟</span></span>
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="en">1 figure</span><span class="zh">1 幅图</span></span>
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="en">Behavioral science</span><span class="zh">行为科学</span></span>
+          </p>
+        </header>
+
+        <div class="prose">
+
+          <div class="box box--short">
+            <span class="box-label"><span class="en">The short version</span><span class="zh">先读结论</span></span>
+            <p>
+              <span class="en">The web is not a neutral container for information. It is a designed field of light that triggers a biological system evolved for a three-dimensional world. Perception is constructive, selective, and aimed at action. Design is therefore the practice of choosing which construction to invite.</span>
+              <span class="zh">互联网并不是承载信息的中立容器。它是一片被设计过的光场，触发着一套为三维世界演化而来的生物系统。知觉是建构性的、选择性的，并且指向行动。因此，设计就是选择邀请哪一种建构发生。</span>
+            </p>
+          </div>
+
+          <section id="s1">
+            <h2><span class="en">A page is a stimulus, not a document</span><span class="zh">页面是刺激，不是文档</span></h2>
+            <p>
+              <span class="en">The word “page” borrows its authority from print. A printed page holds ink; a screen emits or reflects light. That difference is not cosmetic. What reaches you is a pattern of photons, and everything after that pattern is a construction.</span>
+              <span class="zh">“页面”这个词借用了印刷品的权威。纸页承载油墨，屏幕则发光或反光。这一差别并非装饰性的。真正抵达你的，是一组光子图案；而这组图案之后的一切，都是建构。</span>
+            </p>
+            <p>
+              <span class="en">Visual processing runs through a chain: stimulus, sensation, perception, interpretation, action. The retina registers edges and contrasts; the cortex groups them into surfaces and objects; memory and expectation turn those objects into meaning; the hand clicks, scrolls, or leaves. Each stage discards information and fills the gaps with a guess.</span>
+              <span class="zh">视觉处理沿着一条链条展开：刺激、感觉、知觉、解释、行动。视网膜记录边缘与对比，皮层把它们组织成表面与物体，记忆与预期再把这些物体转化为意义，最后手去点击、滚动，或者离开。每一个阶段都会丢弃信息，并用猜测填补空缺。</span>
+            </p>
+            <p>
+              <span class="en">The practical consequence is that a page is never received whole. It is sampled, predicted, and edited in real time. When we say a layout is “clear,” we usually mean that the guesses it invites are the ones we intended.</span>
+              <span class="zh">由此产生的实际后果是：页面从来不是被完整接收的。它被采样、被预测、被实时编辑。当我们说一个版式“清晰”时，通常的意思是：它邀请的那些猜测，恰好是我们想要的那些。</span>
+            </p>
+          </section>
+
+          <figure>
+            <img src="figures/fig-perception-loop.svg" alt="Diagram of the perception loop from stimulus to action and back to a new stimulus." />
+            <figcaption>
+              <span class="fig-num">Fig. 1.1</span>
+              <span class="en">Five stages, one loop. The output of action is the next input to perception.</span>
+              <span class="zh">五个阶段，一个回路。行动的输出，就是下一次知觉的输入。</span>
+            </figcaption>
+          </figure>
+
+          <section id="s2">
+            <h2><span class="en">The bandwidth problem</span><span class="zh">带宽问题</span></h2>
+            <p>
+              <span class="en">Human vision feels wide and immediate, but the part that can report detail is narrow. The fovea covers roughly two degrees of visual angle—about the size of your thumbnail at arm's length. Beyond it, acuity falls off sharply. Reading is a sequence of quick jumps, not a smooth scan.</span>
+              <span class="zh">人的视野感觉宽广而即时，但真正能报告细节的部分却很窄。中央凹大约只覆盖两度视角——相当于手臂伸直时你拇指指甲的宽度。越往外，锐度下降得越快。阅读是一连串快速的跳跃，而不是平滑的扫描。</span>
+            </p>
+            <p>
+              <span class="en">Herbert Simon's formulation is still the cleanest: “A wealth of information creates a poverty of attention.” Every added element competes with every other element for a limited channel. This is why a page with more information can be less informative than a page with less.</span>
+              <span class="zh">赫伯特·西蒙的表述依然最精炼：“信息的丰富，造成注意的贫乏。”每增加一个元素，它都在与所有其他元素争夺一条有限的通道。这就是为什么信息更多的页面，有时反而不如信息更少的页面有信息量。</span>
+            </p>
+            <p>
+              <span class="en">Design, on this view, is not decoration added to content. It is the allocation of attention: what to make loud, what to make quiet, what to leave out.</span>
+              <span class="zh">在这个视角下，设计不是给内容添加装饰，而是对注意的分配：什么该响亮，什么该安静，什么该被省略。</span>
+            </p>
+          </section>
+
+          <section id="s3">
+            <h2><span class="en">Affordances are learned</span><span class="zh">可供性是学来的</span></h2>
+            <p>
+              <span class="en">James Gibson argued that we perceive affordances—possibilities for action—rather than neutral properties. A surface that supports walking looks walkable; a handle looks graspable. Perception is already practical.</span>
+              <span class="zh">詹姆斯·吉布森主张，我们知觉到的是“可供性”——行动的可能性——而不是中性的属性。能支撑行走的表面看起来就可走，把手看起来就可握。知觉从一开始就是实用的。</span>
+            </p>
+            <p>
+              <span class="en">Screens have affordances too, but most of them are conventions rather than physics. A blue underline affords clicking because generations of browsers taught us so. A hamburger icon affords a menu because an industry standard taught us so. None of this is innate. A user who has never seen a website does not see a “button”; they see a rectangle.</span>
+              <span class="zh">屏幕也有可供性，但其中大多数是约定，而非物理属性。蓝色下划线可供点击，是因为一代代浏览器教会了我们。汉堡图标可供打开菜单，是因为行业标准教会了我们。这些都不是天生的。一个从未见过网站的人看到的不是“按钮”，而是一个矩形。</span>
+            </p>
+            <p>
+              <span class="en">This is why “intuitive” is a suspicious word. It usually means “familiar to the person judging.” The useful question is not “Is this intuitive?” but “What has this person learned to expect?”</span>
+              <span class="zh">这就是“直观”这个词值得警惕的原因。它通常只意味着“对评判者本人来说很熟悉”。真正有用的问题不是“这直观吗”，而是“这个人已经学会了期待什么”。</span>
+            </p>
+          </section>
+
+          <section id="s4">
+            <h2><span class="en">An ecology, not a laboratory</span><span class="zh">是生态，不是实验室</span></h2>
+            <p>
+              <span class="en">Laboratory studies of perception usually present isolated stimuli for brief, controlled trials. The web is the opposite: self-paced, interactive, social, and full of interruptions. People arrive with a goal, a history, three other tabs, and a phone that vibrates.</span>
+              <span class="zh">实验室里的知觉研究通常呈现孤立的刺激，进行短暂而受控的试次。互联网恰恰相反：自定节奏、可交互、社会化，而且充满打断。人们带着一个目标、一段历史、另外三个标签页，以及一部会震动的手机来到这里。</span>
+            </p>
+            <p>
+              <span class="en">The unit of analysis is therefore the loop, not the image. A user looks, forms a guess, acts, and the page changes. The next look is shaped by what happened last time. This is closer to Gibson's ecology than to a psychophysics lab.</span>
+              <span class="zh">因此，分析的单位是回路，而不是图像。用户看一眼，形成一个猜测，采取行动，页面随之改变。下一次看，又被上一次发生的事所塑造。这更接近吉布森所说的生态，而不是心理物理实验室。</span>
+            </p>
+            <p>
+              <span class="en">It also means that context is not noise to be averaged away. It is part of the stimulus.</span>
+              <span class="zh">这也意味着，情境不是可以被平均掉的噪声。情境本身就是刺激的一部分。</span>
+            </p>
+          </section>
+
+          <div class="box box--evidence">
+            <span class="box-label"><span class="en">What the evidence says</span><span class="zh">证据怎么说</span></span>
+            <p>
+              <span class="en">Change blindness shows that looking is not the same as seeing. In a well-known experiment, Simons and Chabris (1999) asked participants to count basketball passes; roughly half failed to notice a person in a gorilla suit walking through the scene. On the web, the same selective machinery produces <strong>banner blindness</strong>: users learn to skip regions that look like advertising, including useful links inside them (Benway &amp; Lane, 1998). The failure is not optical. It is a filter doing its job.</span>
+              <span class="zh">变化盲视表明，看并不等于看见。在一项著名实验中，西蒙斯与查布里斯（1999）让参与者数篮球传球次数，约有一半人没有注意到一个穿着大猩猩服装的人从场景中走过。在网页上，同样的选择机制制造了<strong>横幅盲视</strong>：用户学会跳过看起来像广告的区域，连同其中有用的链接一起跳过（Benway &amp; Lane, 1998）。这不是眼睛的失败，而是过滤器在正常工作。</span>
+            </p>
+          </div>
+
+          <section id="s5">
+            <h2><span class="en">What behavioral science can and cannot tell you</span><span class="zh">行为科学能告诉你什么，不能告诉你什么</span></h2>
+            <p>
+              <span class="en">Behavioral science is useful here in three ways. It can diagnose: why did people miss the button that was clearly there? It can predict: what will likely happen if we add a badge, a countdown, or a second call to action? And it can critique: is this design helping someone act on their own goal, or exploiting a shortcut for someone else's?</span>
+              <span class="zh">行为科学在这里有三种用处。它能诊断：为什么人们会错过一个明明就在那里的按钮？它能预测：如果我们加上一个角标、一个倒计时，或第二个行动按钮，可能会发生什么？它还能批判：这个设计是在帮助人们实现自己的目标，还是在利用心理捷径服务于他人的目标？</span>
+            </p>
+            <p>
+              <span class="en">It cannot, by itself, tell you what to ship. Effects are often small, samples are often narrow, and laboratory tasks are cleaner than a checkout page at eleven at night. Use the research to generate hypotheses, then test them with the people who will actually use the thing.</span>
+              <span class="zh">但它本身不能告诉你该上线什么。效应往往很小，样本往往狭窄，实验室任务也比晚上十一点的结账页面干净得多。用研究来生成假设，再用真正会使用它的人来检验假设。</span>
+            </p>
+          </section>
+
+          <div class="box box--try">
+            <span class="box-label"><span class="en">Try this</span><span class="zh">试一试</span></span>
+            <p>
+              <span class="en">Open a page you use every day. List five things it makes visually loud and five things it hides or delays. Next to each, write the behavior the choice encourages—click, scroll past, trust, leave. You have just performed a rough affordance audit.</span>
+              <span class="zh">打开一个你每天使用的页面。列出五件它让视觉上“响亮”的东西，以及五件它隐藏或延迟呈现的东西。在每一项旁边，写下这个选择所鼓励的行为——点击、滑过、信任、离开。你已经完成了一次粗略的可供性审计。</span>
+            </p>
+          </div>
+
+          <div class="takeaways">
+            <span class="box-label"><span class="en">Key takeaways</span><span class="zh">本章要点</span></span>
+            <ol>
+              <li><span class="en">A screen is a stimulus environment, not a neutral container.</span><span class="zh">屏幕是一种刺激环境，而不是中立的容器。</span></li>
+              <li><span class="en">Perception is constructed, selective, and oriented toward action.</span><span class="zh">知觉是建构的、选择性的，并且指向行动。</span></li>
+              <li><span class="en">Attention is scarce; design is the allocation of it.</span><span class="zh">注意是稀缺的；设计就是对它的分配。</span></li>
+              <li><span class="en">“Intuitive” usually means “learned,” which makes user research indispensable.</span><span class="zh">“直观”通常意味着“已学会”，这正是用户研究不可替代的原因。</span></li>
+            </ol>
+          </div>
+
+          <div class="readings">
+            <span class="box-label"><span class="en">Further reading</span><span class="zh">延伸阅读</span></span>
+            <ul>
+              <li>Gibson, J. J. (1979). <em>The Ecological Approach to Visual Perception</em>. Houghton Mifflin.</li>
+              <li>Marr, D. (1982). <em>Vision: A Computational Investigation into the Human Representation and Processing of Visual Information</em>. W. H. Freeman.</li>
+              <li>Simon, H. A. (1971). Designing organizations for an information-rich world. In <em>Computers, Communications, and the Public Interest</em>.</li>
+              <li>Simons, D. J., &amp; Chabris, C. F. (1999). Gorillas in our midst: Sustained inattentional blindness for dynamic events. <em>Perception</em>, 28(9), 1059–1074.</li>
+              <li>Benway, J. P., &amp; Lane, D. M. (1998). Banner blindness: Web searchers often miss “obvious” links. <em>Internetworking</em>.</li>
+              <li>Ware, C. (2019). <em>Information Visualization: Perception for Design</em> (4th ed.). Morgan Kaufmann.</li>
+            </ul>
+          </div>
+        </div>
+
+        <nav class="chapter-nav" id="chapter-nav" aria-label="Chapter navigation"></nav>
+      </article>
+
+      <footer class="book-foot">
+        <span><span class="en">What do you see? · Chapter 01 of 07</span><span class="zh">你看见了什么？· 第 01 章，共 7 章</span></span>
+        <span><a href="references.html"><span class="en">All references</span><span class="zh">全部参考文献</span></a></span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="assets/book.js"></script>
+</body>
+</html>

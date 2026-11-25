@@ -125,6 +125,40 @@
       max-width: 60ch;
     }
 
+    .book-cta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.9rem;
+    }
+    .book-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.72rem 1.25rem;
+      border: 1px solid rgba(154, 183, 255, 0.45);
+      border-radius: 999px;
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+    .book-cta a:hover, .book-cta a:focus-visible {
+      border-color: var(--accent);
+      background: rgba(154, 183, 255, 0.08);
+      transform: translateY(-1px);
+      outline: none;
+    }
+    .book-cta .cta-note {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-mute);
+    }
+
     /* ---------- Illustration card ---------- */
     .illus-card {
       margin-top: clamp(2.5rem, 7vw, 4rem);
@@ -266,11 +300,16 @@
       <span class="sep">·</span>
       <span>Visual Perception</span>
       <span class="sep">·</span>
-      <span>— Ch. 00 of ∞</span>
+      <span>— 7 chapters · EN / 中文</span>
     </div>
 
     <h1>What do you see?</h1>
     <p class="subtitle">The behavioral science of visual information perception on the Internet.</p>
+
+    <p class="book-cta">
+      <a href="visual-information-science-book/index.html">Read the full book <span aria-hidden="true">&rarr;</span></a>
+      <span class="cta-note">7 chapters · English / 中文</span>
+    </p>
 
     <figure class="illus-card">
       <div class="fig-frame">
@@ -286,7 +325,7 @@
       <div class="toc-label">Table of Contents</div>
       <ol class="toc">
         <li>
-          <a href="#">
+          <a href="visual-information-science-book/ch01.html">
             <span class="num">01</span>
             <span>
               <span class="ch-title">The Internet as a Visual System</span>
@@ -296,7 +335,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="visual-information-science-book/ch02.html">
             <span class="num">02</span>
             <span>
               <span class="ch-title">Attention, Saliency, and the Gaze</span>
@@ -306,7 +345,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="visual-information-science-book/ch03.html">
             <span class="num">03</span>
             <span>
               <span class="ch-title">From Retina to Heuristic</span>
@@ -316,7 +355,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="visual-information-science-book/ch04.html">
             <span class="num">04</span>
             <span>
               <span class="ch-title">Color, Contrast, and Consequence</span>
@@ -326,7 +365,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="visual-information-science-book/ch05.html">
             <span class="num">05</span>
             <span>
               <span class="ch-title">Motion as Meaning</span>
@@ -336,7 +375,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="visual-information-science-book/ch06.html">
             <span class="num">06</span>
             <span>
               <span class="ch-title">Noise, Signals, and Trust</span>
@@ -346,11 +385,21 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="visual-information-science-book/ch07.html">
             <span class="num">07</span>
             <span>
               <span class="ch-title">Scaling Beyond the Screen</span>
               <span class="ch-desc">Responsive perception: from watch to wall, from reader to re-reader.</span>
+            </span>
+            <span class="arrow">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="visual-information-science-book/references.html">
+            <span class="num">↗</span>
+            <span>
+              <span class="ch-title">References &amp; Further Reading</span>
+              <span class="ch-desc">The sources behind the claims, grouped by theme — with a note on how to read them.</span>
             </span>
             <span class="arrow">→</span>
           </a>
@@ -361,6 +410,7 @@
 
   <footer>
     <p>Illustrations in this section are in the public domain or freely licensed. The Müller–Lyer illusion figure is reproduced from Wikimedia Commons — no adaptation or redistribution restrictions apply.</p>
+    <p><a href="visual-information-science-book/index.html">Read the full web book &rarr;</a></p>
   </footer>
 </body>
 </html>

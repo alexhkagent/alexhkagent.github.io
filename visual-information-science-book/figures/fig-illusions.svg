@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" role="img" aria-labelledby="t">
+  <title id="t">Two classical illusions: Müller-Lyer shafts of equal length and Ebbinghaus circles of equal size.</title>
+  <rect width="860" height="380" fill="#f7f5ef"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="40" y="42" font-size="12" letter-spacing="3" fill="#6b7074">THE SAME PIXELS, DIFFERENT PERCEPTS</text>
+
+    <text x="40" y="78" font-size="13" font-weight="bold" fill="#23262a">A · Müller–Lyer</text>
+    <text x="40" y="96" font-size="10.5" fill="#6b7074">the three shafts are identical in length</text>
+
+    <g stroke="#23262a" stroke-width="2">
+      <line x1="80" y1="136" x2="300" y2="136"/>
+      <line x1="80" y1="136" x2="62" y2="118"/>
+      <line x1="80" y1="136" x2="62" y2="154"/>
+      <line x1="300" y1="136" x2="318" y2="118"/>
+      <line x1="300" y1="136" x2="318" y2="154"/>
+
+      <line x1="80" y1="196" x2="300" y2="196"/>
+      <line x1="80" y1="196" x2="98" y2="178"/>
+      <line x1="80" y1="196" x2="98" y2="214"/>
+      <line x1="300" y1="196" x2="282" y2="178"/>
+      <line x1="300" y1="196" x2="282" y2="214"/>
+
+      <line x1="80" y1="256" x2="300" y2="256"/>
+    </g>
+    <text x="80" y="284" font-size="10" fill="#6b7074">fins out</text>
+    <text x="162" y="284" font-size="10" fill="#6b7074">fins in</text>
+    <text x="262" y="284" font-size="10" fill="#6b7074">plain</text>
+
+    <line x1="420" y1="78" x2="420" y2="320" stroke="#d9d4c7"/>
+
+    <text x="470" y="78" font-size="13" font-weight="bold" fill="#23262a">B · Ebbinghaus</text>
+    <text x="470" y="96" font-size="10.5" fill="#6b7074">the two central circles are identical in size</text>
+
+    <g fill="#e6eaf0" stroke="#4f5f75" stroke-width="1.2">
+      <circle cx="560" cy="150" r="42"/>
+      <circle cx="670" cy="150" r="42"/>
+      <circle cx="615" cy="110" r="42"/>
+      <circle cx="615" cy="190" r="42"/>
+      <circle cx="576" cy="185" r="42"/>
+      <circle cx="654" cy="185" r="42"/>
+      <circle cx="576" cy="115" r="42"/>
+      <circle cx="654" cy="115" r="42"/>
+    </g>
+    <circle cx="615" cy="150" r="25" fill="#7d5849"/>
+
+    <g fill="#f1e7e1" stroke="#7d5849" stroke-width="1.2">
+      <circle cx="740" cy="120" r="11"/>
+      <circle cx="790" cy="120" r="11"/>
+      <circle cx="715" cy="150" r="11"/>
+      <circle cx="815" cy="150" r="11"/>
+      <circle cx="740" cy="180" r="11"/>
+      <circle cx="790" cy="180" r="11"/>
+      <circle cx="765" cy="95" r="11"/>
+      <circle cx="765" cy="205" r="11"/>
+    </g>
+    <circle cx="765" cy="150" r="25" fill="#7d5849"/>
+
+    <text x="615" y="304" text-anchor="middle" font-size="10" fill="#6b7074">large context</text>
+    <text x="765" y="304" text-anchor="middle" font-size="10" fill="#6b7074">small context</text>
+
+    <rect x="40" y="336" width="780" height="1" fill="#d9d4c7"/>
+    <text x="40" y="358" font-size="10.5" fill="#6b7074">Illusions are not failures of a broken eye. They are side effects of a system tuned to infer stable objects from unstable light.</text>
+  </g>
+</svg>

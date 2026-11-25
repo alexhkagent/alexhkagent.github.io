@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 460" role="img" aria-labelledby="t">
+  <title id="t">An F-shaped scanning path across a page wireframe, with larger fixation dots where gaze lingers.</title>
+  <rect width="860" height="460" fill="#f7f5ef"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="40" y="42" font-size="12" letter-spacing="3" fill="#6b7074">AN AVERAGE ITINERARY, NOT A RULE</text>
+
+    <rect x="40" y="66" width="520" height="340" rx="8" fill="#fffefb" stroke="#d9d4c7"/>
+    <rect x="64" y="90" width="330" height="20" rx="3" fill="#23262a"/>
+    <rect x="64" y="126" width="472" height="7" rx="3.5" fill="#d9d4c7"/>
+    <rect x="64" y="142" width="430" height="7" rx="3.5" fill="#d9d4c7"/>
+    <rect x="64" y="158" width="456" height="7" rx="3.5" fill="#d9d4c7"/>
+
+    <rect x="64" y="196" width="210" height="12" rx="3" fill="#55675b" opacity="0.35"/>
+    <rect x="64" y="220" width="472" height="7" rx="3.5" fill="#e7e2d6"/>
+    <rect x="64" y="236" width="438" height="7" rx="3.5" fill="#e7e2d6"/>
+    <rect x="64" y="252" width="460" height="7" rx="3.5" fill="#e7e2d6"/>
+
+    <rect x="64" y="292" width="140" height="86" rx="4" fill="#f0ede4"/>
+    <rect x="218" y="292" width="140" height="86" rx="4" fill="#f0ede4"/>
+    <rect x="372" y="292" width="164" height="86" rx="4" fill="#f0ede4"/>
+
+    <path d="M88 100 H330 M88 100 V206 M88 206 H272 M88 206 V330" fill="none" stroke="#7d5849" stroke-width="2.2" stroke-linecap="round" opacity="0.85"/>
+
+    <g fill="#7d5849">
+      <circle cx="88" cy="100" r="9" opacity="0.28"/>
+      <circle cx="160" cy="100" r="6" opacity="0.40"/>
+      <circle cx="238" cy="100" r="5" opacity="0.40"/>
+      <circle cx="310" cy="100" r="4" opacity="0.40"/>
+      <circle cx="88" cy="150" r="5" opacity="0.35"/>
+      <circle cx="88" cy="206" r="6" opacity="0.35"/>
+      <circle cx="160" cy="206" r="4" opacity="0.35"/>
+      <circle cx="240" cy="206" r="3.5" opacity="0.35"/>
+      <circle cx="88" cy="270" r="5" opacity="0.30"/>
+      <circle cx="88" cy="330" r="3.5" opacity="0.30"/>
+    </g>
+
+    <g font-size="10.5" fill="#4c5358">
+      <text x="594" y="100" font-size="9.5" letter-spacing="1.5" fill="#7d5849">1 · FIRST PASS</text>
+      <text x="594" y="120">A horizontal sweep across the</text>
+      <text x="594" y="136" fill="#6b7074">first line of meaningful text.</text>
+
+      <text x="594" y="190" font-size="9.5" letter-spacing="1.5" fill="#7d5849">2 · SECOND PASS</text>
+      <text x="594" y="210">A shorter sweep, then a vertical</text>
+      <text x="594" y="226" fill="#6b7074">drop down the left edge.</text>
+
+      <text x="594" y="280" font-size="9.5" letter-spacing="1.5" fill="#7d5849">3 · ABANDON</text>
+      <text x="594" y="300">Gaze leaves before the body</text>
+      <text x="594" y="316" fill="#6b7074">copy is finished.</text>
+    </g>
+
+    <rect x="40" y="420" width="780" height="1" fill="#d9d4c7"/>
+    <text x="40" y="442" font-size="10.5" fill="#6b7074">The F-pattern describes pages with dense text and weak hierarchy. Strong hierarchy changes the shape of the path.</text>
+  </g>
+</svg>

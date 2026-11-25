@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Chapter 4: Color, contrast, and consequence — the physics of light, the arithmetic of contrast, and the ethics of color." />
+  <title>Chapter 04 · Color, Contrast, and Consequence — What do you see?</title>
+  <link rel="stylesheet" href="assets/book.css" />
+  <script>
+    (function () {
+      try {
+        var p = new URLSearchParams(location.search).get('lang');
+        var s = p || localStorage.getItem('visbook:lang');
+        if (s === 'zh') {
+          document.documentElement.setAttribute('data-lang', 'zh');
+          document.documentElement.setAttribute('lang', 'zh');
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+</head>
+<body data-chapter="4"
+      data-title-en="Chapter 04 · Color, Contrast, and Consequence — What do you see?"
+      data-title-zh="第四章 · 颜色、对比与后果 —— 你看见了什么？">
+
+  <a class="skip" href="#main"><span class="en">Skip to content</span><span class="zh">跳到正文</span></a>
+
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>What do you see?</a>
+    <button class="btn-menu" id="menu-toggle" type="button" aria-expanded="false" aria-controls="sidebar">
+      <span class="en">Contents</span><span class="zh">目录</span>
+    </button>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-meta"><span class="en">Ch. 04 / 07</span><span class="zh">第 04 章 / 共 7 章</span></span>
+    <div class="lang-switch" role="group" aria-label="Language / 语言">
+      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+    </div>
+  </header>
+
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
+  <div class="shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="sidebar-scrim" id="sidebar-scrim"></div>
+
+    <main class="page" id="main">
+      <article>
+        <header class="chapter-head">
+          <p class="kicker"><span class="en">Chapter 04</span><span class="zh">第四章</span></p>
+          <h1><span class="en">Color, Contrast, and Consequence</span><span class="zh">颜色、对比与后果</span></h1>
+          <p class="lede">
+            <span class="en">Color is not a property of pixels; it is a transaction between light, eye, and brain. This chapter covers the physiology of color, the arithmetic of contrast, and the consequences for accessibility and action.</span>
+            <span class="zh">颜色不是像素的属性；它是光、眼睛与大脑之间的一场交易。本章讨论颜色的生理机制、对比度的算术，以及它对可访问性与行动的影响。</span>
+          </p>
+          <p class="chapter-meta">
+            <span><span class="en">14 min read</span><span class="zh">约 14 分钟</span></span>
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="en">1 figure · 1 tool</span><span class="zh">1 幅图 · 1 个工具</span></span>
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="en">Color &amp; accessibility</span><span class="zh">颜色与可访问性</span></span>
+          </p>
+        </header>
+
+        <div class="prose">
+
+          <div class="box box--short">
+            <span class="box-label"><span class="en">The short version</span><span class="zh">先读结论</span></span>
+            <p>
+              <span class="en">Color is constructed by the brain from three cone signals and a lot of context. Contrast is a luminance relationship, not a hue difference. Never encode meaning by color alone. Accessibility is not a constraint added at the end; it is the stress test that reveals whether the visual system was designed for actual eyes.</span>
+              <span class="zh">颜色是大脑根据三种视锥信号与大量情境建构出来的。对比是一种亮度关系，而不是色相差异。永远不要只靠颜色编码意义。可访问性不是最后附加的约束，而是一场压力测试，检验这套视觉设计是否真的为真实的眼睛而做。</span>
+            </p>
+          </div>
+
+          <section id="s1">
+            <h2><span class="en">Three cones, four primaries</span><span class="zh">三种视锥，四种原色</span></h2>
+            <p>
+              <span class="en">Human color vision begins with three types of cone, sensitive to short, medium, and long wavelengths. Their relative responses are compared, not read out directly. The result is a set of opponent channels: red versus green, blue versus yellow, light versus dark.</span>
+              <span class="zh">人类色觉始于三种视锥细胞，分别对短、中、长波敏感。视觉系统比较它们的相对反应，而不是直接读取绝对值。结果是一组对立通道：红与绿、蓝与黄、明与暗。</span>
+            </p>
+            <p>
+              <span class="en">This is why there is no “red” in the world, only reflectance and illumination. A tomato in sunlight and a tomato in shadow reflect different wavelengths to your eye, yet you see the same tomato. Color constancy is the brain subtracting the light.</span>
+              <span class="zh">这就是为什么世界上并没有“红色”，只有反射率与照明。阳光下的番茄与阴影中的番茄，反射到你眼里的波长并不相同，但你看到的是同一个番茄。颜色恒常性，就是大脑把照明“减掉”的结果。</span>
+            </p>
+            <p>
+              <span class="en">The practical consequence is that color is relational. A gray text on a dark background can look blue; a red button can look orange next to a warmer red. You cannot specify a color in isolation and expect it to behave the same way in every context.</span>
+              <span class="zh">实际的后果是：颜色是关系性的。深色背景上的灰字可能看起来发蓝；红色按钮放在更暖的红色旁边可能显得发橙。你不能孤立地指定一种颜色，然后期待它在所有情境中表现一致。</span>
+            </p>
+          </section>
+
+          <section id="s2">
+            <h2><span class="en">Contrast is a relationship</span><span class="zh">对比是一种关系</span></h2>
+            <p>
+              <span class="en">Contrast ratio compares the relative luminance of two colors. WCAG 2.2 sets the minimum at 4.5:1 for normal text and 3:1 for large text (18 pt, or 14 pt bold). AAA raises those to 7:1 and 4.5:1. Non-text interface components need 3:1 against their surroundings.</span>
+              <span class="zh">对比度比较的是两种颜色的相对亮度。WCAG 2.2 规定，正文最低为 4.5:1，大字号（18 pt，或 14 pt 粗体）为 3:1。AAA 级则提高到 7:1 与 4.5:1。非文字的界面组件与其周围环境之间需要达到 3:1。</span>
+            </p>
+            <p>
+              <span class="en">The arithmetic is simple but unforgiving. Two colors can look vividly different in hue and still fail, because the eye's sensitivity is dominated by luminance. Saturated blue on black is a classic failure: rich to look at, hard to read.</span>
+              <span class="zh">算术很简单，却不留情面。两种颜色可能在色相上差异鲜明，却仍然不合格，因为眼睛的敏感度主要由亮度决定。黑底上的高饱和蓝是经典反例：看起来浓郁，读起来困难。</span>
+            </p>
+            <p>
+              <span class="en">Dark mode does not solve contrast; it inverts the problem. Pure white on pure black can produce halation for readers with astigmatism, and thin light text on dark backgrounds can appear to bloom. Off-white on near-black is usually kinder.</span>
+              <span class="zh">深色模式并不“解决”对比问题，它只是把问题翻转过来。纯白配纯黑，可能让散光读者感到光晕；深色背景上的细字则可能显得发胀。近黑底配米白字，通常更温和。</span>
+            </p>
+          </section>
+
+          <figure>
+            <img src="figures/fig-contrast.svg" alt="A contrast ratio scale with sample text at 1.2:1, 3:1, 4.5:1, 7:1 and 21:1, and WCAG thresholds." />
+            <figcaption>
+              <span class="fig-num">Fig. 4.1</span>
+              <span class="en">The same hue can pass or fail depending on luminance. The thresholds are floors, not targets.</span>
+              <span class="zh">同一个色相会因亮度不同而合格或不合格。阈值是下限，不是目标。</span>
+            </figcaption>
+          </figure>
+
+          <div class="demo" id="cc-demo">
+            <div class="demo-head">
+              <h3><span class="en">Tool · Contrast checker</span><span class="zh">工具 · 对比度检查器</span></h3>
+              <span class="demo-note"><span class="en">WCAG 2.2 thresholds, calculated locally.</span><span class="zh">按 WCAG 2.2 阈值本地计算。</span></span>
+            </div>
+            <div class="cc-grid">
+              <div class="cc-field">
+                <label for="cc-text"><span class="en">Text color</span><span class="zh">文字颜色</span></label>
+                <div class="row">
+                  <input type="color" id="cc-text" value="#23262a" />
+                  <code id="cc-text-code">#23262a</code>
+                </div>
+              </div>
+              <div class="cc-field">
+                <label for="cc-bg"><span class="en">Background</span><span class="zh">背景颜色</span></label>
+                <div class="row">
+                  <input type="color" id="cc-bg" value="#f7f5ef" />
+                  <code id="cc-bg-code">#f7f5ef</code>
+                </div>
+              </div>
+            </div>
+            <div class="cc-preview" id="cc-preview">
+              <span class="big"><span class="en">What do you see?</span><span class="zh">你看见了什么？</span></span>
+              <span class="en">Small text is where contrast fails first.</span>
+              <span class="zh">小字号文字，是对比度最先失守的地方。</span>
+            </div>
+            <div class="cc-result">
+              <span class="cc-ratio" id="cc-ratio">–</span>
+              <div class="cc-badges" id="cc-badges"></div>
+            </div>
+          </div>
+
+          <section id="s3">
+            <h2><span class="en">Color as code</span><span class="zh">颜色作为编码</span></h2>
+            <p>
+              <span class="en">Color is an efficient code because it can be read in parallel with shape and position. But it is a code with a narrow alphabet and a cultural dialect. Red means error in many interfaces, celebration in many cultures, and “up” in some stock markets and “down” in others.</span>
+              <span class="zh">颜色是一种高效的编码，因为它可以与形状、位置并行读取。但它的字母表很窄，而且带有文化方言。红色在许多界面里表示错误，在许多文化中表示喜庆，在一些股市里表示上涨，在另一些里表示下跌。</span>
+            </p>
+            <p>
+              <span class="en">Roughly one in twelve men of Northern European descent has some form of red–green color vision deficiency; the rate is much lower in women. If a chart distinguishes categories only by red and green, a meaningful fraction of the audience cannot decode it. Add labels, shapes, or position.</span>
+              <span class="zh">在北欧血统的男性中，大约每十二人就有一人存在某种红绿色觉缺陷；女性的比例低得多。如果一张图只用红绿区分类别，那么相当一部分受众无法解码。请增加标签、形状或位置编码。</span>
+            </p>
+            <p>
+              <span class="en">Color also creates emphasis. The isolation effect applies: a single colored element among neutral ones draws the eye. This is why “the red button converts better” is a fragile claim. The button may win because it is the only saturated object on the page, not because red has magic.</span>
+              <span class="zh">颜色还会制造强调。孤立效应在此适用：中性元素中唯一的彩色元素会吸引视线。这就是“红色按钮转化更好”这类说法脆弱的原因。按钮可能获胜，是因为它是页面上唯一的高饱和物体，而不是因为红色有魔力。</span>
+            </p>
+          </section>
+
+          <section id="s4">
+            <h2><span class="en">The ethics of color</span><span class="zh">颜色的伦理</span></h2>
+            <p>
+              <span class="en">Color can soothe or alarm. It can make a cancel link pale and a subscription button loud. It can make a required field look optional, or an opt-out look like a warning. These are not neutral aesthetic choices when they change what people do.</span>
+              <span class="zh">颜色可以安抚，也可以恐吓。它可以让“取消”链接变得苍白，让“订阅”按钮变得响亮；可以让必填项看起来像选填，让“退出”看起来像警告。当它们改变人们的行为时，就不再是中性的审美选择。</span>
+            </p>
+            <p>
+              <span class="en">Regulators have started to treat interface design as a consumer-protection issue. Dark patterns—including color-based obstruction—are increasingly named in enforcement actions and in legislation such as the EU's Digital Services Act. The direction is clear: the visual system is not a free playground.</span>
+              <span class="zh">监管者已开始把界面设计视为消费者保护问题。包括利用颜色制造阻碍在内的“暗黑模式”，越来越多地出现在执法行动与立法文本中，例如欧盟的《数字服务法》。方向很明确：视觉系统不是可以随意操弄的游乐场。</span>
+            </p>
+          </section>
+
+          <section id="s5">
+            <h2><span class="en">A practical protocol</span><span class="zh">一套实用流程</span></h2>
+            <p>
+              <span class="en">Five checks catch most color failures. Measure contrast on the actual text sizes you ship. View the page in grayscale. Simulate the common forms of color vision deficiency. Look at it outdoors, on a low-quality screen. And test at 200% zoom, where layout and contrast often break together.</span>
+              <span class="zh">五项检查可以抓住大多数颜色问题。用实际发布的字号测量对比度；把页面转成灰度查看；模拟常见的色觉缺陷；在户外、低质量屏幕上观看；并在 200% 缩放下测试——版式与对比度往往会在那里一起崩掉。</span>
+            </p>
+            <p>
+              <span class="en">For palette work, perceptual color spaces such as OKLCH make it easier to change lightness without shifting hue, and to generate a scale that stays visually even. Whatever the tool, define tokens once and use them everywhere. Ad hoc color is how a system loses its grammar.</span>
+              <span class="zh">在调色板工作中，OKLCH 等感知均匀色彩空间让“改变明度而不漂移色相”更容易，也能生成视觉上更均匀的色阶。无论用什么工具，都应先定义好设计令牌，再统一使用。随手取色，正是系统丢失语法的开始。</span>
+            </p>
+          </section>
+
+          <div class="box box--evidence">
+            <span class="box-label"><span class="en">What the evidence says</span><span class="zh">证据怎么说</span></span>
+            <p>
+              <span class="en">The WCAG contrast thresholds are consensus standards informed by legibility research, not laws of nature. They are a floor: text that passes at 4.5:1 can still be unpleasant at 12 px on a glossy phone in sunlight. Conversely, some large display type can be readable below the threshold. Use the ratio as a diagnostic, then test with readers.</span>
+              <span class="zh">WCAG 的对比度阈值是由可读性研究支撑的共识标准，而非自然定律。它们是下限：达到 4.5:1 的文字，在阳光下的亮面手机上以 12 px 呈现时，仍可能令人难受。反过来，一些大号展示字体低于阈值也可能可读。把比值当作诊断工具，然后用真实读者去测试。</span>
+            </p>
+          </div>
+
+          <div class="box box--try">
+            <span class="box-label"><span class="en">Try this</span><span class="zh">试一试</span></span>
+            <p>
+              <span class="en">Take three text/background pairs from a page you are working on and run them through the checker above. Then convert the page to grayscale and look again. The pair that survives both tests is the one to build the rest of the palette around.</span>
+              <span class="zh">从你正在处理的页面中取三组“文字/背景”配色，放进上面的检查器。然后把页面转成灰度，再看一遍。同时通过两项测试的那一组，可以作为整套调色板的基准。</span>
+            </p>
+          </div>
+
+          <div class="takeaways">
+            <span class="box-label"><span class="en">Key takeaways</span><span class="zh">本章要点</span></span>
+            <ol>
+              <li><span class="en">Color is constructed, contextual, and never absolute.</span><span class="zh">颜色是建构的、依赖情境的，从来不是绝对的。</span></li>
+              <li><span class="en">Contrast is luminance; hue can mislead you.</span><span class="zh">对比度是亮度关系；色相会误导你。</span></li>
+              <li><span class="en">Never encode meaning by color alone.</span><span class="zh">永远不要只靠颜色来编码意义。</span></li>
+              <li><span class="en">Accessibility is a design constraint, not a patch.</span><span class="zh">可访问性是一种设计约束，而不是事后补丁。</span></li>
+            </ol>
+          </div>
+
+          <div class="readings">
+            <span class="box-label"><span class="en">Further reading</span><span class="zh">延伸阅读</span></span>
+            <ul>
+              <li>W3C (2023). <em>Web Content Accessibility Guidelines (WCAG) 2.2</em>. W3C Recommendation.</li>
+              <li>Conway, B. R. (2009). Color vision, cones, and color-coding in the cortex. <em>The Neuroscientist</em>, 15(3), 274–290.</li>
+              <li>Palmer, S. E. (1999). <em>Vision Science: Photons to Phenomenology</em>. MIT Press.</li>
+              <li>Von Restorff, H. (1933). Über die Wirkung von Bereichsbildungen im Spurenfeld. <em>Psychologische Forschung</em>, 18, 299–342.</li>
+              <li>Okabe, M., &amp; Ito, K. (2008). Color universal design (CUD): How to make figures and presentations that are friendly to colorblind people.</li>
+            </ul>
+          </div>
+        </div>
+
+        <nav class="chapter-nav" id="chapter-nav" aria-label="Chapter navigation"></nav>
+      </article>
+
+      <footer class="book-foot">
+        <span><span class="en">What do you see? · Chapter 04 of 07</span><span class="zh">你看见了什么？· 第 04 章，共 7 章</span></span>
+        <span><a href="references.html"><span class="en">All references</span><span class="zh">全部参考文献</span></a></span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="assets/book.js"></script>
+</body>
+</html>

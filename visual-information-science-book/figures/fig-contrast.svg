@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" role="img" aria-labelledby="t">
+  <title id="t">A contrast ratio scale from 1:1 to 21:1 with WCAG thresholds at 3:1, 4.5:1, and 7:1.</title>
+  <rect width="860" height="420" fill="#f7f5ef"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="40" y="42" font-size="12" letter-spacing="3" fill="#6b7074">CONTRAST IS LUMINANCE, NOT HUE</text>
+
+    <g>
+      <rect x="40" y="76" width="146" height="92" rx="4" fill="#f7f5ef" stroke="#d9d4c7"/>
+      <text x="58" y="128" font-size="30" font-weight="bold" fill="#d9d4c7">Aa</text>
+      <text x="58" y="152" font-size="10" fill="#6b7074">1.2 : 1</text>
+
+      <rect x="202" y="76" width="146" height="92" rx="4" fill="#f7f5ef" stroke="#d9d4c7"/>
+      <text x="220" y="128" font-size="30" font-weight="bold" fill="#a9a294">Aa</text>
+      <text x="220" y="152" font-size="10" fill="#6b7074">3 : 1</text>
+
+      <rect x="364" y="76" width="146" height="92" rx="4" fill="#f7f5ef" stroke="#d9d4c7"/>
+      <text x="382" y="128" font-size="30" font-weight="bold" fill="#7a746a">Aa</text>
+      <text x="382" y="152" font-size="10" fill="#6b7074">4.5 : 1</text>
+
+      <rect x="526" y="76" width="146" height="92" rx="4" fill="#f7f5ef" stroke="#d9d4c7"/>
+      <text x="544" y="128" font-size="30" font-weight="bold" fill="#42464a">Aa</text>
+      <text x="544" y="152" font-size="10" fill="#6b7074">7 : 1</text>
+
+      <rect x="688" y="76" width="132" height="92" rx="4" fill="#f7f5ef" stroke="#d9d4c7"/>
+      <text x="706" y="128" font-size="30" font-weight="bold" fill="#23262a">Aa</text>
+      <text x="706" y="152" font-size="10" fill="#6b7074">21 : 1</text>
+    </g>
+
+    <line x1="60" y1="232" x2="800" y2="232" stroke="#23262a" stroke-width="1.2"/>
+    <g stroke="#23262a" stroke-width="1.2">
+      <line x1="60" y1="226" x2="60" y2="238"/>
+      <line x1="285" y1="226" x2="285" y2="238"/>
+      <line x1="430" y1="226" x2="430" y2="238"/>
+      <line x1="580" y1="226" x2="580" y2="238"/>
+      <line x1="800" y1="226" x2="800" y2="238"/>
+    </g>
+    <g font-size="10" fill="#6b7074" text-anchor="middle">
+      <text x="60" y="256">1:1</text>
+      <text x="285" y="256">3:1</text>
+      <text x="430" y="256">4.5:1</text>
+      <text x="580" y="256">7:1</text>
+      <text x="800" y="256">21:1</text>
+    </g>
+
+    <g>
+      <rect x="285" y="272" width="145" height="26" rx="13" fill="#e6eaf0"/>
+      <text x="357" y="289" text-anchor="middle" font-size="9.5" fill="#4f5f75">AA large text</text>
+      <rect x="430" y="272" width="150" height="26" rx="13" fill="#e8ede7"/>
+      <text x="505" y="289" text-anchor="middle" font-size="9.5" fill="#405044">AA normal text</text>
+      <rect x="580" y="272" width="220" height="26" rx="13" fill="#f0ede4"/>
+      <text x="690" y="289" text-anchor="middle" font-size="9.5" fill="#4c5358">AAA normal text — the comfortable zone</text>
+    </g>
+
+    <text x="40" y="336" font-size="10.5" fill="#4c5358">WCAG 2.2 minimums: 4.5:1 for normal text, 3:1 for large text (18pt, or 14pt bold), 3:1 for UI components.</text>
+    <text x="40" y="354" font-size="10.5" fill="#6b7074">A ratio of 7:1 is the AAA target for body copy. Higher is not automatically better: extreme contrast can vibrate or fatigue.</text>
+
+    <rect x="40" y="380" width="780" height="1" fill="#d9d4c7"/>
+    <text x="40" y="402" font-size="10.5" fill="#6b7074">Two colors can look “different enough” in hue and still fail, because the eye cares about relative luminance.</text>
+  </g>
+</svg>

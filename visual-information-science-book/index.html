@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="What do you see? A web book on the behavioral science of visual information perception on the Internet." />
+  <title>What do you see? — A web book on visual perception</title>
+  <link rel="stylesheet" href="assets/book.css" />
+  <script>
+    (function () {
+      try {
+        var p = new URLSearchParams(location.search).get('lang');
+        var s = p || localStorage.getItem('visbook:lang');
+        if (s === 'zh') {
+          document.documentElement.setAttribute('data-lang', 'zh');
+          document.documentElement.setAttribute('lang', 'zh');
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+</head>
+<body data-title-en="What do you see? — A web book on visual perception" data-title-zh="你看见了什么？—— 一本关于视觉感知的网页书">
+
+  <a class="skip" href="#main"><span class="en">Skip to content</span><span class="zh">跳到正文</span></a>
+
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>What do you see?</a>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-meta"><span class="en">Visual Information Science · Vol. 01</span><span class="zh">视觉信息科学 · 第一卷</span></span>
+    <div class="lang-switch" role="group" aria-label="Language / 语言">
+      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+    </div>
+  </header>
+
+  <main class="home" id="main">
+
+    <section class="cover" aria-labelledby="book-title">
+      <p class="imprint">
+        <span class="en">3Cats · Visual Information Science · First edition, 2026</span>
+        <span class="zh">3Cats · 视觉信息科学 · 第一版，2026</span>
+      </p>
+
+      <h1 id="book-title">What do you see?</h1>
+
+      <p class="cover-sub">
+        <span class="en">The behavioral science of visual information perception on the Internet.</span>
+        <span class="zh">互联网视觉信息感知的行为科学。</span>
+      </p>
+
+      <div class="cover-actions">
+        <a class="btn-primary" href="ch01.html">
+          <span class="en">Start reading</span><span class="zh">开始阅读</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        <a class="btn-ghost" href="#contents"><span class="en">Table of contents</span><span class="zh">查看目录</span></a>
+      </div>
+    </section>
+
+    <div class="cover-grid">
+      <section class="abstract">
+        <div class="home-section" style="margin-top:0">
+          <h2><span class="en">What this book is</span><span class="zh">这是一本什么书</span></h2>
+        </div>
+        <p>
+          <span class="en">Every screen is a controlled experiment on the human visual system, run millions of times a day without a consent form. A headline competes with a badge; a chart competes with a cookie banner; a face competes with a countdown timer. <strong>What you see</strong> is the result of that competition, not a neutral recording of the page.</span>
+          <span class="zh">每一块屏幕，都是一场针对人类视觉系统的受控实验，每天在未经同意的情况下运行数百万次。标题与角标竞争，图表与 Cookie 弹窗竞争，人脸与倒计时竞争。<strong>你看见了什么</strong>，是这场竞争的结果，而不是对页面的中立记录。</span>
+        </p>
+        <p>
+          <span class="en">This book follows the signal from the photon to the click: the eye, the cortex, attention, color, motion, layout, and finally the devices and bodies that receive it all. It is written for designers, researchers, and anyone who has ever wondered why a page that looks fine can still fail the person reading it.</span>
+          <span class="zh">本书沿着信号从光子走到点击：眼睛、皮层、注意、颜色、运动、版式，以及最终承载这一切的设备与身体。它写给设计师、研究者，也写给任何好奇“为什么一个看起来没问题的页面，仍然会让读者失败”的人。</span>
+        </p>
+        <p>
+          <span class="en">The argument is simple: perception is inference, attention is scarce, and design is the practice of choosing what the inference will be about.</span>
+          <span class="zh">核心论点很简单：知觉是一种推断，注意是一种稀缺资源，而设计，就是选择让这种推断指向何处的实践。</span>
+        </p>
+      </section>
+
+      <figure class="cover-fig">
+        <img src="figures/fig-perception-loop.svg" alt="The perception loop: stimulus, sensation, perception, interpretation, action." />
+        <figcaption>
+          <span class="fig-num">Fig. 00</span>
+          <span class="en">The loop this book follows. Each stage is lossy; each action produces the next stimulus.</span>
+          <span class="zh">本书所遵循的回路。每个阶段都有信息损失；每个动作都会产生下一个刺激。</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <section class="home-section" aria-labelledby="howto-label">
+      <h2 id="howto-label"><span class="en">How to read</span><span class="zh">如何阅读</span></h2>
+      <div class="howto">
+        <div>
+          <span class="n">01</span>
+          <h3><span class="en">In order</span><span class="zh">按顺序</span></h3>
+          <p><span class="en">The chapters build: environment, attention, biology, color, motion, information, adaptation. Each one assumes the last.</span><span class="zh">各章层层递进：环境、注意、生理、颜色、运动、信息、适应。每一章都建立在前一章之上。</span></p>
+        </div>
+        <div>
+          <span class="n">02</span>
+          <h3><span class="en">By figure</span><span class="zh">循图而读</span></h3>
+          <p><span class="en">Every chapter has at least one figure that can be read on its own. Start there if you are in a hurry.</span><span class="zh">每章至少有一幅可独立阅读的图。时间有限时，不妨从图开始。</span></p>
+        </div>
+        <div>
+          <span class="n">03</span>
+          <h3><span class="en">At the screen</span><span class="zh">对着屏幕读</span></h3>
+          <p><span class="en">Two demos ask you to look, not just read. The book is about seeing; it should be tested with your eyes.</span><span class="zh">书中有两个演示需要你亲自去看，而不只是读。这是一本关于“看”的书，应该用眼睛来检验。</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section" id="contents" aria-labelledby="toc-label">
+      <h2 id="toc-label"><span class="en">Contents</span><span class="zh">目录</span></h2>
+      <ol class="toc-book">
+        <li>
+          <a href="ch01.html">
+            <span class="num">01</span>
+            <span>
+              <span class="t"><span class="en">The Internet as a Visual System</span><span class="zh">互联网作为一个视觉系统</span></span>
+              <span class="d"><span class="en">Why the screen is a stimulus environment, and why “intuitive” is mostly learned.</span><span class="zh">为什么屏幕是一种刺激环境，以及为什么“直观”多半是学来的。</span></span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="ch02.html">
+            <span class="num">02</span>
+            <span>
+              <span class="t"><span class="en">Attention, Saliency, and the Gaze</span><span class="zh">注意、显著性与凝视</span></span>
+              <span class="d"><span class="en">How salience pulls the eye, how goals push it, and why we miss what we look at.</span><span class="zh">显著性如何牵引视线，目标如何推动视线，以及我们为何看不见眼前之物。</span></span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="ch03.html">
+            <span class="num">03</span>
+            <span>
+              <span class="t"><span class="en">From Retina to Heuristic</span><span class="zh">从视网膜到启发式</span></span>
+              <span class="d"><span class="en">The biology of seeing and the shortcuts of judgment—two filters before every click.</span><span class="zh">视觉的生物学与判断的捷径——每次点击之前的双重过滤。</span></span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="ch04.html">
+            <span class="num">04</span>
+            <span>
+              <span class="t"><span class="en">Color, Contrast, and Consequence</span><span class="zh">颜色、对比与后果</span></span>
+              <span class="d"><span class="en">The physics of light, the arithmetic of contrast, and the ethics of color.</span><span class="zh">光的物理、对比度的算术与颜色的伦理。</span></span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="ch05.html">
+            <span class="num">05</span>
+            <span>
+              <span class="t"><span class="en">Motion as Meaning</span><span class="zh">运动即意义</span></span>
+              <span class="d"><span class="en">Timing, easing, and attention—what animation says before it says anything.</span><span class="zh">时机、缓动与注意——动画在开口之前说了什么。</span></span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="ch06.html">
+            <span class="num">06</span>
+            <span>
+              <span class="t"><span class="en">Noise, Signals, and Trust</span><span class="zh">噪声、信号与信任</span></span>
+              <span class="d"><span class="en">Hierarchy, clutter, charts, and the visual construction of credibility.</span><span class="zh">层级、杂乱、图表与可信度的视觉建构。</span></span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="ch07.html">
+            <span class="num">07</span>
+            <span>
+              <span class="t"><span class="en">Scaling Beyond the Screen</span><span class="zh">超越屏幕的尺度</span></span>
+              <span class="d"><span class="en">Reading across devices, bodies, and abilities—from watch to wall.</span><span class="zh">跨设备、身体与能力的阅读——从手表到墙面。</span></span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="references.html">
+            <span class="num">↗</span>
+            <span>
+              <span class="t"><span class="en">References &amp; further reading</span><span class="zh">参考文献与延伸阅读</span></span>
+              <span class="d"><span class="en">The sources behind the claims, grouped by chapter.</span><span class="zh">支撑书中论断的文献，按章分组。</span></span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ol>
+    </section>
+
+    <section class="home-section colophon">
+      <p>
+        <span class="en"><strong>About the figures.</strong> All diagrams are original vector illustrations drawn for this book. Classical illusion figures are redrawn from the public domain. Photographs are not used; every image is a diagram, because the subject is the mechanism, not the brand.</span>
+        <span class="zh"><strong>关于插图。</strong>所有图表均为本书原创的矢量插图。经典视错觉图依据公有领域资料重绘。书中不使用照片；每一幅图都是示意图，因为本书关心的是机制，而非品牌。</span>
+      </p>
+      <p>
+        <span class="en"><strong>About the claims.</strong> Citations point to peer-reviewed work where it exists. Where the evidence is mixed, the text says so. Effect sizes in labs do not automatically transfer to the web; treat every number as a starting point for testing.</span>
+        <span class="zh"><strong>关于论断。</strong>凡有同行评审研究之处，均给出引用。证据不一致时，正文会明确说明。实验室中的效应量不会自动迁移到网页；请把每一个数字当作测试的起点，而非结论。</span>
+      </p>
+      <p>
+        <span class="en">Set in Arial. Built with native HTML, CSS, and JavaScript. No trackers. No cookies. Read in English or Chinese, or both.</span>
+        <span class="zh">字体为 Arial。使用原生 HTML、CSS 与 JavaScript 构建。无追踪器，无 Cookie。可读英文，可读中文，也可对照阅读。</span>
+      </p>
+    </section>
+  </main>
+
+  <script src="assets/book.js"></script>
+</body>
+</html>

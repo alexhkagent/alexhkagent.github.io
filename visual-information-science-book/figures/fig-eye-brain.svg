@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" role="img" aria-labelledby="t">
+  <title id="t">From eye to cortex: the optic nerve carries signals to V1, which splits into a ventral what pathway and a dorsal where-and-how pathway.</title>
+  <rect width="860" height="420" fill="#f7f5ef"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="40" y="42" font-size="12" letter-spacing="3" fill="#6b7074">FROM PHOTONS TO POSSIBILITIES</text>
+
+    <g>
+      <circle cx="120" cy="190" r="76" fill="#fffefb" stroke="#23262a" stroke-width="1.4"/>
+      <circle cx="120" cy="190" r="28" fill="#e6eaf0" stroke="#4f5f75"/>
+      <circle cx="120" cy="190" r="11" fill="#4f5f75"/>
+      <path d="M120 114 A76 76 0 0 1 196 190" fill="none" stroke="#7d5849" stroke-width="5" opacity="0.55"/>
+      <path d="M196 190 A76 76 0 0 1 120 266" fill="none" stroke="#7d5849" stroke-width="5" opacity="0.30"/>
+      <text x="120" y="292" text-anchor="middle" font-size="10.5" fill="#4c5358">retina: ~120M rods, ~6M cones</text>
+      <text x="120" y="308" text-anchor="middle" font-size="10.5" fill="#6b7074">the fovea sees detail; the periphery sees change</text>
+    </g>
+
+    <path d="M200 190 H252" stroke="#55675b" stroke-width="1.4" marker-end="url(#a2)"/>
+    <text x="226" y="180" text-anchor="middle" font-size="10" fill="#6b7074">optic nerve</text>
+
+    <path d="M268 150 C330 110 390 120 420 160 C450 200 430 260 380 272 C330 284 286 250 268 226 Z" fill="#e8ede7" stroke="#55675b" stroke-width="1.4"/>
+    <text x="344" y="196" text-anchor="middle" font-size="12" font-weight="bold" fill="#405044">V1</text>
+    <text x="344" y="214" text-anchor="middle" font-size="9.5" fill="#55675b">edges · orientation</text>
+    <text x="344" y="230" text-anchor="middle" font-size="9.5" fill="#55675b">contrast · motion</text>
+
+    <path d="M424 160 C500 130 560 120 610 132" fill="none" stroke="#4f5f75" stroke-width="1.4" marker-end="url(#a2)"/>
+    <path d="M424 248 C500 282 560 300 610 288" fill="none" stroke="#7d5849" stroke-width="1.4" marker-end="url(#a2)"/>
+
+    <rect x="620" y="96" width="200" height="76" rx="6" fill="#fffefb" stroke="#4f5f75"/>
+    <text x="636" y="122" font-size="10" letter-spacing="1.5" fill="#4f5f75">VENTRAL STREAM</text>
+    <text x="636" y="144" font-size="13" font-weight="bold" fill="#23262a">“What is it?”</text>
+    <text x="636" y="162" font-size="10" fill="#6b7074">objects, faces, words</text>
+
+    <rect x="620" y="250" width="200" height="76" rx="6" fill="#fffefb" stroke="#7d5849"/>
+    <text x="636" y="276" font-size="10" letter-spacing="1.5" fill="#7d5849">DORSAL STREAM</text>
+    <text x="636" y="298" font-size="13" font-weight="bold" fill="#23262a">“Where / how do I act?”</text>
+    <text x="636" y="316" font-size="10" fill="#6b7074">location, reach, gaze</text>
+
+    <text x="40" y="370" font-size="10.5" fill="#6b7074">Both streams are recurrent: higher areas send predictions back down, and the eye keeps moving.</text>
+    <text x="40" y="388" font-size="10.5" fill="#6b7074">Seeing is not a feed-forward photograph. It is a loop that is always already guessing.</text>
+  </g>
+  <defs>
+    <marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#55675b"/>
+    </marker>
+  </defs>
+</svg>
