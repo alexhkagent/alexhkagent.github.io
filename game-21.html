@@ -3,204 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="21 Points Game — a minimal blackjack table" />
-  <title>21 Points Game — 3Cats</title>
+  <meta name="description" content="21 Points Game — a Macau-inspired blackjack table with custom cat card backs" />
+  <title>3Cats Casino · Macau Nights</title>
   <style>
-    :root {
-      color-scheme: light;
-      --bg: #fafaf8;
-      --fg: #161616;
-      --line: rgba(22, 22, 22, 0.12);
-      --line-soft: rgba(22, 22, 22, 0.07);
-      --muted: rgba(22, 22, 22, 0.46);
-      --felt: #1f6f4a;
-      --felt-deep: #14432e;
-      --win: #1f6f4a;
-      --lose: #b3261e;
-      --card-w: clamp(56px, 12.5vw, 76px);
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { background: var(--bg); color: var(--fg); }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+:root { color-scheme: dark; --bg:#090f12; --fg:#fff2cf; --muted:#bbd4c8; --line:#b68d4e66; --line-soft:#c4a66533; --win:#f4cf70; --lose:#ff9f95; --card-w:clamp(66px,12vw,86px); --cat-back:url('Photo/Power.jpg'); }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { min-height:100vh; color:var(--fg); background:radial-gradient(ellipse at 50% 0,#343020 0,transparent 55%),repeating-linear-gradient(45deg,#ffffff02 0 1px,transparent 1px 16px),#090f12; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; }
+.topbar { max-width:1180px; margin:auto; padding:20px 28px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); }
+.topbar a { color:#edcc89; text-decoration:none; letter-spacing:.18em; font-size:12px; font-weight:700; }
+.balance { font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:#c9b999; }
+.balance strong { margin-left:10px; color:#f7dd9e; font-size:22px; font-variant-numeric:tabular-nums; }
+.table { width:calc(100% - 48px); max-width:1060px; margin:26px auto; padding:24px 52px 26px; border:7px solid #493124; border-radius:100px 100px 44px 44px; outline:1px solid #b99055; background:radial-gradient(ellipse at 50% 30%,#18785d 0,#09503f 47%,#06382e 100%); box-shadow:inset 0 0 0 2px #d0aa65,inset 0 0 0 10px #092d27,inset 0 0 80px #001d1580,0 25px 80px #0009; display:flex; flex-direction:column; gap:14px; position:relative; }
+.head { text-align:center; }
+.head .eyebrow { color:#e3c78c; font-size:10px; letter-spacing:.3em; text-transform:uppercase; }
+.head h1 { font-family:Georgia,'Times New Roman',serif; font-weight:400; font-size:clamp(32px,5vw,54px); letter-spacing:.07em; color:#ffe2a0; text-shadow:0 2px 16px #001c16; margin:5px 0; }
+.head p { color:#c9d7b8; font-size:10px; letter-spacing:.24em; text-transform:uppercase; }
+.table-rule { display:inline-block; margin-top:12px; border:1px solid #d4b47166; border-radius:20px; padding:5px 16px; color:#f4ddad; font-size:10px; letter-spacing:.12em; }
+.side { display:flex; flex-direction:column; align-items:center; gap:8px; }
+.side-label { text-transform:uppercase; font-size:10px; letter-spacing:.2em; color:#bcd4bc; display:flex; align-items:center; gap:10px; }
+.total { background:#002c25; border:1px solid #bca16077; border-radius:20px; min-width:34px; padding:3px 9px; color:#ffe4a9; text-align:center; font-size:12px; font-variant-numeric:tabular-nums; }
+.total.bust { color:var(--lose); } .total.good { color:var(--win); }
+.hand { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; min-height:calc(var(--card-w)*1.4); }
+.hand:empty::before { content:'♠  ♥  ♣  ♦'; font-family:Georgia,serif; font-size:30px; letter-spacing:15px; color:#d3d6ab23; }
+.card { width:var(--card-w); height:calc(var(--card-w)*1.4); flex-shrink:0; background:linear-gradient(145deg,#fffef7,#eae5d9); color:#172733; border:1px solid #fff9da; border-radius:9px; box-shadow:0 6px 12px #00130d66; padding:9px; display:flex; flex-direction:column; justify-content:space-between; position:relative; font-family:Georgia,serif; animation:deal .35s ease-out both; }
+.card .rank { font-size:23px; font-weight:700; line-height:1; z-index:1; } .card .suit { align-self:flex-end; font-size:24px; line-height:1; z-index:1; }
+.card:not(.back)::before { content:'♠'; position:absolute; inset:0; display:grid; place-items:center; font-size:38px; opacity:.1; }
+.card.red { color:#b32337; }
+.card.back { background-image:linear-gradient(0deg,#061d2677,transparent 55%),var(--cat-back); background-size:cover; background-position:center; border:3px solid #e7c782; }
+.card.back::after { content:'3 CATS'; position:absolute; bottom:5px; left:4px; right:4px; color:#fff1c4; font:8px Georgia,serif; letter-spacing:.12em; text-align:center; text-shadow:0 1px 3px #000; }
+@keyframes deal { from { opacity:0; transform:translateY(-12px) rotate(-4deg); } to { opacity:1; transform:none; } }
+.divider { height:1px; width:70%; align-self:center; background:linear-gradient(90deg,transparent,#c6b07577,transparent); }
+.message { text-align:center; min-height:22px; font-size:14px; color:#e6dfc6; } .message.win { color:var(--win); } .message.lose { color:var(--lose); }
+.controls { display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:9px; margin-top:6px; }
+button { font:600 12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; letter-spacing:.04em; cursor:pointer; border:1px solid #c6a96c99; border-radius:7px; padding:12px 22px; background:linear-gradient(#234e46,#123a33); color:#ffeac1; box-shadow:0 3px 0 #00291f; transition:filter .15s,transform .15s; }
+button:hover:not(:disabled) { filter:brightness(1.2); transform:translateY(-1px); }
+button:active:not(:disabled) { transform:translateY(1px); } button:disabled { opacity:.4; cursor:default; }
+button.primary { color:#fff0d2; background:linear-gradient(#c6424c,#8c182b); border-color:#f1a17e; padding-inline:30px; }
+#btn-double { background:linear-gradient(#ddbf76,#a98543); color:#251c0f; border-color:#f8db91; }
+.bet-box { display:flex; align-items:center; gap:8px; background:#002c25; border:1px solid #b99c61; border-radius:40px; padding:5px; }
+.bet-val { min-width:45px; text-align:center; font-size:15px; color:#ffe1a0; font-variant-numeric:tabular-nums; }
+.bet-box button { width:32px; height:32px; padding:0; border-radius:50%; background:repeating-conic-gradient(#f9e1af 0deg 12deg,#a62939 12deg 48deg,#f9e1af 48deg 60deg); border:2px solid #e4c38a; color:white; text-shadow:0 1px 3px black; box-shadow:inset 0 0 0 5px #9a293b; }
+.hint { text-align:center; font-size:10px; color:#c2d2bd; letter-spacing:.05em; } kbd { color:#f5d49b; font:inherit; }
+.customize { display:flex; align-items:center; justify-content:center; gap:7px; flex-wrap:wrap; padding-top:8px; }
+.customize > span { color:#c5d1bc; font-size:10px; letter-spacing:.12em; text-transform:uppercase; margin-right:4px; }
+.cat-choice { padding:4px 10px 4px 4px; display:flex; align-items:center; gap:6px; font-size:10px; background:#062f27; border-radius:30px; box-shadow:none; }
+.cat-choice img { width:24px; height:28px; border-radius:16px; object-fit:cover; }
+.cat-choice[aria-pressed='true'] { background:#d6b56c; color:#1f291c; border-color:#ffe5a7; }
+details { border-top:1px solid var(--line); padding-top:12px; color:#ccdacb; font-size:12px; line-height:1.7; } summary { cursor:pointer; color:#ebd5a4; font-size:11px; } details p { margin:9px 0; }
+.footer { text-align:center; font-size:9px; text-transform:uppercase; letter-spacing:.2em; color:#a39376; padding:0 20px 20px; }
+button:focus-visible,a:focus-visible,summary:focus-visible { outline:3px solid #ffe18a; outline-offset:4px; }
+@media(max-width:600px) { .topbar { padding:15px 18px; } .table { width:calc(100% - 20px); padding:22px 15px; margin:14px auto; border-radius:55px 55px 24px 24px; border-width:5px; gap:12px; } .controls { gap:7px; } button { padding:11px 14px; } button.primary { padding-inline:19px; } .head h1 { font-size:34px; } }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; } }
 
-    .topbar {
-      position: sticky; top: 0; z-index: 20;
-      height: 56px; display: flex; align-items: center;
-      padding: 0 1.25rem;
-      border-bottom: 1px solid var(--line-soft);
-      background: rgba(250, 250, 248, 0.82);
-      -webkit-backdrop-filter: blur(14px);
-      backdrop-filter: blur(14px);
-    }
-    .topbar a {
-      color: var(--fg); text-decoration: none;
-      font-size: 0.76rem; letter-spacing: 0.12em; text-transform: uppercase;
-      opacity: 0.5; transition: opacity 0.2s ease;
-    }
-    .topbar a:hover, .topbar a:focus-visible { opacity: 1; outline: none; }
-    .topbar .balance {
-      margin-left: auto;
-      font-family: "SF Mono", Menlo, Consolas, monospace;
-      font-size: 0.78rem; font-variant-numeric: tabular-nums;
-      letter-spacing: 0.04em; color: var(--muted);
-    }
-    .topbar .balance strong { color: var(--fg); font-weight: 500; }
-
-    .table {
-      flex: 1; width: 100%; max-width: 860px;
-      margin: 0 auto;
-      padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 4vw, 2rem) 2rem;
-      display: flex; flex-direction: column;
-      gap: clamp(1rem, 3vw, 1.75rem);
-    }
-
-    .head { text-align: center; }
-    .head h1 {
-      font-size: clamp(2rem, 6vw, 2.9rem);
-      font-weight: 300; letter-spacing: 0.02em; line-height: 1;
-    }
-    .head p {
-      margin-top: 0.55rem;
-      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .side { display: flex; flex-direction: column; gap: 0.7rem; }
-    .side-label {
-      display: flex; align-items: baseline; gap: 0.6rem;
-      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--muted);
-    }
-    .side-label .total {
-      font-family: "SF Mono", Menlo, Consolas, monospace;
-      font-size: 0.86rem; font-variant-numeric: tabular-nums;
-      color: var(--fg); letter-spacing: 0.02em;
-      transition: color 0.2s ease;
-    }
-    .side-label .total.bust { color: var(--lose); }
-    .side-label .total.good { color: var(--win); }
-
-    .hand {
-      display: flex; flex-wrap: wrap; gap: 0.55rem;
-      min-height: calc(var(--card-w) * 1.4);
-      align-items: center;
-    }
-
-    .card {
-      width: var(--card-w);
-      height: calc(var(--card-w) * 1.4);
-      background: #fff;
-      border: 1px solid rgba(22, 22, 22, 0.14);
-      border-radius: 7px;
-      box-shadow: 0 1px 2px rgba(22, 22, 22, 0.05), 0 6px 14px rgba(22, 22, 22, 0.06);
-      display: flex; flex-direction: column; justify-content: space-between;
-      padding: 0.42em 0.5em;
-      font-family: "SF Mono", Menlo, Consolas, monospace;
-      position: relative;
-      animation: deal 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-    .card .rank { font-size: clamp(0.92rem, 3vw, 1.05rem); font-weight: 500; line-height: 1; }
-    .card .suit { align-self: flex-end; font-size: clamp(0.95rem, 3.2vw, 1.15rem); line-height: 1; }
-    .card.red { color: var(--lose); }
-    .card.back {
-      background: linear-gradient(140deg, var(--felt), var(--felt-deep));
-      border-color: var(--felt-deep);
-    }
-    .card.back::after {
-      content: "";
-      position: absolute; inset: 5px;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      border-radius: 4px;
-    }
-    @keyframes deal {
-      from { opacity: 0; transform: translateY(-14px) rotate(-2deg); }
-      to   { opacity: 1; transform: translateY(0) rotate(0); }
-    }
-
-    .divider { height: 1px; background: var(--line-soft); margin: 0.25rem 0; }
-    .message {
-      text-align: center; min-height: 1.6em;
-      font-size: 0.92rem; letter-spacing: 0.01em;
-      color: var(--muted);
-      transition: color 0.25s ease;
-    }
-    .message.win { color: var(--win); }
-    .message.lose { color: var(--lose); }
-
-    .controls {
-      display: flex; flex-wrap: wrap; gap: 0.6rem;
-      justify-content: center; align-items: center;
-      padding-top: 0.5rem;
-    }
-    button {
-      font: inherit; font-size: 0.82rem; letter-spacing: 0.06em;
-      padding: 0.68rem 1.35rem;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: #fff; color: var(--fg);
-      cursor: pointer;
-      transition: background 0.18s ease, border-color 0.18s ease, opacity 0.18s ease, transform 0.12s ease;
-    }
-    button:hover:not(:disabled) { border-color: rgba(22, 22, 22, 0.35); }
-    button:active:not(:disabled) { transform: translateY(1px); }
-    button:focus-visible { outline: 2px solid rgba(22, 22, 22, 0.35); outline-offset: 2px; }
-    button:disabled { opacity: 0.32; cursor: default; }
-    button.primary { background: var(--fg); border-color: var(--fg); color: var(--bg); }
-    button.primary:hover:not(:disabled) { background: #000; border-color: #000; }
-
-    .bet-box {
-      display: flex; align-items: center; gap: 0.35rem;
-      padding: 0.28rem 0.4rem;
-      border: 1px solid var(--line); border-radius: 999px;
-      background: #fff;
-    }
-    .bet-box .bet-val {
-      min-width: 4.6em; text-align: center;
-      font-family: "SF Mono", Menlo, Consolas, monospace;
-      font-size: 0.8rem; font-variant-numeric: tabular-nums;
-    }
-    .bet-box button {
-      width: 30px; height: 30px; padding: 0;
-      border-radius: 50%; font-size: 0.95rem; line-height: 1;
-      border-color: transparent;
-      background: rgba(22, 22, 22, 0.045);
-    }
-
-    .hint {
-      text-align: center;
-      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: rgba(22, 22, 22, 0.3);
-      padding-top: 0.25rem;
-    }
-    .hint kbd {
-      font-family: "SF Mono", Menlo, Consolas, monospace;
-      font-size: 0.68rem; padding: 1px 5px;
-      border: 1px solid var(--line); border-radius: 3px;
-      letter-spacing: 0.04em;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .card { animation: none; }
-    }
+.ai-seats {display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.ai-seat {background:#002c254d;border:1px solid #c6a96c55;border-radius:14px;padding:12px;text-align:center;}
+.ai-seat h2 {font-size:13px;color:#ffe1a0;margin-bottom:4px;}
+.ai-seat p {font-size:10px;color:#ccdacb;margin:5px 0;min-height:14px;}
+.ai-seat .hand {--card-w:52px;min-height:74px;gap:6px;}
+.ai-seat .card {padding:6px;} .ai-seat .rank {font-size:17px;} .ai-seat .suit {font-size:17px;}
+.player-hand {padding:10px;border:1px solid transparent;border-radius:12px;}
+.player-hand.active {border-color:#ffe1a0;background:#eac67517;box-shadow:0 0 20px #eac67520;}
+.hand-label {font-size:11px;color:#ffe1a0;text-align:center;margin-bottom:8px;}
+#player-hand {align-items:flex-start;} #player-hand .hand {min-height:0;}
+@media(max-width:420px){.ai-seats{gap:7px;}.ai-seat{padding:8px 3px;}.ai-seat .hand{--card-w:42px;gap:3px;}.ai-seat .card{padding:4px;}}
   </style>
 </head>
 <body>
   <header class="topbar">
-    <a href="index.html">&larr; 3Cats</a>
-    <span class="balance">Chips <strong id="bankroll">1000</strong></span>
+    <a href="index.html">♠ 3CATS · HOME</a>
+    <span class="balance">Virtual chips <strong id="bankroll">1000</strong></span>
   </header>
 
   <main class="table">
     <div class="head">
-      <h1>21</h1>
-      <p>Blackjack &middot; Twenty-One</p>
+      <div class="eyebrow">澳門之夜 · Macau Nights</div>
+      <h1>3Cats Casino</h1>
+      <p>3Cats private table · Blackjack</p>
+      <div class="table-rule">BLACKJACK PAYS 3 : 2 &nbsp; ◆ &nbsp; DEALER STANDS ON 17</div>
     </div>
 
     <section class="side" aria-label="Dealer hand">
@@ -212,6 +91,7 @@
     <p class="message" id="message" aria-live="polite">Place your bet, then deal.</p>
     <div class="divider"></div>
 
+    <div id="ai-seats" class="ai-seats"></div>
     <section class="side" aria-label="Your hand">
       <div class="side-label">You <span class="total" id="player-total">&mdash;</span></div>
       <div class="hand" id="player-hand"></div>
@@ -220,377 +100,34 @@
     <div class="controls">
       <div class="bet-box">
         <button type="button" id="bet-down" aria-label="Decrease bet">&minus;</button>
-        <span class="bet-val" id="bet-val">25</span>
+        <span class="bet-val" id="bet-val">20</span>
         <button type="button" id="bet-up" aria-label="Increase bet">+</button>
       </div>
       <button type="button" class="primary" id="btn-deal">Deal</button>
       <button type="button" id="btn-hit">Hit</button>
       <button type="button" id="btn-stand">Stand</button>
       <button type="button" id="btn-double">Double</button>
+      <button type="button" id="btn-split">Split</button>
     </div>
 
-    <p class="hint"><kbd>H</kbd> hit &nbsp; <kbd>S</kbd> stand &nbsp; <kbd>D</kbd> double &nbsp; <kbd>Space</kbd> deal</p>
+    <p class="hint"><kbd>H</kbd> hit &nbsp; <kbd>S</kbd> stand &nbsp; <kbd>D</kbd> double &nbsp; <kbd>P</kbd> split &nbsp; <kbd>Space</kbd> deal</p>
+    <div class="customize" aria-label="Choose card back">
+      <span>Your lucky cat</span>
+      <button class="cat-choice" data-cat="18" aria-pressed="false"><img src="Photo/18.jpg" alt="" />18</button>
+      <button class="cat-choice" data-cat="Fortune" aria-pressed="false"><img src="Photo/Fortune.jpg" alt="" />Fortune</button>
+      <button class="cat-choice" data-cat="Power" aria-pressed="true"><img src="Photo/Power.jpg" alt="" />Power</button>
+    </div>
+    <details id="rules">
+      <summary>How to play &amp; table rules</summary>
+      <p>Get closer to 21 than the dealer without going over. Face cards count as 10; aces count as 1 or 11. Hit takes a card; Stand ends your turn. Double doubles your bet, gives exactly one card, and ends your turn.</p>
+      <p>Six decks. Dealer stands on all 17s, including soft 17. A two-card blackjack pays 3:2; other wins pay 1:1; ties return your bet. Dealer blackjack is checked immediately. Split an identical-rank pair once into two hands, with an equal extra bet. Play the highlighted hand first. Double after splitting is allowed. Split aces receive one card each; a split 21 pays 1:1. No insurance or surrender. Fortune and Power are rule-based AI players with independent balances; each bets 20 and plays against the dealer. Fortune stands on 16 or more; Power stands on 18 or more. They do not split or double. Players below 20 chips sit out until a new session. Bets use increments of 10 virtual chips; you start with 1,000. No real money.</p>
+      <p>For classroom exploration: compare hitting and standing on the same total when the dealer shows different cards.</p>
+      <button type="button" id="btn-reset">New session · 1,000 chips</button>
+    </details>
   </main>
 
-  <script>
-    (function () {
-      "use strict";
-
-      var SUITS = [["\u2660", false], ["\u2665", true], ["\u2666", true], ["\u2663", false]];
-      var RANKS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-      var DECKS = 6;
-      var START_BANKROLL = 1000;
-
-      var bankroll = START_BANKROLL;
-      var bet = 25;
-      var shoe = buildShoe();
-      var round = null;
-      var busy = false;
-
-      function $(id) { return document.getElementById(id); }
-      function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
-
-      /* ---------- Deck ---------- */
-
-      function buildShoe() {
-        var cards = [];
-        for (var d = 0; d < DECKS; d++) {
-          for (var s = 0; s < SUITS.length; s++) {
-            for (var r = 0; r < RANKS.length; r++) {
-              cards.push({ rank: RANKS[r], suit: SUITS[s][0], red: SUITS[s][1] });
-            }
-          }
-        }
-        for (var i = cards.length - 1; i > 0; i--) {
-          var j = Math.floor(Math.random() * (i + 1));
-          var t = cards[i]; cards[i] = cards[j]; cards[j] = t;
-        }
-        return cards;
-      }
-
-      function drawCard() {
-        if (shoe.length < 40) { shoe = buildShoe(); }
-        return shoe.pop();
-      }
-
-      function cardValue(card) {
-        if (card.rank === "A") return 11;
-        if (card.rank === "K" || card.rank === "Q" || card.rank === "J" || card.rank === "10") return 10;
-        return parseInt(card.rank, 10);
-      }
-
-      function handValue(hand) {
-        if (!hand || !hand.length) return 0;
-        var total = 0;
-        var aces = 0;
-        for (var i = 0; i < hand.length; i++) {
-          if (!hand[i]) continue;
-          total += cardValue(hand[i]);
-          if (hand[i].rank === "A") aces++;
-        }
-        while (total > 21 && aces > 0) { total -= 10; aces--; }
-        return total;
-      }
-
-      /* ---------- Rendering ----------
-         Rebuild each hand from state on every render so card faces can never
-         drift out of sync with the model. Only cards beyond the previously
-         shown count animate, so existing cards stay put visually.          */
-
-      function makeCard(card, faceDown) {
-        var el = document.createElement("div");
-        el.className = "card" + (card.red ? " red" : "") + (faceDown ? " back" : "");
-        if (!faceDown) {
-          var r = document.createElement("span");
-          r.className = "rank";
-          r.textContent = card.rank;
-          var s = document.createElement("span");
-          s.className = "suit";
-          s.textContent = card.suit;
-          el.appendChild(r);
-          el.appendChild(s);
-        }
-        return el;
-      }
-
-      function paintHand(container, hand, faceDownIndex, alreadyShown) {
-        container.innerHTML = "";
-        for (var i = 0; i < hand.length; i++) {
-          var el = makeCard(hand[i], i === faceDownIndex);
-          if (i < alreadyShown) { el.style.animation = "none"; }
-          else { el.style.animationDelay = ((i - alreadyShown) * 80) + "ms"; }
-          container.appendChild(el);
-        }
-      }
-
-      function setMessage(text, kind) {
-        var m = $("message");
-        m.textContent = text;
-        m.className = "message" + (kind ? " " + kind : "");
-      }
-
-      function render() {
-        var playerEl = $("player-hand");
-        var dealerEl = $("dealer-hand");
-        var pt = $("player-total");
-        var dt = $("dealer-total");
-
-        if (!round) {
-          playerEl.innerHTML = "";
-          dealerEl.innerHTML = "";
-          pt.textContent = "\u2014";
-          dt.textContent = "\u2014";
-          pt.className = "total";
-          dt.className = "total";
-          syncUI();
-          return;
-        }
-
-        paintHand(playerEl, round.player, -1, round.shown.player);
-        paintHand(dealerEl, round.dealer, round.dealerHidden ? 1 : -1, round.shown.dealer);
-        round.shown.player = round.player.length;
-        round.shown.dealer = round.dealer.length;
-
-        var p = handValue(round.player);
-        pt.textContent = String(p);
-        pt.className = "total" + (p > 21 ? " bust" : (p === 21 ? " good" : ""));
-
-        if (round.dealerHidden) {
-          dt.textContent = (round.dealer.length ? handValue([round.dealer[0]]) : 0) + " +";
-          dt.className = "total";
-        } else {
-          var d = handValue(round.dealer);
-          dt.textContent = String(d);
-          dt.className = "total" + (d > 21 ? " bust" : "");
-        }
-
-        syncUI();
-      }
-
-      function syncUI() {
-        $("bankroll").textContent = String(bankroll);
-        $("bet-val").textContent = String(bet);
-
-        var inRound = !!round && round.phase === "player";
-        var settled = !!round && round.phase === "settled";
-        var broke = bankroll < 5;
-
-        $("btn-deal").textContent = broke ? "Restart" : (settled ? "Next Round" : "Deal");
-        $("btn-deal").disabled = busy || inRound;
-        $("btn-hit").disabled = busy || !inRound;
-        $("btn-stand").disabled = busy || !inRound;
-        $("btn-double").disabled = busy || !inRound || !round || round.player.length !== 2 || bankroll < round.bet;
-        $("bet-down").disabled = busy || inRound || bet <= 5;
-        $("bet-up").disabled = busy || inRound || bet >= bankroll;
-      }
-
-      function adjustBet(delta) {
-        if (busy || (round && round.phase === "player")) return;
-        bet = Math.min(bankroll, Math.max(5, bet + delta));
-        syncUI();
-      }
-
-      /* ---------- Game flow ---------- */
-
-      async function deal() {
-        if (busy) return;
-        if (round && round.phase === "player") return;
-        if (bankroll < 5) { resetBankroll(); return; }
-        if (bet > bankroll) { bet = bankroll; }
-        if (bankroll < bet) { setMessage("Not enough chips for that bet.", "lose"); return; }
-
-        busy = true;
-        bankroll -= bet;
-        round = {
-          player: [],
-          dealer: [],
-          bet: bet,
-          phase: "player",
-          dealerHidden: true,
-          shown: { player: 0, dealer: 0 }
-        };
-        setMessage("");
-        render();
-
-        await sleep(80);
-        round.player.push(drawCard());
-        round.dealer.push(drawCard());
-        render();
-
-        await sleep(220);
-        round.player.push(drawCard());
-        round.dealer.push(drawCard());
-        render();
-        await sleep(360);
-
-        var p = handValue(round.player);
-        var d = handValue(round.dealer);
-
-        if (p === 21 || d === 21) {
-          round.dealerHidden = false;
-          render();
-          await sleep(420);
-          if (p === 21 && d === 21) {
-            finishRound("push", "Both blackjack \u2014 push.");
-          } else if (p === 21) {
-            finishRound("blackjack", "Blackjack! Pays 3:2.");
-          } else {
-            finishRound("lose", "Dealer has blackjack.");
-          }
-          return;
-        }
-
-        busy = false;
-        setMessage("Your move.");
-        syncUI();
-      }
-
-      function canAct() {
-        return !!round && round.phase === "player" && !busy;
-      }
-
-      async function hit() {
-        if (!canAct()) return;
-        busy = true;
-        syncUI();
-        round.player.push(drawCard());
-        render();
-        await sleep(360);
-
-        var total = handValue(round.player);
-        if (total > 21) {
-          round.dealerHidden = false;
-          render();
-          await sleep(420);
-          finishRound("lose", "Bust with " + total + ".");
-        } else if (total === 21) {
-          setMessage("21 \u2014 standing.");
-          await sleep(320);
-          await dealerTurn();
-        } else {
-          busy = false;
-          syncUI();
-        }
-      }
-
-      async function stand() {
-        if (!canAct()) return;
-        busy = true;
-        syncUI();
-        await dealerTurn();
-      }
-
-      async function doubleDown() {
-        if (!canAct() || round.player.length !== 2 || bankroll < round.bet) return;
-        busy = true;
-        bankroll -= round.bet;
-        round.bet *= 2;
-        syncUI();
-        round.player.push(drawCard());
-        render();
-        await sleep(420);
-
-        if (handValue(round.player) > 21) {
-          round.dealerHidden = false;
-          render();
-          await sleep(420);
-          finishRound("lose", "Double bust with " + handValue(round.player) + ".");
-          return;
-        }
-        await dealerTurn();
-      }
-
-      async function dealerTurn() {
-        round.phase = "dealer";
-        round.dealerHidden = false;
-        setMessage("Dealer plays\u2026");
-        render();
-        await sleep(520);
-
-        while (handValue(round.dealer) < 17) {
-          round.dealer.push(drawCard());
-          render();
-          await sleep(600);
-        }
-
-        var d = handValue(round.dealer);
-        var p = handValue(round.player);
-
-        if (d > 21) {
-          finishRound("win", "Dealer busts with " + d + " \u2014 you win.");
-        } else if (p > d) {
-          finishRound("win", "You " + p + " \u2014 dealer " + d + ". You win.");
-        } else if (p < d) {
-          finishRound("lose", "You " + p + " \u2014 dealer " + d + ". Dealer wins.");
-        } else {
-          finishRound("push", "Push at " + p + " \u2014 bet returned.");
-        }
-      }
-
-      function finishRound(kind, text) {
-        round.phase = "settled";
-        round.dealerHidden = false;
-
-        var b = round.bet;
-        var msgKind = "";
-
-        if (kind === "blackjack") {
-          bankroll += Math.round(b * 2.5);
-          msgKind = "win";
-        } else if (kind === "win") {
-          bankroll += b * 2;
-          msgKind = "win";
-        } else if (kind === "push") {
-          bankroll += b;
-        }
-
-        setMessage(text, msgKind);
-        busy = false;
-        render();
-
-        if (bankroll < 5) {
-          setMessage(text + " Out of chips \u2014 press Next Round to restart with " + START_BANKROLL + ".", msgKind);
-        }
-      }
-
-      function resetBankroll() {
-        bankroll = START_BANKROLL;
-        bet = 25;
-        round = null;
-        busy = false;
-        shoe = buildShoe();
-        setMessage("Fresh shoe. Place your bet, then deal.");
-        render();
-      }
-
-      /* ---------- Events ---------- */
-
-      $("btn-deal").addEventListener("click", function () {
-        if (bankroll < 5) { resetBankroll(); return; }
-        deal();
-      });
-      $("btn-hit").addEventListener("click", function () { hit(); });
-      $("btn-stand").addEventListener("click", function () { stand(); });
-      $("btn-double").addEventListener("click", function () { doubleDown(); });
-      $("bet-down").addEventListener("click", function () { adjustBet(-25); });
-      $("bet-up").addEventListener("click", function () { adjustBet(25); });
-
-      document.addEventListener("keydown", function (e) {
-        if (e.metaKey || e.ctrlKey || e.altKey) return;
-        if (e.target && /^(INPUT|TEXTAREA|SELECT|BUTTON)$/.test(e.target.tagName)) return;
-
-        var key = e.key.toLowerCase();
-        if (key === "h") { hit(); }
-        else if (key === "s") { stand(); }
-        else if (key === "d") { doubleDown(); }
-        else if (e.code === "Space" || key === "enter") {
-          e.preventDefault();
-          if (bankroll < 5) { resetBankroll(); } else { deal(); }
-        }
-      });
-
-      render();
-    })();
-  </script>
+  <footer class="footer">18 · Fortune · Power &nbsp; / &nbsp; A little luck. A little strategy. &nbsp; / &nbsp; Virtual chips only</footer>
+  <script src="casino/game.js?v=1"></script>
+  <script src="casino/ui.js?v=1"></script>
 </body>
 </html>
