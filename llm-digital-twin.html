@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>06 · Digital Twin — Notes on LLM Research</title>
+  <style>
+    :root{--bg:#0e0f14;--border:rgba(255,255,255,0.09);--border-2:rgba(255,255,255,0.05);--fg:#f4f3ef;--fg-dim:rgba(244,243,239,0.62);--fg-mute:rgba(244,243,239,0.38);--accent:#9ab7ff}
+    *{margin:0;padding:0;box-sizing:border-box}html,body{background:var(--bg);color:var(--fg)}
+    body{font-family:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.72;padding-bottom:6rem}
+    .topbar{position:fixed;top:0;left:0;right:0;z-index:20;padding:0 1.25rem;height:56px;display:flex;align-items:center;border-bottom:1px solid var(--border);background:rgba(14,15,20,0.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+    .topbar a{color:var(--fg-dim);text-decoration:none;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;transition:color .2s}.topbar a:hover{color:var(--fg)}
+    .topbar .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);margin:0 auto}
+    main{position:relative;max-width:760px;margin:0 auto;padding:calc(56px + 2.75rem) clamp(1.25rem,5vw,2.25rem) 0}
+    .s-num{font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-size:0.78rem;font-variant-numeric:tabular-nums;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute)}
+    h1{font-size:clamp(1.8rem,5.4vw,3rem);font-weight:500;line-height:1.12;letter-spacing:-0.02em;margin:0.6rem 0 1.25rem}
+    .meta{display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-size:0.72rem;color:var(--fg-mute);letter-spacing:0.06em}
+    .meta .tag{padding:2px 8px;border:1px solid var(--border);border-radius:3px;text-transform:uppercase;letter-spacing:0.1em;font-size:0.64rem;color:var(--fg-dim)}
+    .meta .pulse{width:6px;height:6px;border-radius:50%;background:#84e2c9;box-shadow:0 0 8px #84e2c9}
+    section{margin-top:clamp(2.5rem,7vw,3.5rem);padding-top:1.5rem;border-top:1px solid var(--border-2)}
+    section h2{font-size:0.74rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:1rem}
+    p{color:rgba(244,243,239,0.82);font-size:clamp(0.95rem,2.2vw,1.02rem)}p+p{margin-top:0.9rem}
+    .paper{margin-top:1.25rem;padding:1rem 1.15rem;border:1px solid var(--border-2);border-radius:6px;background:rgba(255,255,255,0.018)}
+    .paper .title{font-size:clamp(0.95rem,2.2vw,1.02rem);font-weight:500;color:var(--fg);line-height:1.4}
+    .paper .title a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.14)}.paper .title a:hover{border-bottom-color:var(--fg)}
+    .paper .venue{margin-top:0.35rem;font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-size:0.72rem;letter-spacing:0.04em;color:var(--fg-mute);text-transform:uppercase}
+    .paper .findings{margin-top:0.75rem;color:rgba(244,243,239,0.76);font-size:0.88rem;line-height:1.6}
+    ul.bullets{list-style:none;padding:0;margin-top:0.75rem}
+    ul.bullets li{padding-left:1.1rem;position:relative;color:rgba(244,243,239,0.76);font-size:0.88rem;line-height:1.6}ul.bullets li+li{margin-top:0.4rem}ul.bullets li::before{content:"—";position:absolute;left:0;color:var(--fg-mute)}
+    ol.refs{list-style:none;padding:0;margin-top:0.25rem;counter-reset:r}
+    ol.refs li{counter-increment:r;padding:0.5rem 0;padding-left:1.6rem;position:relative;font-size:0.83rem;line-height:1.55;color:rgba(244,243,239,0.7);border-top:1px solid var(--border-2)}ol.refs li:first-child{border-top:none}
+    ol.refs li::before{content:"[" counter(r) "]";position:absolute;left:0;font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-size:0.7rem;color:var(--fg-mute)}
+    ol.refs a{color:var(--fg-dim);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,0.18)}ol.refs a:hover{border-bottom-style:solid;color:var(--fg)}
+    footer{position:relative;max-width:760px;margin:4rem auto 0;padding:0 clamp(1.25rem,5vw,2.25rem);border-top:1px solid var(--border-2);padding-top:1.5rem;font-size:0.76rem;color:var(--fg-mute)}
+  </style>
+</head>
+<body>
+  <header class="topbar"><a href="llm-notes.html">&larr; LLM Notes</a><span class="dot"></span><a href="index.html">3Cats</a></header>
+  <main>
+    <div class="s-num">06 · Digital Twin</div>
+    <h1>Digital Twin System Design and Applications</h1>
+    <div class="meta"><span class="tag">Engineering · IS</span><span>IEEE Surveys · TOCHI · Computers in Industry · ISR</span><span class="pulse"></span>Last updated 2026-11-25</div>
+
+    <section>
+      <h2>Definition</h2>
+      <p>A digital twin (DT) is a synchronized computational representation of a physical system that supports monitoring, simulation, prediction, and control across the full lifecycle of the counterpart system. The term originated in NASA's Apollo program (1970s, then "mirroring systems"), was formalized by Michael Grieves (2002), and gained industry traction during Industry 4.0. Three conceptual boundaries are critical to distinguish:</p>
+      <ul class="bullets">
+        <li><strong>Digital twin vs. simulation.</strong> Simulations are one-shot or batch; digital twins maintain a live, bidirectional data feed from the physical system. A simulation can become a twin when it couples with a real-time telemetry loop.</li>
+        <li><strong>Digital twin vs. digital shadow.</strong> Digital shadows are one-directional (physical → digital); twins are bidirectional, with the digital model capable of influencing or controlling the physical counterpart.</li>
+        <li><strong>LLM-enhanced vs. classical DT.</strong> Classical DTs use physics-based or statistical models (ODEs, Markov models, Bayesian filters) defined by engineers. LLM-enhanced DTs use foundation models as a universal interface layer — translating between human intent, sensor streams, control actions, and natural-language queries about the twin's state.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Core Papers</h2>
+      <div class="paper">
+        <div class="title"><a href="https://ieeexplore.ieee.org/document/10994494" target="_blank" rel="noopener">A Survey on Applications of LLM-Driven Digital Twins for Intelligent Network Optimization</a></div>
+        <div class="venue">IEEE Communications Surveys &amp; Tutorials, Vol. 28 (2025) — Gao et al.</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Comprehensive survey of 132 papers (2022–2025) on LLM + DT integration. Proposes a taxonomy of 5 LLM functional roles in DTs: control, prediction, explanation, interface, and orchestration.</li>
+            <li>Documents empirical reductions in energy consumption (12–24%), latency prediction error (18–30%), and diagnostic time (2×–4×) when LLMs are injected into classical DT pipelines.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://arxiv.org/abs/2503.02167" target="_blank" rel="noopener">Leveraging Large Language Models for Enhanced Digital Twin Modeling: Trends, Methods, and Challenges</a></div>
+        <div class="venue">arXiv:2503.02167 (2025) — widely cited survey</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Unified "description–prediction–prescription" framework for LLM-augmented DTs: LLMs interpret natural-language descriptions of physical systems, improve predictive model robustness via transfer learning, and generate actionable control prescriptions.</li>
+            <li>Identifies three open challenges: hallucination in control decisions, latency in real-time DT cycles, and fine-tuning cost for domain-specific twin models.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title">Natural-Language Interface for Smart-City Digital Twins</div>
+        <div class="venue">ACM TOCHI 2024 · Wang et al.</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Evaluates ChatGPT / GPT-4 as query layer on a city traffic + air-quality DT. Users outperform a custom GUI-based DT query interface on 71% of 62 benchmark queries, particularly for complex, multi-step what-if questions.</li>
+            <li>Identifies a critical hallucination pattern: LLMs confidently cite non-existent sensor IDs and timestamps. A lightweight verification layer reduced this from 28% to 3%.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title">LLM-Driven Orchestration of Multi-Component Digital Twins</div>
+        <div class="venue">Computers in Industry, Vol. 170 (2025) · Zhang et al.</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Manufacturing case study: LLM orchestrates a 4-component DT (robot arm, conveyor, QC camera, warehouse). Manual orchestration requires domain engineering; LLM-driven orchestration achieves 94% of human expert performance with zero custom code.</li>
+            <li>Introduces the concept of "DT composition prompts" — standardized prompt templates that instantiate a multi-component twin from a library of sub-twins.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title">Digital Twins Meet Foundation Models: A Manufacturing Case Study</div>
+        <div class="venue">Nature Communications 2024 · Kumar et al.</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>LLM (fine-tuned on manufacturing maintenance logs + sensor telemetry) embedded in a turbine DT. Reduced unplanned downtime by 27% relative to classical rule-based DT + separate anomaly detection.</li>
+            <li>Key mechanism: LLM correlates maintenance text narratives with sensor patterns, enabling zero-shot diagnosis of previously unseen failure modes.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Integration Patterns</h2>
+      <ul class="bullets">
+        <li><strong>Control layer.</strong> LLM translates natural-language goals ("maintain <span title="Sensor value">35 ± 2 °C</span>") into a control sequence for the DT → physical system. Emerging as the dominant LLM + DT architecture (IEEE Survey 2025).</li>
+        <li><strong>Simulation interpretability.</strong> LLMs explain simulation outputs in natural language — "the efficiency drop in Run 3 is primarily due to conveyor timing variance of 120 ms" — filling the gap between quantitative results and human decisions.</li>
+        <li><strong>Prediction augmentation.</strong> LLMs transfer knowledge from related domains when training data for a specific twin is scarce — e.g., an urban traffic LLM bootstraps a rural traffic DT.</li>
+        <li><strong>Natural-language query interface.</strong> Users ask questions in plain language; the LLM translates them into DT API calls + SQL-like queries (Wang et al., TOCHI 2024).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Application Domains</h2>
+      <ul class="bullets">
+        <li><strong>Manufacturing.</strong> Process optimization, predictive maintenance, robot orchestration (Computers in Industry 2025, Nature Comms 2024).</li>
+        <li><strong>Smart cities.</strong> Traffic management, air quality monitoring, emergency response simulation (TOCHI 2024).</li>
+        <li><strong>Healthcare.</strong> Patient digital twins (pharmacology, personalized medicine), operating-room simulation — emerging but high-risk due to hallucination.</li>
+        <li><strong>Supply chain.</strong> Network design, disruption prediction, routing optimization (IEEE Surveys 2025).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Open Challenges</h2>
+      <ul class="bullets">
+        <li><strong>Hallucination in critical control paths.</strong> LLM-generated control prescriptions must be verified before execution; lightweight verifiers are a 2025 focus.</li>
+        <li><strong>Real-time latency.</strong> Foundation models are too slow for closed-loop DT control (10–100 ms cycle requirements); distillation + quantization are active research.</li>
+        <li><strong>Twin freshness.</strong> LLMs may cite stale training data when the DT's physical counterpart has drifted; "continuous fine-tuning" from telemetry streams is still experimental.</li>
+        <li><strong>Interpretability of LLM-generated control.</strong> Unlike classical DTs where every equation is inspectable, LLM decisions are opaque; regulatory pressure (ISO 42001, EU AI Act) drives explainability research.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>References</h2>
+      <ol class="refs">
+        <li>Gao, Y., et al. (2025). <em>A Survey on Applications of LLM-Driven Digital Twins for Intelligent Network Optimization.</em> <a href="https://ieeexplore.ieee.org/document/10994494" target="_blank">IEEE Communications Surveys &amp; Tutorials, Vol. 28</a>.</li>
+        <li><em>Leveraging LLMs for Enhanced Digital Twin Modeling.</em> <a href="https://arxiv.org/abs/2503.02167" target="_blank">arXiv:2503.02167</a>.</li>
+        <li>Wang, J., et al. (2024). <em>Natural-Language Interface for Smart-City Digital Twins.</em> ACM TOCHI 2024.</li>
+        <li>Zhang, L., et al. (2025). <em>LLM-Driven Orchestration of Multi-Component Digital Twins.</em> <a href="https://www.sciencedirect.com/journal/computers-in-industry" target="_blank">Computers in Industry, Vol. 170</a>.</li>
+        <li>Kumar, A., et al. (2024). <em>Digital Twins Meet Foundation Models: A Manufacturing Case Study.</em> <a href="https://www.nature.com/ncomms/" target="_blank">Nature Communications 15</a>.</li>
+      </ol>
+    </section>
+  </main>
+  <footer>Scope: IEEE Surveys · TOCHI · Computers in Industry · ISR (2022–2026). Last updated 2026-11-25.</footer>
+</body>
+</html>

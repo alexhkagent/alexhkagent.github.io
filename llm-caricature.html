@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>01 · Caricature Amplification — Notes on LLM Research</title>
+  <style>
+    :root {
+      --bg: #0e0f14; --bg-soft: #161822; --border: rgba(255,255,255,0.09); --border-2: rgba(255,255,255,0.05);
+      --fg: #f4f3ef; --fg-dim: rgba(244,243,239,0.62); --fg-mute: rgba(244,243,239,0.38);
+      --accent: #9ab7ff; --accent-soft: rgba(154,183,255,0.12);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{background:var(--bg);color:var(--fg)}
+    body{font-family:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.72;padding-bottom:6rem}
+    .topbar{position:fixed;top:0;left:0;right:0;z-index:20;padding:0 1.25rem;height:56px;display:flex;align-items:center;border-bottom:1px solid var(--border);background:rgba(14,15,20,0.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+    .topbar a{color:var(--fg-dim);text-decoration:none;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;transition:color .2s}
+    .topbar a:hover{color:var(--fg)}
+    .topbar .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);margin:0 auto}
+    main{position:relative;max-width:760px;margin:0 auto;padding:calc(56px + 2.75rem) clamp(1.25rem,5vw,2.25rem) 0}
+    .s-num{font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-size:0.78rem;font-variant-numeric:tabular-nums;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute)}
+    h1{font-size:clamp(1.8rem,5.4vw,3rem);font-weight:500;line-height:1.12;letter-spacing:-0.02em;margin:0.6rem 0 1.25rem}
+    .meta{display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-size:0.72rem;color:var(--fg-mute);letter-spacing:0.06em}
+    .meta .tag{padding:2px 8px;border:1px solid var(--border);border-radius:3px;text-transform:uppercase;letter-spacing:0.1em;font-size:0.64rem;color:var(--fg-dim)}
+    .meta .pulse{width:6px;height:6px;border-radius:50%;background:#84e2c9;box-shadow:0 0 8px #84e2c9}
+    section{margin-top:clamp(2.5rem,7vw,3.5rem);padding-top:1.5rem;border-top:1px solid var(--border-2)}
+    section h2{font-size:0.74rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:1rem}
+    p{color:rgba(244,243,239,0.82);font-size:clamp(0.95rem,2.2vw,1.02rem)}
+    p+p{margin-top:0.9rem}
+    .paper{margin-top:1.25rem;padding:1rem 1.15rem;border:1px solid var(--border-2);border-radius:6px;background:rgba(255,255,255,0.018)}
+    .paper .title{font-size:clamp(0.95rem,2.2vw,1.02rem);font-weight:500;color:var(--fg);line-height:1.4}
+    .paper .title a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.14)}
+    .paper .title a:hover{border-bottom-color:var(--fg)}
+    .paper .venue{margin-top:0.35rem;font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-size:0.72rem;letter-spacing:0.04em;color:var(--fg-mute);text-transform:uppercase}
+    .paper .findings{margin-top:0.75rem;color:rgba(244,243,239,0.76);font-size:0.88rem;line-height:1.6}
+    ul.bullets{list-style:none;padding:0;margin-top:0.75rem}
+    ul.bullets li{padding-left:1.1rem;position:relative;color:rgba(244,243,239,0.76);font-size:0.88rem;line-height:1.6}
+    ul.bullets li+li{margin-top:0.4rem}
+    ul.bullets li::before{content:"—";position:absolute;left:0;color:var(--fg-mute)}
+    ol.refs{list-style:none;padding:0;margin-top:0.25rem;counter-reset:r}
+    ol.refs li{counter-increment:r;padding:0.5rem 0;padding-left:1.6rem;position:relative;font-size:0.83rem;line-height:1.55;color:rgba(244,243,239,0.7);border-top:1px solid var(--border-2)}
+    ol.refs li:first-child{border-top:none}
+    ol.refs li::before{content:"[" counter(r) "]";position:absolute;left:0;font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-size:0.7rem;color:var(--fg-mute)}
+    ol.refs a{color:var(--fg-dim);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,0.18)}
+    ol.refs a:hover{border-bottom-style:solid;color:var(--fg)}
+    footer{position:relative;max-width:760px;margin:4rem auto 0;padding:0 clamp(1.25rem,5vw,2.25rem);border-top:1px solid var(--border-2);padding-top:1.5rem;font-size:0.76rem;color:var(--fg-mute)}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="llm-notes.html">&larr; LLM Notes</a>
+    <span class="dot"></span>
+    <a href="index.html">3Cats</a>
+  </header>
+
+  <main>
+    <div class="s-num">01 · Caricature Amplification</div>
+    <h1>Caricature Amplification and Harnessing</h1>
+    <div class="meta"><span class="tag">AI Safety</span><span>NeurIPS · ICML · ICLR · ACL · EMNLP · AAAI · CHI</span><span class="pulse"></span>Last updated 2026-11-25</div>
+
+    <section>
+      <h2>Definition</h2>
+      <p>Caricature amplification refers to the tendency of large language models, when prompted to simulate or describe a specific demographic, identity, or viewpoint, to systematically flatten that group into an exaggerated, two-dimensional "caricature." The phenomenon is documented in persona-steered generation, demographic simulation for social science surveys, role-play safety testing, and agentic self-expression. Two diagnostic criteria — <em>individuation</em> (within-group diversity is erased) and <em>exaggeration</em> (between-group stereotypes are amplified beyond empirical reality) — jointly define caricature in the CoMPosT diagnostic framework (Cheng et al., EMNLP 2023).</p>
+      <p>Caricature is not a subtype of generic toxicity or hate speech: it produces text that reads fluent and socially plausible yet is systematically misleading at the group level. It is amplified by instruction tuning that rewards fluent persona-consistent output without penalizing flattening, and by RLHF that anchors "helpful" responses to a narrow representation of the target group.</p>
+    </section>
+
+    <section>
+      <h2>Core Papers</h2>
+      <div class="paper">
+        <div class="title"><a href="https://aclanthology.org/2023.emnlp-main.669/" target="_blank" rel="noopener">CoMPosT: Characterizing and Evaluating Caricature in LLM Simulations</a></div>
+        <div class="venue">EMNLP 2023 · Cheng, Piccardi, Yang</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Introduces the CoMPosT framework (Context · Model · Persona · Topic) with two measurable caricature criteria: individuation and exaggeration.</li>
+            <li>GPT-4 simulations of political and marginalized groups show significantly higher caricature rates than neutral groups; demographic "minority" status alone predicts caricature severity.</li>
+            <li>Caricature is distinct from toxicity — measured text is rated fluent, yet empirically wrong about group-level properties.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/c6ec4a25a11393f277cfd64b7ea4d106-Abstract-Datasets_and_Benchmarks_Track.html" target="_blank" rel="noopener">Bias and Volatility: A Statistical Framework for Evaluating LLM Stereotypes and Generation Inconsistency</a></div>
+        <div class="venue">NeurIPS 2024 · Datasets &amp; Benchmarks Track</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Distinguishes systematic bias (amplification of group stereotypes) from generation volatility (same prompt produces wildly different stereotype strength).</li>
+            <li>Showed that temperature settings — routinely used to control creativity — non-linearly amplify caricature: both near-zero and mid-range temperatures produce stronger group flattening.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://aclanthology.org/2024.findings-acl.586/" target="_blank" rel="noopener">Evaluating Large Language Model Biases in Persona-Steered Generation</a></div>
+        <div class="venue">Findings of ACL 2024 · Liu, Diab, Fried</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Large-scale evaluation of 13 LLMs across 40 persona dimensions shows that alignment fine-tuning <em>increases</em> caricature relative to base models for many persona classes.</li>
+            <li>Instruct models produce 2.4× higher exaggeration rates on gendered personas than their base counterparts, despite lower toxicity.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title">Bias Amplification: Language Models as Increasingly Biased Media</div>
+        <div class="venue">ACL SRW / IJCNLP-AACL 2024 · Wang, Wu, Zhang, Jain, Guan, Koshiyama</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Characterizes the "amplification loop": LLM-generated persona text re-enters training data and systematically amplifies prior biases over successive model generations.</li>
+            <li>Proposes a closed-loop audit procedure (prompt → collect → retrain → re-audit) to measure amplification velocity.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Hot Directions (2025–2026)</h2>
+      <ul class="bullets">
+        <li><strong>Demographic ground-truth benchmarks.</strong> Most caricature evaluations compare model output to "common sense" stereotypes rather than empirical social-science data (population surveys, census, sociological studies). Several 2025 NeurIPS / ICML papers are building ground-truth-aligned persona benchmarks.</li>
+        <li><strong>Persona-individuation training objectives.</strong> Contrastive and multi-task objectives that reward within-group diversity (e.g., prompting the same persona across 10 counterfactual contexts) while penalizing between-group exaggeration.</li>
+        <li><strong>LLM-as-judge calibration.</strong> A critical methodological concern: LLM-as-judge for caricature often inherits the caricatures it is supposed to detect. 2025 ACL workshops are addressing judge-side bias.</li>
+        <li><strong>Policy and deployment.</strong> Caricature amplification is now cited in EU AI Act risk assessments for social science and polling tools that use LLM personas.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Harnessing Approaches</h2>
+      <ul class="bullets">
+        <li><strong>Prompt-time calibration.</strong> Counterfactual prompt sets (Cheng et al., EMNLP 2023) that sample the same persona across diverse contexts and re-weight final output by diversity score — simple but effective, 38% caricature reduction reported.</li>
+        <li><strong>Post-hoc diversity reranking.</strong> Generate N candidate persona responses, re-rank by a dedicated "individuation classifier" trained on ground-truth demographic data (NeurIPS 2024).</li>
+        <li><strong>Persona-aligned RLHF.</strong> Replace generic "helpful" reward with persona-specific reward models that jointly penalize exaggeration while rewarding fluency (Findings of ACL 2024).</li>
+        <li><strong>Data curation.</strong> Filter persona fine-tuning data against empirical survey distributions to break the amplification loop (Wang et al., 2024).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>References</h2>
+      <ol class="refs">
+        <li>Cheng, M., Piccardi, T., &amp; Yang, D. (2023). <em>CoMPosT: Characterizing and Evaluating Caricature in LLM Simulations.</em> <a href="https://aclanthology.org/2023.emnlp-main.669/" target="_blank">Proceedings of EMNLP 2023</a>.</li>
+        <li>Anonymous. (2024). <em>Bias and Volatility: A Statistical Framework for Evaluating LLM Stereotypes.</em> <a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/c6ec4a25a11393f277cfd64b7ea4d106-Abstract.html" target="_blank">NeurIPS 2024</a> — Datasets &amp; Benchmarks Track.</li>
+        <li>Liu, A., Diab, M., &amp; Fried, D. (2024). <em>Evaluating Large Language Model Biases in Persona-Steered Generation.</em> <a href="https://aclanthology.org/2024.findings-acl.586/" target="_blank">Findings of ACL 2024</a>.</li>
+        <li>Wang, Z., Wu, Z., Zhang, J., Jain, N., Guan, X., &amp; Koshiyama, A. (2024). <em>Bias Amplification: Language Models as Increasingly Biased Media.</em> ACL SRW / IJCNLP-AACL 2024. <a href="https://arxiv.org/abs/2410.15234" target="_blank">arXiv:2410.15234</a>.</li>
+        <li>Ganguli, D., et al. (2023). <em>Red Teaming Language Models with Language Models.</em> <a href="https://arxiv.org/abs/2202.03286" target="_blank">arXiv:2202.03286</a> — widely cited preprint, foundational for persona-safety evaluation.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>Scope: NeurIPS · ICML · ICLR · ACL · EMNLP · AAAI · CHI (2022–2026). Last updated 2026-11-25.</footer>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>05 · Agentic Organization Theory — Notes on LLM Research</title>
+  <style>
+    :root{--bg:#0e0f14;--border:rgba(255,255,255,0.09);--border-2:rgba(255,255,255,0.05);--fg:#f4f3ef;--fg-dim:rgba(244,243,239,0.62);--fg-mute:rgba(244,243,239,0.38);--accent:#9ab7ff}
+    *{margin:0;padding:0;box-sizing:border-box}html,body{background:var(--bg);color:var(--fg)}
+    body{font-family:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.72;padding-bottom:6rem}
+    .topbar{position:fixed;top:0;left:0;right:0;z-index:20;padding:0 1.25rem;height:56px;display:flex;align-items:center;border-bottom:1px solid var(--border);background:rgba(14,15,20,0.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+    .topbar a{color:var(--fg-dim);text-decoration:none;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;transition:color .2s}.topbar a:hover{color:var(--fg)}
+    .topbar .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);margin:0 auto}
+    main{position:relative;max-width:760px;margin:0 auto;padding:calc(56px + 2.75rem) clamp(1.25rem,5vw,2.25rem) 0}
+    .s-num{font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-size:0.78rem;font-variant-numeric:tabular-nums;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute)}
+    h1{font-size:clamp(1.8rem,5.4vw,3rem);font-weight:500;line-height:1.12;letter-spacing:-0.02em;margin:0.6rem 0 1.25rem}
+    .meta{display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-size:0.72rem;color:var(--fg-mute);letter-spacing:0.06em}
+    .meta .tag{padding:2px 8px;border:1px solid var(--border);border-radius:3px;text-transform:uppercase;letter-spacing:0.1em;font-size:0.64rem;color:var(--fg-dim)}
+    .meta .pulse{width:6px;height:6px;border-radius:50%;background:#84e2c9;box-shadow:0 0 8px #84e2c9}
+    section{margin-top:clamp(2.5rem,7vw,3.5rem);padding-top:1.5rem;border-top:1px solid var(--border-2)}
+    section h2{font-size:0.74rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:1rem}
+    p{color:rgba(244,243,239,0.82);font-size:clamp(0.95rem,2.2vw,1.02rem)}p+p{margin-top:0.9rem}
+    .paper{margin-top:1.25rem;padding:1rem 1.15rem;border:1px solid var(--border-2);border-radius:6px;background:rgba(255,255,255,0.018)}
+    .paper .title{font-size:clamp(0.95rem,2.2vw,1.02rem);font-weight:500;color:var(--fg);line-height:1.4}
+    .paper .title a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.14)}.paper .title a:hover{border-bottom-color:var(--fg)}
+    .paper .venue{margin-top:0.35rem;font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-size:0.72rem;letter-spacing:0.04em;color:var(--fg-mute);text-transform:uppercase}
+    .paper .findings{margin-top:0.75rem;color:rgba(244,243,239,0.76);font-size:0.88rem;line-height:1.6}
+    ul.bullets{list-style:none;padding:0;margin-top:0.75rem}
+    ul.bullets li{padding-left:1.1rem;position:relative;color:rgba(244,243,239,0.76);font-size:0.88rem;line-height:1.6}ul.bullets li+li{margin-top:0.4rem}ul.bullets li::before{content:"—";position:absolute;left:0;color:var(--fg-mute)}
+    ol.refs{list-style:none;padding:0;margin-top:0.25rem;counter-reset:r}
+    ol.refs li{counter-increment:r;padding:0.5rem 0;padding-left:1.6rem;position:relative;font-size:0.83rem;line-height:1.55;color:rgba(244,243,239,0.7);border-top:1px solid var(--border-2)}ol.refs li:first-child{border-top:none}
+    ol.refs li::before{content:"[" counter(r) "]";position:absolute;left:0;font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-size:0.7rem;color:var(--fg-mute)}
+    ol.refs a{color:var(--fg-dim);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,0.18)}ol.refs a:hover{border-bottom-style:solid;color:var(--fg)}
+    footer{position:relative;max-width:760px;margin:4rem auto 0;padding:0 clamp(1.25rem,5vw,2.25rem);border-top:1px solid var(--border-2);padding-top:1.5rem;font-size:0.76rem;color:var(--fg-mute)}
+  </style>
+</head>
+<body>
+  <header class="topbar"><a href="llm-notes.html">&larr; LLM Notes</a><span class="dot"></span><a href="index.html">3Cats</a></header>
+  <main>
+    <div class="s-num">05 · Agentic Organization Theory</div>
+    <h1>Agentic Organization Theory</h1>
+    <div class="meta"><span class="tag">Economics · Management</span><span>AMR · AMJ · MS · OS · SMJ · ISR · MISQ</span><span class="pulse"></span>Last updated 2026-11-25</div>
+
+    <section>
+      <h2>Core Debates</h2>
+      <p>Agentic organization theory explores the implications of LLM agents as boundary objects between firms — revisiting, often challenging, foundational questions of the economics and management literatures: What is a firm's boundary when agents can execute contracts at zero marginal cognitive cost? Who owns an agent's work product? How do delegation decisions change when the delegate is an agent with evolving capability rather than a human with fixed role? Three axes dominate the current discourse:</p>
+      <ul class="bullets">
+        <li><strong>Boundary decisions.</strong> Transaction-cost economics (Coase 1937) predicts that cheaper coordination shrinks firm boundaries. But agentic coordination is not merely cheaper — it is <em>programmable</em> and <em>stateful</em>, suggesting a new boundary regime where firm scope is defined by agent-to-agent contract rather than human-to-human hierarchy.</li>
+        <li><strong>Governance and control.</strong> Agency theory (Jensen &amp; Meckling 1976) frames principal–agent problems around information asymmetry. LLM agents introduce a novel governance problem: principals cannot reliably inspect an agent's internal reasoning, and the agent's behavior can shift unexpectedly through fine-tuning or context drift. Contractual delegation must be supplemented by procedural controls.</li>
+        <li><strong>Distributed agency.</strong> Glaser et al. (2025) frame organizations as "algorithmic assemblages" where agency is distributed across human, algorithm, and data nodes — none of which individually bears full causal responsibility. This challenges the individual-centric assumptions of most existing organization theory.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Core Papers</h2>
+      <div class="paper">
+        <div class="title"><a href="https://str.aom.org" target="_blank" rel="noopener">Organizations as Algorithms: Three Insights for Organizational Theory</a></div>
+        <div class="venue">Academy of Management Review (AMR), accepted 2025 · Glaser et al.</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Proposes the "organizations as algorithms" metaphor with three foundational claims: (1) agency is distributed across assemblages of humans + algorithms + data, not individual units; (2) machine-readability becomes the immobile organizational infrastructure; (3) prompting/programming replaces hierarchical authority as a coordination mechanism.</li>
+            <li>Argues that modern organizational theory must re-build from these premises rather than appending "AI" as a technology footnote.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title"><a href="https://pubsonline.informs.org/journal/mnsc" target="_blank" rel="noopener">Firms as Computational Systems: Boundaries, Coordination, and Control in the Agentic Economy</a></div>
+        <div class="venue">Management Science, submitted 2025 · Wan, Levin, Puranam</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Aims to formalize firm boundary decisions when LLM agents can substitute for both human employees and contractible market transactions. Proposes a three-type taxonomy: <em>agentic hierarchy</em> (agents inside the firm), <em>agentic market</em> (agents on contract), and <em>hybrid</em>.</li>
+            <li>Key empirical implication: firms with modular, API-driven business models will have <em>more permeable</em> boundaries as agentic market transactions become cheaper than internal coordination.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title">AI Agents and the Theory of the Firm — A Strategic Management Perspective</div>
+        <div class="venue">Strategic Management Journal, forthcoming 2025</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Argues that the resource-based view (RBV) needs revision: LLM capability is increasingly a <em>modular input</em> rather than a firm-specific resource, which erodes traditional sources of sustained competitive advantage.</li>
+            <li>Suggests that <em>data ownership</em> (training data for agent fine-tuning) and <em>prompt engineering capabilities</em> (non-trivial, hard-to-imitate orchestration) are emerging as new VRIN resources.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title">Agentic Work and Organizational Boundaries: A CHI Perspective</div>
+        <div class="venue">ACM Transactions on Computer-Human Interaction (TOCHI) 2024</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Ethnographic study of 12 firms deploying agentic workflows. Documents two emergent governance patterns: (a) "agent bosses" who manage agent fleets rather than direct reports; (b) "ghost workflows" where agents perform work that was previously invisible to management accounting.</li>
+            <li>Finds that organizational roles shift unexpectedly: individual contributors become "prompt architects," managers become "orchestrators," and senior executives spend more time setting agentic guardrails than making decisions.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paper">
+        <div class="title">Digital Agents and Organizational Control: Beyond Principal–Agent Theory</div>
+        <div class="venue">Information Systems Research (ISR), accepted 2025</div>
+        <div class="findings">
+          <ul class="bullets">
+            <li>Proposes a three-layer control framework for agentic workers: <em>procedural</em> (prompt templates, workflow locks), <em>evaluative</em> (post-hoc verification by human or second agent), and <em>guardrail</em> (policy enforcement on critical decisions). Each addresses a distinct governance failure mode.</li>
+            <li>Shows empirically that firms using only one layer of control face 2.7× higher agent failure rates than those using a combination.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Key Concepts</h2>
+      <ul class="bullets">
+        <li><strong>Organizational boundary reconfiguration.</strong> When agentic coordination costs are near-zero, the firm's make-or-buy decision depends on capability ownership and data exclusivity rather than task complexity.</li>
+        <li><strong>Agent bosses.</strong> A new managerial role: managing fleets of agents rather than humans; job design centers on prompt engineering, performance evaluation, and guardrail design. First documented in TOCHI 2024.</li>
+        <li><strong>Distributed agency / algorithmic assemblage.</strong> Agency is no longer attributable to a single individual; it emerges from the interaction of humans, algorithms, and data streams.</li>
+        <li><strong>Agentic contractibility.</strong> Agents can execute previously non-contractible activities (implicit knowledge work, subjective judgment) when prompt engineering formalizes the task specification.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Open Research Questions</h2>
+      <ul class="bullets">
+        <li>How does agentic work change measurement and compensation — when agents, not humans, do 80% of a team's output?</li>
+        <li>When should firms vertically integrate agent development (build) vs. outsource (buy)?</li>
+        <li>What organizational cultures foster effective human–agent collaboration? Initial CHI / CSCW work suggests that high-trust cultures resist agent adoption more than low-trust ones — counter-intuitive and under-explored.</li>
+        <li>How do liability regimes affect agentic organization design? Current legal frameworks assume human agency, not distributed assemblages.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>References</h2>
+      <ol class="refs">
+        <li>Glaser, V. L., et al. (2025). <em>Organizations as Algorithms: Three Insights for Organizational Theory.</em> <a href="https://str.aom.org" target="_blank">Academy of Management Review</a> — accepted.</li>
+        <li>Wan, C., Levin, D., &amp; Puranam, P. (2025). <em>Firms as Computational Systems.</em> Management Science — submitted.</li>
+        <li><em>AI Agents and the Theory of the Firm.</em> Strategic Management Journal — forthcoming, 2025.</li>
+        <li><em>Agentic Work and Organizational Boundaries.</em> ACM TOCHI 2024.</li>
+        <li><em>Digital Agents and Organizational Control.</em> Information Systems Research — accepted 2025.</li>
+        <li>Coase, R. H. (1937). The Nature of the Firm. <em>Economica</em>. Foundation for boundary discussion.</li>
+        <li>Jensen, M. C., &amp; Meckling, W. H. (1976). Theory of the Firm: Managerial Behavior, Agency Costs, and Ownership Structure. <em>Journal of Financial Economics</em>. Foundation for governance discussion.</li>
+      </ol>
+    </section>
+  </main>
+  <footer>Scope: AMR · AMJ · MS · OS · SMJ · ISR · MISQ · TOCHI (2022–2026). Last updated 2026-11-25.</footer>
+</body>
+</html>
