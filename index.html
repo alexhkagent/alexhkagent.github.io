@@ -8,11 +8,15 @@
   <style>
     :root { color-scheme: light; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { height: 100%; }
+    html, body { min-height: 100%; }
     body {
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: clamp(1.75rem, 5vw, 3rem);
+      padding: 3rem 1.5rem;
       background: #fafaf8;
       color: #161616;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -26,16 +30,44 @@
       line-height: 1;
       animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
+    nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.9rem;
+      text-align: center;
+      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+    }
+    nav a {
+      color: #161616;
+      text-decoration: none;
+      font-size: clamp(0.9rem, 2.2vw, 1rem);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      padding-bottom: 3px;
+      border-bottom: 1px solid rgba(22, 22, 22, 0.18);
+      opacity: 0.72;
+      transition: opacity 0.25s ease, border-color 0.25s ease;
+    }
+    nav a:hover, nav a:focus-visible {
+      opacity: 1;
+      border-bottom-color: #161616;
+      outline: none;
+    }
     @keyframes rise {
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
     @media (prefers-reduced-motion: reduce) {
-      h1 { animation: none; }
+      h1, nav { animation: none; }
     }
   </style>
 </head>
 <body>
   <h1>3Cats</h1>
+  <nav>
+    <a href="course.html">AI Technology, Digital Transformation, and Innovation</a>
+    <a href="photos.html">18, Fortune, and Power</a>
+  </nav>
 </body>
 </html>
