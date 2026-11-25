@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="What do you see? The behavioral science of visual information perception on the Internet" />
+  <meta name="description" content="What do you see? The behavioral science of visual information perception on the Internet — a seven-chapter web book." />
   <title>What do you see? — 3Cats</title>
   <style>
     :root {
@@ -16,66 +16,51 @@
       --fg-dim:    rgba(244, 243, 239, 0.58);
       --fg-mute:   rgba(244, 243, 239, 0.34);
       --accent:    #9ab7ff;
-      --accent-2:  #ffd49a;
-      --accent-3:  #84e2c9;
       --grid:      rgba(154, 183, 255, 0.06);
+      --amber:     #ffd49a;
+      --teal:      #84e2c9;
+      --rose:      #ff9ab7;
+      --sage:      #b7d4a3;
+      --lavender:  #c4a8f0;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { background: var(--bg); color: var(--fg); }
     body {
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
       line-height: 1.65;
       padding-bottom: 6rem;
     }
 
-    /* ---------- Top bar ---------- */
     .topbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 20;
-      padding: 0 1.25rem;
-      height: 56px;
-      display: flex;
-      align-items: center;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+      padding: 0 1.25rem; height: 56px;
+      display: flex; align-items: center;
       border-bottom: 1px solid var(--border);
       background: rgba(14, 15, 20, 0.72);
       -webkit-backdrop-filter: blur(14px) saturate(1.3);
       backdrop-filter: blur(14px) saturate(1.3);
     }
     .topbar .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--fg-dim);
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      color: var(--fg-dim); text-decoration: none;
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
       transition: color 0.2s ease;
     }
-    .topbar .back-btn:hover, .topbar .back-btn:focus-visible { color: var(--fg); outline: none; }
-    .topbar .back-btn .arrow { font-size: 0.9em; }
+    .topbar .back-btn:hover { color: var(--fg); }
     .topbar .series {
       margin-left: auto;
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--fg-mute);
-      font-variant-numeric: tabular-nums;
+      font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--fg-mute); font-variant-numeric: tabular-nums;
     }
 
-    /* ---------- Background canvas ---------- */
-    .bg {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-    }
+    .bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
     .bg::before {
-      content: "";
-      position: absolute; inset: 0;
+      content: ""; position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(154, 183, 255, 0.18), transparent 70%),
-        radial-gradient(ellipse 40% 35% at 80% 80%, rgba(255, 212, 154, 0.09), transparent 60%);
+        radial-gradient(ellipse 55% 45% at 50% 0%, rgba(154,183,255,0.18), transparent 70%),
+        radial-gradient(ellipse 40% 35% at 80% 80%, rgba(183,212,163,0.08), transparent 60%);
     }
     .grid {
       position: absolute; inset: 0;
@@ -87,330 +72,219 @@
       -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black 30%, transparent 85%);
     }
 
-    /* ---------- Main ---------- */
     main {
       position: relative; z-index: 1;
-      max-width: 880px;
-      margin: 0 auto;
+      max-width: 920px; margin: 0 auto;
       padding: calc(56px + 3rem) clamp(1.25rem, 5vw, 2.5rem) 0;
     }
 
     .meta-row {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--fg-mute);
-      margin-bottom: 1.75rem;
+      display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--fg-mute); margin-bottom: 1.75rem;
     }
     .meta-row .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
     .meta-row .sep { opacity: 0.4; }
 
     h1 {
-      font-size: clamp(2.1rem, 6.5vw, 4rem);
-      font-weight: 500;
-      line-height: 1.08;
-      letter-spacing: -0.025em;
-      color: var(--fg);
+      font-size: clamp(2.1rem, 6.5vw, 4rem); font-weight: 500;
+      line-height: 1.08; letter-spacing: -0.025em;
     }
     .subtitle {
       margin-top: 1.25rem;
-      font-size: clamp(1rem, 2.8vw, 1.25rem);
-      font-weight: 400;
-      line-height: 1.55;
-      color: var(--fg-dim);
-      max-width: 60ch;
+      font-size: clamp(1rem, 2.8vw, 1.25rem); font-weight: 400;
+      line-height: 1.55; color: var(--fg-dim); max-width: 62ch;
     }
+    .last-updated {
+      margin-top: 1.5rem;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+      font-size: 0.72rem; letter-spacing: 0.08em; color: var(--fg-mute);
+      padding: 0.35rem 0.75rem; border: 1px solid var(--border-2); border-radius: 4px;
+      background: rgba(255,255,255,0.015);
+    }
+    .last-updated .pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-    .book-cta {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 1.9rem;
-    }
-    .book-cta a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.72rem 1.25rem;
-      border: 1px solid rgba(154, 183, 255, 0.45);
-      border-radius: 999px;
-      color: var(--fg);
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-    }
-    .book-cta a:hover, .book-cta a:focus-visible {
-      border-color: var(--accent);
-      background: rgba(154, 183, 255, 0.08);
-      transform: translateY(-1px);
-      outline: none;
-    }
-    .book-cta .cta-note {
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--fg-mute);
-    }
-
-    /* ---------- Illustration card ---------- */
-    .illus-card {
-      margin-top: clamp(2.5rem, 7vw, 4rem);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: var(--bg-card);
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-    }
-    .illus-card .fig-frame {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: clamp(1.5rem, 5vw, 3rem) clamp(1rem, 4vw, 2rem);
-      background:
-        linear-gradient(180deg, rgba(154, 183, 255, 0.04), transparent 70%);
-    }
-    .illus-card .fig-frame img {
-      display: block;
-      width: min(100%, 420px);
-      filter: invert(1) hue-rotate(180deg);
-      opacity: 0.94;
-    }
-    .illus-card .cap {
-      border-top: 1px solid var(--border);
-      padding: 0.9rem 1.25rem;
-      font-size: 0.78rem;
-      letter-spacing: 0.04em;
-      color: var(--fg-mute);
-      display: flex;
-      align-items: baseline;
-      gap: 0.6rem;
-    }
-    .illus-card .cap .fig-label {
-      font-variant-numeric: tabular-nums;
-      font-weight: 600;
-      color: var(--fg-dim);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    /* ---------- TOC ---------- */
-    .toc-wrap { margin-top: clamp(2.5rem, 7vw, 3.75rem); }
     .toc-label {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--fg-mute);
-      margin-bottom: 1.1rem;
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--fg-mute); margin-top: clamp(2.5rem, 7vw, 3.5rem); margin-bottom: 1.25rem;
     }
     .toc-label::before, .toc-label::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--border-2);
-      max-width: 80px;
+      content: ""; flex: 1; height: 1px; background: var(--border-2); max-width: 80px;
     }
 
-    .toc { list-style: none; padding: 0; }
-    .toc li + li { border-top: 1px solid var(--border-2); }
-    .toc li:last-child { border-bottom: 1px solid var(--border-2); }
-    .toc a {
+    .sections { list-style: none; padding: 0; }
+    .sections li + li { border-top: 1px solid var(--border-2); }
+    .sections li:last-child { border-bottom: 1px solid var(--border-2); }
+    .sections a {
       display: grid;
-      grid-template-columns: 64px 1fr auto;
-      gap: 1rem;
-      align-items: start;
-      padding: 1.1rem 0.25rem;
-      color: var(--fg);
-      text-decoration: none;
+      grid-template-columns: 60px 1fr auto;
+      gap: 1.25rem; align-items: start;
+      padding: 1.5rem 0.5rem; color: var(--fg); text-decoration: none;
       transition: background 0.2s ease;
     }
-    .toc a:hover, .toc a:focus-visible {
-      background: rgba(255, 255, 255, 0.025);
-      outline: none;
+    .sections a:hover, .sections a:focus-visible {
+      background: rgba(255,255,255,0.025); outline: none;
     }
-    .toc .num {
-      font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
-      font-size: 0.82rem;
-      font-variant-numeric: tabular-nums;
-      color: var(--fg-mute);
-      padding-top: 0.15rem;
+    .sections .num {
+      font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+      font-size: 0.85rem; font-variant-numeric: tabular-nums;
+      color: var(--fg-mute); padding-top: 0.15rem;
     }
-    .toc .ch-title {
-      font-size: clamp(0.95rem, 2.2vw, 1.05rem);
-      font-weight: 400;
+    .sections .s-title {
+      font-size: clamp(1rem, 2.4vw, 1.15rem); font-weight: 400;
       letter-spacing: -0.005em;
     }
-    .toc .ch-desc {
-      display: block;
-      margin-top: 0.3rem;
-      font-size: 0.82rem;
+    .sections .s-desc {
+      display: block; margin-top: 0.45rem;
+      font-size: 0.84rem; color: var(--fg-dim); line-height: 1.55;
+    }
+    .sections .s-meta {
+      font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+      font-size: 0.7rem; letter-spacing: 0.04em;
+      color: var(--fg-mute); padding-top: 0.35rem; text-align: right;
+      white-space: nowrap;
+    }
+    .sections .s-meta .tag {
+      display: inline-block; margin-right: 0.5rem;
+      padding: 2px 6px; border: 1px solid var(--border); border-radius: 3px;
+      font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em;
       color: var(--fg-dim);
-      line-height: 1.55;
     }
-    .toc .arrow {
-      font-size: 0.9rem;
-      color: var(--fg-mute);
-      padding-top: 0.3rem;
-      transition: transform 0.2s ease, color 0.2s ease;
-    }
-    .toc a:hover .arrow { transform: translateX(3px); color: var(--accent); }
+    .sections .s-meta .tag.perc { border-color: rgba(154,183,255,0.35); color: var(--accent); }
+    .sections .s-meta .tag.attn { border-color: rgba(255,212,154,0.35); color: var(--amber); }
+    .sections .s-meta .tag.biol { border-color: rgba(132,226,201,0.35); color: var(--teal); }
+    .sections .s-meta .tag.color { border-color: rgba(183,212,163,0.35); color: var(--sage); }
+    .sections .s-meta .tag.motion { border-color: rgba(196,168,240,0.35); color: var(--lavender); }
+    .sections .s-meta .tag.info { border-color: rgba(255,154,183,0.35); color: var(--rose); }
+    .sections .s-meta .tag.acc { border-color: rgba(255,255,255,0.25); color: var(--fg-dim); }
 
-    /* ---------- Footer ---------- */
     footer {
       position: relative; z-index: 1;
-      max-width: 880px;
-      margin: 4rem auto 0;
+      max-width: 920px; margin: 4rem auto 0;
       padding: 0 clamp(1.25rem, 5vw, 2.5rem);
-      border-top: 1px solid var(--border-2);
-      padding-top: 2rem;
-      font-size: 0.76rem;
-      letter-spacing: 0.06em;
-      color: var(--fg-mute);
+      border-top: 1px solid var(--border-2); padding-top: 2rem;
+      font-size: 0.78rem; letter-spacing: 0.06em; color: var(--fg-mute);
       line-height: 1.8;
     }
     footer a { color: var(--fg-dim); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.12); }
     footer a:hover { border-bottom-color: var(--fg); }
-
-    @media (prefers-reduced-motion: reduce) {
-      .toc .arrow { transition: none; }
-    }
+    footer p + p { margin-top: 0.8rem; }
   </style>
 </head>
 <body>
   <div class="bg"><div class="grid"></div></div>
 
   <header class="topbar">
-    <a class="back-btn" href="index.html"><span class="arrow">&larr;</span> 3Cats</a>
-    <span class="series">Behavioral Science · Vol. 01</span>
+    <a class="back-btn" href="index.html"><span>&larr;</span> 3Cats</a>
+    <span class="series">Visual Perception · 2026</span>
   </header>
 
   <main>
     <div class="meta-row">
       <span class="dot"></span>
-      <span>Book · Landing</span>
+      <span>Web Book · Behavior</span>
       <span class="sep">·</span>
-      <span>Visual Perception</span>
+      <span>7 chapters</span>
       <span class="sep">·</span>
-      <span>— 7 chapters · EN / 中文</span>
+      <span>EN / 中文</span>
     </div>
 
     <h1>What do you see?</h1>
-    <p class="subtitle">The behavioral science of visual information perception on the Internet.</p>
+    <p class="subtitle">The behavioral science of visual information perception on the Internet — a seven-chapter web book tracing the signal from photon to click: eye, cortex, attention, color, motion, layout, and the devices that receive it all.</p>
 
-    <p class="book-cta">
-      <a href="visual-information-science-book/index.html">Read the full book <span aria-hidden="true">&rarr;</span></a>
-      <span class="cta-note">7 chapters · English / 中文</span>
-    </p>
+    <span class="last-updated"><span class="pulse"></span> All chapters last updated 2026-11-25</span>
 
-    <figure class="illus-card">
-      <div class="fig-frame">
-        <img src="images/muller-lyer.svg" alt="Müller-Lyer illusion" />
-      </div>
-      <figcaption class="cap">
-        <span class="fig-label">Fig. 01</span>
-        <span>The Müller–Lyer Illusion — the three horizontal shafts are physically identical in length. What you see is not always what is there.</span>
-      </figcaption>
-    </figure>
-
-    <section class="toc-wrap" aria-label="Table of Contents">
-      <div class="toc-label">Table of Contents</div>
-      <ol class="toc">
-        <li>
-          <a href="visual-information-science-book/ch01.html">
-            <span class="num">01</span>
-            <span>
-              <span class="ch-title">The Internet as a Visual System</span>
-              <span class="ch-desc">Why behavioral science matters for what pixels do to people — and what people do with pixels.</span>
-            </span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
-        <li>
-          <a href="visual-information-science-book/ch02.html">
-            <span class="num">02</span>
-            <span>
-              <span class="ch-title">Attention, Saliency, and the Gaze</span>
-              <span class="ch-desc">Where the eye lands, what it skips, and how interfaces silently steer both.</span>
-            </span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
-        <li>
-          <a href="visual-information-science-book/ch03.html">
-            <span class="num">03</span>
-            <span>
-              <span class="ch-title">From Retina to Heuristic</span>
-              <span class="ch-desc">Perceptual illusions, cognitive shortcuts, and the biases that shape every click.</span>
-            </span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
-        <li>
-          <a href="visual-information-science-book/ch04.html">
-            <span class="num">04</span>
-            <span>
-              <span class="ch-title">Color, Contrast, and Consequence</span>
-              <span class="ch-desc">The physics of light, the biology of cones, and the ergonomics of call-to-action.</span>
-            </span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
-        <li>
-          <a href="visual-information-science-book/ch05.html">
-            <span class="num">05</span>
-            <span>
-              <span class="ch-title">Motion as Meaning</span>
-              <span class="ch-desc">What animations communicate, when they distract, and why timing is tone.</span>
-            </span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
-        <li>
-          <a href="visual-information-science-book/ch06.html">
-            <span class="num">06</span>
-            <span>
-              <span class="ch-title">Noise, Signals, and Trust</span>
-              <span class="ch-desc">How visual clutter erodes confidence — and how restraint rebuilds it.</span>
-            </span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
-        <li>
-          <a href="visual-information-science-book/ch07.html">
-            <span class="num">07</span>
-            <span>
-              <span class="ch-title">Scaling Beyond the Screen</span>
-              <span class="ch-desc">Responsive perception: from watch to wall, from reader to re-reader.</span>
-            </span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
-        <li>
-          <a href="visual-information-science-book/references.html">
-            <span class="num">↗</span>
-            <span>
-              <span class="ch-title">References &amp; Further Reading</span>
-              <span class="ch-desc">The sources behind the claims, grouped by theme — with a note on how to read them.</span>
-            </span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
-      </ol>
-    </section>
+    <div class="toc-label">Table of Contents</div>
+    <ol class="sections">
+      <li>
+        <a href="visual-information-science-book/ch01.html">
+          <span class="num">01</span>
+          <span>
+            <span class="s-title">The Internet as a Visual System</span>
+            <span class="s-desc">Why the screen is a stimulus environment — and why "intuitive" is mostly learned.</span>
+          </span>
+          <span class="s-meta"><span class="tag perc">Perception</span>2026·11·25</span>
+        </a>
+      </li>
+      <li>
+        <a href="visual-information-science-book/ch02.html">
+          <span class="num">02</span>
+          <span>
+            <span class="s-title">Attention, Saliency, and the Gaze</span>
+            <span class="s-desc">How salience pulls the eye, how goals push it, and why we miss what we look at.</span>
+          </span>
+          <span class="s-meta"><span class="tag attn">Attention</span>2026·11·25</span>
+        </a>
+      </li>
+      <li>
+        <a href="visual-information-science-book/ch03.html">
+          <span class="num">03</span>
+          <span>
+            <span class="s-title">From Retina to Heuristic</span>
+            <span class="s-desc">The biology of seeing and the shortcuts of judgment — two filters before every click.</span>
+          </span>
+          <span class="s-meta"><span class="tag biol">Biology</span>2026·11·25</span>
+        </a>
+      </li>
+      <li>
+        <a href="visual-information-science-book/ch04.html">
+          <span class="num">04</span>
+          <span>
+            <span class="s-title">Color, Contrast, and Consequence</span>
+            <span class="s-desc">The physics of light, the arithmetic of contrast, and the ethics of color.</span>
+          </span>
+          <span class="s-meta"><span class="tag color">Color</span>2026·11·25</span>
+        </a>
+      </li>
+      <li>
+        <a href="visual-information-science-book/ch05.html">
+          <span class="num">05</span>
+          <span>
+            <span class="s-title">Motion as Meaning</span>
+            <span class="s-desc">Timing, easing, and attention — what animation says before it says anything.</span>
+          </span>
+          <span class="s-meta"><span class="tag motion">Motion</span>2026·11·25</span>
+        </a>
+      </li>
+      <li>
+        <a href="visual-information-science-book/ch06.html">
+          <span class="num">06</span>
+          <span>
+            <span class="s-title">Noise, Signals, and Trust</span>
+            <span class="s-desc">Hierarchy, clutter, charts, and the visual construction of credibility.</span>
+          </span>
+          <span class="s-meta"><span class="tag info">Information</span>2026·11·25</span>
+        </a>
+      </li>
+      <li>
+        <a href="visual-information-science-book/ch07.html">
+          <span class="num">07</span>
+          <span>
+            <span class="s-title">Scaling Beyond the Screen</span>
+            <span class="s-desc">Reading across devices, bodies, and abilities — from watch to wall.</span>
+          </span>
+          <span class="s-meta"><span class="tag acc">Accessibility</span>2026·11·25</span>
+        </a>
+      </li>
+      <li>
+        <a href="visual-information-science-book/references.html">
+          <span class="num">&rarr;</span>
+          <span>
+            <span class="s-title">References &amp; Further Reading</span>
+            <span class="s-desc">The sources behind the claims, grouped by theme.</span>
+          </span>
+          <span class="s-meta"><span class="tag">Sources</span>2026·11·25</span>
+        </a>
+      </li>
+    </ol>
   </main>
 
   <footer>
-    <p>Illustrations in this section are in the public domain or freely licensed. The Müller–Lyer illusion figure is reproduced from Wikimedia Commons — no adaptation or redistribution restrictions apply.</p>
-    <p><a href="visual-information-science-book/index.html">Read the full web book &rarr;</a></p>
+    <p>Scope note: this web book draws on peer-reviewed work from perception science, cognitive psychology, HCI (CHI, TOCHI), design, and accessibility literature. Laboratory effect sizes do not automatically transfer to the web — treat every number as a starting point for testing, not a conclusion.</p>
+    <p>中文说明：本书采用中英双语，读者可选择英文或中文，亦可对照阅读。书中论断均尽量指向同行评审研究；当证据不一致时，正文会明确说明。</p>
   </footer>
 </body>
 </html>

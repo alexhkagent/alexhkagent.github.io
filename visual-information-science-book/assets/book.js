@@ -75,7 +75,7 @@
     var current = document.body.getAttribute('data-chapter') || '';
     var html = '<div class="sidebar-inner">';
     html += '<p class="sidebar-label"><span class="en">Contents</span><span class="zh">目录</span></p>';
-    html += '<a class="side-home" href="index.html"><span class="en">What do you see?</span><span class="zh">你看见了什么？</span></a>';
+    html += '<a class="side-home" href="../book.html"><span class="en">What do you see?</span><span class="zh">你看见了什么？</span></a>';
     html += '<nav class="chapter-list" aria-label="' + t('Book chapters', '全书章节') + '">';
 
     CHAPTERS.forEach(function (ch) {
@@ -124,7 +124,7 @@
         '<span class="nav-title"><span class="en">' + prev.en + '</span><span class="zh">' + prev.zh + '</span></span>' +
         '</a>';
     } else {
-      out += '<a class="prev is-empty" href="index.html" aria-hidden="true" tabindex="-1"></a>';
+      out += '<a class="prev is-empty" href="../book.html" aria-hidden="true" tabindex="-1"></a>';
     }
 
     if (next) {
@@ -133,7 +133,7 @@
         '<span class="nav-title"><span class="en">' + next.en + '</span><span class="zh">' + next.zh + '</span></span>' +
         '</a>';
     } else if (current === 'refs') {
-      out += '<a class="next" href="index.html">' +
+      out += '<a class="next" href="../book.html">' +
         '<span class="dir">' + t('Back to', '返回') + '</span>' +
         '<span class="nav-title"><span class="en">The cover</span><span class="zh">封面</span></span>' +
         '</a>';
